@@ -1,0 +1,8 @@
+# Empacotamentos para upload na hospedagem — gerados a partir do próprio repo
+*.zip
+
+# Artefatos locais
+.DS_Store
+.playwright-mcp/
+venv/
+__pycache__/

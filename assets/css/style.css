@@ -1,0 +1,482 @@
+/* ==========================================================================
+   Colégio Nossa Senhora do Rosário — folha de estilo principal
+   Paleta extraída do brasão: azul-marinho, ouro e creme.
+   ========================================================================== */
+
+:root {
+  --navy-900: #0B1B3F;
+  --navy-800: #12295C;
+  --navy-700: #1B3468;
+  --navy-600: #2A467F;
+
+  --gold-500: #C9A227;
+  --gold-400: #D4AF37;
+  --gold-300: #E3C766;
+  --gold-200: #F2DCA0;
+
+  --cream:    #FBF7EE;
+  --cream-2:  #F3EBDA;
+  --ink:      #1C1C1C;
+  --ink-soft: #4A4A4A;
+  --white:    #FFFFFF;
+
+  --serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --sans:  "Lato", "Helvetica Neue", Arial, sans-serif;
+
+  --shadow-sm: 0 2px 10px rgba(11, 27, 63, .08);
+  --shadow-md: 0 10px 30px rgba(11, 27, 63, .12);
+  --shadow-lg: 0 24px 60px rgba(11, 27, 63, .18);
+
+  --header-h: 96px;
+  --maxw: 1200px;
+  --ease: cubic-bezier(.22, .61, .36, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 17px;
+  line-height: 1.75;
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--serif);
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--navy-900);
+  margin: 0 0 .5em;
+  letter-spacing: .01em;
+}
+h1 { font-size: clamp(2.4rem, 5vw, 3.9rem); }
+h2 { font-size: clamp(1.9rem, 3.4vw, 2.7rem); }
+h3 { font-size: clamp(1.3rem, 2.2vw, 1.6rem); }
+
+p { margin: 0 0 1.1em; color: var(--ink-soft); }
+
+a { color: var(--navy-700); text-decoration: none; transition: color .2s var(--ease); }
+a:hover { color: var(--gold-500); }
+
+/* A proporção intrínseca do arquivo sempre prevalece sobre os atributos width/height */
+img, svg { max-width: 100%; height: auto; }
+
+.container { width: min(100% - 3rem, var(--maxw)); margin-inline: auto; }
+.section { padding: clamp(4rem, 8vw, 7rem) 0; }
+.section--cream { background: var(--cream-2); }
+.section--navy  { background: var(--navy-900); }
+.section--navy h2, .section--navy h3 { color: var(--gold-200); }
+.section--navy p  { color: rgba(255,255,255,.78); }
+
+.center { text-align: center; }
+.lede { font-size: 1.15rem; max-width: 62ch; }
+.center .lede { margin-inline: auto; }
+
+/* Filete dourado usado como ornamento clássico */
+.rule {
+  width: 84px; height: 2px; border: 0; margin: 1.4rem 0 1.8rem;
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-200));
+}
+.center .rule { margin-inline: auto; }
+
+.eyebrow {
+  font-family: var(--sans);
+  font-size: .78rem; font-weight: 700;
+  letter-spacing: .22em; text-transform: uppercase;
+  color: var(--gold-500);
+  margin: 0 0 .8rem;
+}
+
+/* ---------- Botões ---------- */
+.btn {
+  display: inline-block;
+  padding: .95rem 2.1rem;
+  font-family: var(--sans);
+  font-size: .82rem; font-weight: 700;
+  letter-spacing: .16em; text-transform: uppercase;
+  border: 1px solid transparent; border-radius: 2px;
+  cursor: pointer;
+  transition: all .28s var(--ease);
+}
+.btn--gold {
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+  color: var(--navy-900);
+  box-shadow: 0 8px 24px rgba(201,162,39,.32);
+}
+.btn--gold:hover { color: var(--navy-900); transform: translateY(-2px); box-shadow: 0 14px 32px rgba(201,162,39,.42); }
+.btn--ghost { border-color: var(--gold-300); color: var(--gold-200); background: transparent; }
+.btn--ghost:hover { background: var(--gold-300); color: var(--navy-900); }
+.btn--navy { background: var(--navy-800); color: var(--gold-200); }
+.btn--navy:hover { background: var(--navy-600); color: var(--gold-200); }
+
+/* ==========================================================================
+   Cabeçalho e navegação
+   ========================================================================== */
+.site-header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--navy-900);
+  border-bottom: 2px solid var(--gold-500);
+  transition: box-shadow .3s var(--ease);
+}
+.site-header.is-stuck { box-shadow: var(--shadow-md); }
+
+.header-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2.75rem; min-height: var(--header-h);
+}
+
+/* flex-shrink: 0 impede que a caixa encolha abaixo do conteúdo — sem isso a
+   tagline (nowrap) transborda e encosta no primeiro item do menu. */
+.brand { display: flex; align-items: center; gap: .9rem; flex-shrink: 0; }
+.brand img { width: 48px; height: auto; }
+/* O bloco de texto também não pode encolher: é ele que contém a tagline com
+   nowrap. Ambas as linhas ficam em nowrap para a caixa ter largura previsível. */
+.brand-text { display: flex; flex-direction: column; line-height: 1.1; flex-shrink: 0; }
+.brand-name {
+  font-family: var(--serif); font-size: 1.18rem; font-weight: 600;
+  color: var(--gold-200); letter-spacing: .02em; white-space: nowrap;
+}
+.brand-tag {
+  font-size: .62rem; white-space: nowrap; letter-spacing: .22em; text-transform: uppercase;
+  color: rgba(255,255,255,.55);
+}
+
+.nav { display: flex; align-items: center; gap: .25rem; }
+.nav-item { position: relative; }
+.nav-link {
+  display: flex; align-items: center; gap: .35rem;
+  padding: .7rem .9rem;
+  font-size: .8rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase;
+  color: rgba(255,255,255,.86);
+  background: none; border: 0; font-family: var(--sans); cursor: pointer;
+  white-space: nowrap;
+}
+.nav-link:hover, .nav-item.is-open > .nav-link { color: var(--gold-300); }
+.nav-link[aria-current="page"] { color: var(--gold-300); }
+.nav-link .caret {
+  width: 8px; height: 8px; border-right: 1.6px solid currentColor; border-bottom: 1.6px solid currentColor;
+  transform: rotate(45deg) translate(-2px, -2px); transition: transform .25s var(--ease);
+}
+.nav-item.is-open .caret { transform: rotate(-135deg) translate(-3px, -3px); }
+
+.submenu {
+  position: absolute; top: calc(100% + 6px); left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  min-width: 250px; padding: .6rem 0; margin: 0;
+  list-style: none;
+  background: var(--white);
+  border-top: 3px solid var(--gold-500);
+  border-radius: 0 0 6px 6px;
+  box-shadow: var(--shadow-lg);
+  opacity: 0; visibility: hidden; pointer-events: none;
+  transition: opacity .22s var(--ease), transform .22s var(--ease), visibility .22s;
+}
+.nav-item.is-open .submenu {
+  opacity: 1; visibility: visible; pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+.submenu a {
+  display: block; padding: .68rem 1.5rem;
+  font-size: .92rem; color: var(--navy-800);
+  border-left: 3px solid transparent;
+  transition: all .2s var(--ease);
+}
+.submenu a:hover { background: var(--cream-2); border-left-color: var(--gold-500); color: var(--navy-900); padding-left: 1.75rem; }
+
+.header-cta { flex-shrink: 0; }
+
+.nav-toggle {
+  display: none; width: 44px; height: 44px;
+  background: none; border: 1px solid rgba(255,255,255,.3); border-radius: 3px;
+  cursor: pointer; padding: 0; position: relative;
+}
+.nav-toggle span, .nav-toggle span::before, .nav-toggle span::after {
+  position: absolute; left: 50%; width: 20px; height: 2px;
+  background: var(--gold-200); transform: translateX(-50%);
+  transition: all .25s var(--ease); content: "";
+}
+.nav-toggle span { top: 50%; margin-top: -1px; }
+.nav-toggle span::before { top: -7px; }
+.nav-toggle span::after  { top:  7px; }
+.nav-toggle.is-active span { background: transparent; }
+.nav-toggle.is-active span::before { top: 0; transform: translateX(-50%) rotate(45deg); }
+.nav-toggle.is-active span::after  { top: 0; transform: translateX(-50%) rotate(-45deg); }
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: min(88vh, 780px);
+  display: grid; place-items: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(42,70,127,.55), transparent 60%),
+    linear-gradient(160deg, var(--navy-800) 0%, var(--navy-900) 100%);
+  overflow: hidden;
+  padding: 5rem 0;
+}
+/* Padrão discreto de losangos dourados, textura "clássica" */
+.hero::before {
+  content: ""; position: absolute; inset: 0; opacity: .07;
+  background-image:
+    linear-gradient(45deg, var(--gold-300) 25%, transparent 25%, transparent 75%, var(--gold-300) 75%),
+    linear-gradient(45deg, var(--gold-300) 25%, transparent 25%, transparent 75%, var(--gold-300) 75%);
+  background-size: 44px 44px; background-position: 0 0, 22px 22px;
+}
+.hero > .container { position: relative; z-index: 1; }
+.hero-crest {
+  width: 118px; height: auto; margin: 0 auto 1.8rem;
+  /* halo dourado discreto: destaca os quadrantes navy do brasão contra o fundo navy */
+  filter: drop-shadow(0 0 18px rgba(201,162,39,.35)) drop-shadow(0 14px 30px rgba(0,0,0,.5));
+}
+.hero h1 { color: var(--white); margin-bottom: .3rem; }
+.hero h1 em { font-style: italic; color: var(--gold-300); }
+.hero-sub {
+  font-family: var(--serif); font-size: clamp(1.1rem, 2vw, 1.45rem);
+  color: rgba(255,255,255,.8); max-width: 60ch; margin: 1.2rem auto 2.2rem;
+}
+.hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+/* Faixa de destaques sob o hero */
+.hero-strip { background: var(--navy-800); border-top: 1px solid rgba(201,162,39,.35); }
+.hero-strip .container {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  text-align: center; padding: 2.2rem 0; gap: 1.5rem;
+}
+.hero-strip .num {
+  font-family: var(--serif); font-variant-numeric: lining-nums; font-size: 2.3rem; color: var(--gold-300); display: block; line-height: 1;
+}
+.hero-strip .lbl {
+  font-size: .72rem; letter-spacing: .18em; text-transform: uppercase; color: rgba(255,255,255,.65);
+}
+
+/* ==========================================================================
+   Cabeçalho de páginas internas
+   ========================================================================== */
+.page-hero {
+  background: linear-gradient(160deg, var(--navy-800), var(--navy-900));
+  color: var(--white); text-align: center;
+  padding: clamp(3.5rem, 7vw, 5.5rem) 0 clamp(3rem, 6vw, 4.5rem);
+  border-bottom: 3px solid var(--gold-500);
+}
+.page-hero h1 { color: var(--white); }
+.page-hero p { color: rgba(255,255,255,.75); max-width: 64ch; margin-inline: auto; }
+.breadcrumb {
+  font-size: .74rem; letter-spacing: .16em; text-transform: uppercase;
+  color: rgba(255,255,255,.5); margin-bottom: 1rem;
+}
+.breadcrumb a { color: var(--gold-300); }
+
+/* ==========================================================================
+   Cartões e grades
+   ========================================================================== */
+.grid { display: grid; gap: 2rem; }
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+.card {
+  background: var(--white);
+  border: 1px solid rgba(201,162,39,.28);
+  border-radius: 4px;
+  padding: 2.2rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform .3s var(--ease), box-shadow .3s var(--ease), border-color .3s var(--ease);
+}
+.card:hover { transform: translateY(-6px); box-shadow: var(--shadow-md); border-color: var(--gold-400); }
+.card h3 { margin-bottom: .4rem; }
+.card p:last-child { margin-bottom: 0; }
+.card .icon { font-variant-numeric: lining-nums;
+  width: 52px; height: 52px; display: grid; place-items: center;
+  border-radius: 50%; margin-bottom: 1.2rem;
+  background: linear-gradient(135deg, var(--gold-200), var(--gold-400));
+  color: var(--navy-900); font-family: var(--serif); font-size: 1.4rem; font-weight: 700;
+}
+.card--link { display: block; color: inherit; }
+.card--link .more {
+  display: inline-block; margin-top: .8rem;
+  font-size: .76rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold-500);
+}
+
+/* Duas colunas texto + destaque */
+.split { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.panel {
+  background: linear-gradient(160deg, var(--navy-800), var(--navy-900));
+  color: rgba(255,255,255,.82);
+  border-radius: 4px; padding: 2.6rem;
+  border-top: 3px solid var(--gold-500);
+}
+.panel h3 { color: var(--gold-200); }
+.panel ul { margin: 0; padding-left: 1.1rem; }
+.panel li { margin-bottom: .55rem; }
+
+/* Lista com marcador dourado */
+.list-gold { list-style: none; padding: 0; margin: 0 0 1.2rem; }
+.list-gold li { position: relative; padding-left: 1.6rem; margin-bottom: .6rem; color: var(--ink-soft); }
+.list-gold li::before {
+  content: "✦"; position: absolute; left: 0; top: 0; color: var(--gold-500); font-size: .9rem;
+}
+
+/* Linha do tempo (História) */
+.timeline { list-style: none; margin: 0; padding: 0 0 0 2rem; border-left: 2px solid var(--gold-300); }
+.timeline li { position: relative; padding-bottom: 2.2rem; }
+.timeline li::before {
+  content: ""; position: absolute; left: calc(-2rem - 7px); top: .5rem;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--gold-400); border: 2px solid var(--cream);
+}
+.timeline .year {
+  font-family: var(--serif); font-variant-numeric: lining-nums; font-size: 1.5rem; color: var(--navy-800); display: block; margin-bottom: .2rem;
+}
+
+/* Tabela */
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; background: var(--white); font-size: .95rem; }
+th, td { padding: .95rem 1.1rem; text-align: left; border-bottom: 1px solid rgba(11,27,63,.1); }
+th { background: var(--navy-800); color: var(--gold-200); font-size: .76rem; letter-spacing: .12em; text-transform: uppercase; }
+tbody tr:hover { background: var(--cream-2); }
+
+/* Citação */
+.quote {
+  font-family: var(--serif); font-style: italic;
+  font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.5;
+  color: var(--gold-200); max-width: 46ch; margin: 0 auto 1rem; text-align: center;
+}
+.quote-author { font-size: .78rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.6); text-align: center; }
+
+/* Chamada final */
+.cta-band {
+  background: linear-gradient(135deg, var(--gold-500), var(--gold-300));
+  text-align: center; padding: clamp(3rem, 6vw, 4.5rem) 0;
+}
+.cta-band h2 { color: var(--navy-900); }
+.cta-band p { color: rgba(11,27,63,.78); max-width: 56ch; margin-inline: auto; }
+
+/* Formulário */
+.form { display: grid; gap: 1.1rem; }
+.form .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+label { display: block; font-size: .76rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--navy-800); margin-bottom: .4rem; }
+input, select, textarea {
+  width: 100%; padding: .8rem 1rem;
+  font-family: var(--sans); font-size: .98rem; color: var(--ink);
+  background: var(--white); border: 1px solid rgba(11,27,63,.2); border-radius: 3px;
+  transition: border-color .2s var(--ease), box-shadow .2s var(--ease);
+}
+input:focus, select:focus, textarea:focus {
+  outline: none; border-color: var(--gold-400); box-shadow: 0 0 0 3px rgba(201,162,39,.18);
+}
+.form-note { font-size: .82rem; color: var(--ink-soft); }
+
+/* Acordeão (FAQ / Regimento) */
+.acc { border: 1px solid rgba(201,162,39,.3); border-radius: 4px; background: var(--white); overflow: hidden; }
+.acc + .acc { margin-top: .8rem; }
+.acc-head {
+  width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 1.15rem 1.4rem; background: none; border: 0; cursor: pointer;
+  font-family: var(--serif); font-size: 1.15rem; font-weight: 600; color: var(--navy-900); text-align: left;
+}
+.acc-head::after { content: "+"; color: var(--gold-500); font-size: 1.5rem; line-height: 1; flex-shrink: 0; }
+.acc.is-open .acc-head::after { content: "–"; }
+.acc-body { display: none; padding: 0 1.4rem 1.4rem; }
+.acc.is-open .acc-body { display: block; }
+
+/* ==========================================================================
+   Rodapé
+   ========================================================================== */
+.site-footer { background: var(--navy-900); color: rgba(255,255,255,.68); padding: 4rem 0 0; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.2fr; gap: 2.5rem; padding-bottom: 3rem; }
+.site-footer h4 {
+  color: var(--gold-300); font-family: var(--sans);
+  font-size: .76rem; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; margin-bottom: 1.1rem;
+}
+.site-footer ul { list-style: none; margin: 0; padding: 0; }
+.site-footer li { margin-bottom: .5rem; font-size: .93rem; }
+.site-footer a { color: rgba(255,255,255,.68); }
+.site-footer a:hover { color: var(--gold-300); }
+.footer-brand img { width: 62px; height: auto; margin-bottom: 1rem; }
+.footer-brand p { color: rgba(255,255,255,.6); font-size: .93rem; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.12); padding: 1.4rem 0;
+  display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+  font-size: .82rem; color: rgba(255,255,255,.45);
+}
+
+/* ==========================================================================
+   Animação de entrada
+   ========================================================================== */
+/* A ocultação só vale quando o JS está ativo — sem JS, tudo permanece visível. */
+.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s var(--ease), transform .7s var(--ease); }
+.js .reveal.is-visible { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation: none !important; transition: none !important; }
+  .reveal { opacity: 1; transform: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ==========================================================================
+   Responsivo
+   ========================================================================== */
+/* Breakpoints do cabeçalho, derivados das larguras reais medidas:
+   marca 269 px + menu 732 px + botão 216 px + espaçamentos = 1353 px. */
+@media (max-width: 1360px) {
+  .header-cta { display: none; }
+}
+
+@media (max-width: 1120px) {
+  .header-inner { gap: 1.75rem; }
+  .nav-link { padding: .7rem .55rem; font-size: .72rem; }
+}
+
+@media (max-width: 900px) {
+  .grid--3, .grid--4 { grid-template-columns: repeat(2, 1fr); }
+  .split { grid-template-columns: 1fr; }
+  .hero-strip .container { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+
+}
+
+@media (max-width: 1000px) {
+  .nav-toggle { display: block; }
+  .nav {
+    position: fixed; inset: var(--header-h) 0 0 auto;
+    width: min(360px, 88vw);
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--navy-900); border-left: 1px solid rgba(201,162,39,.3);
+    padding: 1rem 0 3rem; overflow-y: auto;
+    transform: translateX(100%); transition: transform .32s var(--ease);
+  }
+  .nav.is-open { transform: none; }
+  .nav-link { width: 100%; justify-content: space-between; padding: 1rem 1.6rem; font-size: .82rem; }
+  .submenu {
+    position: static; transform: none; opacity: 1; visibility: visible; pointer-events: auto;
+    display: none; min-width: 0; background: var(--navy-800); box-shadow: none;
+    border-top: 0; border-radius: 0; padding: .2rem 0 .6rem;
+  }
+  .nav-item.is-open .submenu { display: block; transform: none; }
+  .submenu a { color: rgba(255,255,255,.75); padding-left: 2.6rem; }
+  .submenu a:hover { background: rgba(255,255,255,.06); color: var(--gold-300); padding-left: 2.9rem; }
+}
+
+@media (max-width: 620px) {
+  body { font-size: 16px; }
+  .grid--2, .grid--3, .grid--4 { grid-template-columns: 1fr; }
+  .form .row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .brand-name { font-size: 1rem; }
+  .card { padding: 1.6rem; }
+}
+
+/* Tabelas dentro de painéis escuros herdam a paleta do painel */
+.panel table { background: transparent; }
+.panel th { background: rgba(201,162,39,.16); color: var(--gold-200); }
+.panel td { color: rgba(255,255,255,.8); border-bottom-color: rgba(255,255,255,.14); }
+.panel tbody tr:hover { background: rgba(255,255,255,.05); }
