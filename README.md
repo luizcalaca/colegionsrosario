@@ -42,8 +42,25 @@ python3 -m http.server 8899
 
 ## Publicação
 
-Basta subir a pasta inteira para qualquer hospedagem estática
-(Vercel, Netlify, GitHub Pages, ou um diretório em servidor Apache/Nginx).
+Automática: todo push na `main` dispara `.github/workflows/deploy.yml`, que
+regenera o site, confere se o HTML commitado bate com o `build.py` e envia os
+arquivos por FTPS para `public_html/` na hospedagem.
+
+Para funcionar, cadastre em *Settings → Secrets and variables → Actions*:
+
+| Segredo | Onde encontrar no cPanel da GoDaddy |
+|---|---|
+| `FTP_SERVER` | Contas de FTP → Configurar Cliente de FTP → servidor |
+| `FTP_USERNAME` | usuário de FTP (geralmente `usuario@colegionsrosario.com.br`) |
+| `FTP_PASSWORD` | senha definida ao criar a conta de FTP |
+
+Sem os segredos, o workflow roda, avisa e não publica nada.
+
+Não vão para o servidor: `build.py`, `README.md`, `tools/`, `.github/`, os ZIPs
+e as imagens de origem (`image.png`, `brasao-full.png`).
+
+Manualmente, se preferir: suba os `.html`, `assets/`, `robots.txt` e `sitemap.xml`
+para qualquer hospedagem estática.
 
 ## Brasão
 

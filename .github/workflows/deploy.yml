@@ -1,0 +1,74 @@
+name: Publicar na hospedagem
+
+# Publica o site a cada push na main. Também pode ser disparado à mão
+# em Actions → Publicar na hospedagem → Run workflow.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  # Se dois pushes acontecerem em sequência, só o mais recente publica.
+  group: deploy-producao
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Baixar o repositório
+        uses: actions/checkout@v4
+
+      - name: Preparar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Conferir se o HTML confere com o build.py
+        # As páginas são geradas. Se alguém editar um .html à mão e esquecer de
+        # rodar o build, a publicação seria desfeita no build seguinte — então
+        # aqui a divergência vira erro, antes de ir para o ar.
+        run: |
+          python3 build.py
+          if [ -n "$(git status --porcelain)" ]; then
+            echo "::error::O HTML commitado não corresponde ao build.py. Rode 'python3 build.py' e faça commit do resultado."
+            git --no-pager diff --stat
+            exit 1
+          fi
+          echo "HTML em dia com o build.py."
+
+      - name: Verificar credenciais de FTP
+        id: credenciais
+        env:
+          SERVIDOR: ${{ secrets.FTP_SERVER }}
+        run: |
+          if [ -z "$SERVIDOR" ]; then
+            echo "configurado=nao" >> "$GITHUB_OUTPUT"
+            echo "::warning::Segredos FTP_SERVER, FTP_USERNAME e FTP_PASSWORD ainda não foram cadastrados — publicação ignorada."
+          else
+            echo "configurado=sim" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Enviar para a hospedagem
+        if: steps.credenciais.outputs.configurado == 'sim'
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          # Pasta pública do cPanel na GoDaddy. Precisa terminar com barra.
+          server-dir: public_html/
+          # Arquivos de desenvolvimento não vão para o servidor.
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/.github/**
+            build.py
+            README.md
+            tools/**
+            **/*.zip
+            assets/img/image.png
+            assets/img/brasao-full.png
