@@ -76,11 +76,19 @@ NAV = [
         ("Ensino Fundamental II", "ensino-fundamental-2.html"),
     ]),
     ("Currículo", None, [
+        ("Pré-alfabetização", "curriculo-pre-alfabetizacao.html"),
         ("Inglês", "curriculo-ingles.html"),
         ("Francês", "curriculo-frances.html"),
         ("Português e Latim", "curriculo-portugues-latim.html"),
+        ("Literatura Estrangeira", "curriculo-literatura-estrangeira.html"),
+        ("Matemática", "curriculo-matematica.html"),
+        ("História e Geografia", "curriculo-historia-geografia.html"),
+        ("Filosofia Clássica", "curriculo-filosofia.html"),
         ("Artes", "curriculo-artes.html"),
         ("Música e Teatro", "curriculo-musica-teatro.html"),
+        ("Oficinas", "curriculo-oficinas.html"),
+        ("Educação Física", "curriculo-educacao-fisica.html"),
+        ("Cortesia e Civilidade", "curriculo-cortesia-civilidade.html"),
     ]),
     ("Cursos Extras", None, [
         ("Música", "cursos-musica.html"),
@@ -124,7 +132,7 @@ HEADER = """<header class="site-header">
       </span>
     </a>
     {nav}
-    <a class="btn btn--gold header-cta" href="admissao.html">Matrículas 2026</a>
+    <a class="btn btn--gold header-cta" href="admissao.html">Matrículas 2027</a>
     <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="nav"><span></span></button>
   </div>
 </header>"""
@@ -161,8 +169,8 @@ FOOTER = """<footer class="site-footer">
           <li>__END_RUA__</li>
           <li>__END_BAIRRO__ · __END_CIDADE__</li>
           <li>__END_CEP__</li>
-          <li><a href="https://wa.me/__WA__" target="_blank" rel="noopener">WhatsApp __WA_FMT__</a></li>
-          <li><a href="mailto:__EMAIL__">__EMAIL__</a></li>
+          <li><a class="link-contato" href="https://wa.me/__WA__" target="_blank" rel="noopener">WhatsApp __WA_FMT__</a></li>
+          <li><a class="link-contato" href="mailto:__EMAIL__">__EMAIL__</a></li>
           <li>Secretaria: seg. a sex., 7h30 às 17h30</li>
         </ul>
       </div>
@@ -266,7 +274,7 @@ HOME = """
     com a formação humana. Da Educação Infantil ao Fundamental II, em turmas reduzidas e
     acompanhamento próximo de cada família.</p>
     <div class="hero-actions">
-      <a class="btn btn--gold" href="admissao.html">Matrículas 2026</a>
+      <a class="btn btn--gold" href="admissao.html">Matrículas 2027</a>
       <a class="btn btn--ghost" href="proposta-pedagogica.html">Nossa Proposta</a>
     </div>
   </div>
@@ -275,7 +283,7 @@ HOME = """
 <section class="hero-strip">
   <div class="container">
     <div><span class="num">2022</span><span class="lbl">Fundado por famílias</span></div>
-    <div><span class="num">18</span><span class="lbl">Alunos por turma</span></div>
+    <div><span class="num">20</span><span class="lbl">Alunos por turma</span></div>
     <div><span class="num">4</span><span class="lbl">Idiomas no currículo</span></div>
     <div><span class="num">100%</span><span class="lbl">Professores de excelência</span></div>
   </div>
@@ -289,7 +297,7 @@ HOME = """
         "Decidiram construí-la. Esse continua sendo o nosso compromisso: currículo clássico, "
         "professores presentes e uma comunidade que educa junto com a família.",
     )
-    + '<div class="grid grid--3" style="margin-top:3.2rem">'
+    + '<div class="grid grid--4" style="margin-top:3.2rem">'
     + "".join(
         f'<a class="card card--link reveal" href="{href}"><div class="icon" aria-hidden="true">{icon}</div>'
         f"<h3>{t}</h3><p>{d}</p><span class=\"more\">Saiba mais →</span></a>"
@@ -299,6 +307,13 @@ HOME = """
             ("III", "Fundamental II", "6º ao 9º ano. Aprofundamento nas ciências, nas línguas clássicas e no pensamento crítico.", "ensino-fundamental-2.html"),
         ]
     )
+    # Etapa ainda não oferecida: cartão sem link, marcado por uma faixa.
+    + '<article class="card card--embreve reveal">'
+      '<span class="card-faixa">Em breve</span>'
+      '<div class="icon" aria-hidden="true">IV</div>'
+      "<h3>Ensino Médio</h3>"
+      "<p>1ª à 3ª série. A continuidade natural do percurso clássico, hoje em preparação para "
+      "abrir as portas às nossas primeiras turmas.</p></article>"
     + "</div>",
 ) + section(
     '<div class="split">'
@@ -308,7 +323,7 @@ HOME = """
     "as letras, as ciências e as artes — na ordem e no ritmo em que a criança é capaz de absorvê-las. "
     "Não perseguimos modismos pedagógicos; perseguimos o aprendizado real.</p>"
     '<ul class="list-gold">'
-    "<li>Inglês e Francês desde a Educação Infantil</li>"
+    "<li>Inglês em forma de Literatura desde a Educação Infantil</li>"
     "<li>Latim a partir do 6º ano, integrado ao ensino de Português</li>"
     "<li>Artes, Música e Teatro como disciplinas regulares, não como extras</li>"
     "<li>Formação católica e acompanhamento espiritual em todos os anos</li>"
@@ -317,12 +332,12 @@ HOME = """
     '<p style="margin-top:1.6rem"><a class="btn btn--navy" href="proposta-pedagogica.html">Conheça a proposta pedagógica</a></p></div>'
     '<div class="panel reveal"><h3>O dia do aluno</h3>'
     "<ul>"
-    "<li><strong>7h30</strong> — Acolhida e oração da manhã</li>"
-    "<li><strong>7h45</strong> — Aulas do núcleo comum</li>"
-    "<li><strong>10h00</strong> — Intervalo e recreio orientado</li>"
-    "<li><strong>10h20</strong> — Línguas: Inglês, Francês ou Latim</li>"
-    "<li><strong>11h40</strong> — Artes, Música ou Teatro</li>"
-    "<li><strong>12h30</strong> — Encerramento e saída</li>"
+    "<li><strong>7h</strong> — Acolhida e oração da manhã</li>"
+    "<li><strong>7h15</strong> — Aulas do núcleo comum</li>"
+    "<li><strong>9h30</strong> — Intervalo e recreio orientado</li>"
+    "<li><strong>9h50</strong> — Línguas: Inglês, Francês ou Latim</li>"
+    "<li><strong>11h10</strong> — Artes, Música ou Teatro</li>"
+    "<li><strong>12h</strong> — Encerramento e saída</li>"
     "<li><strong>13h30</strong> — Cursos extras: Música e Ballet</li>"
     "</ul></div></div>",
     "section--cream",
@@ -382,7 +397,8 @@ def subject_page(nome, eyebrow, resumo, paragrafos, destaques, carga, objetivos)
         )
         + section(
             intro("Na prática", "Como as aulas acontecem", "")
-            + f'<div style="margin-top:2.4rem">{cards(destaques)}</div>'
+            # Com 4 destaques, três colunas deixariam o último cartão sozinho na linha.
+            + f'<div style="margin-top:2.4rem">{cards(destaques, 4 if len(destaques) == 4 else 3)}</div>'
         )
         + CTA
     )
@@ -436,7 +452,7 @@ PAGES["historia.html"] = dict(
             for ano, txt in [
                 ("2021", "Um grupo de famílias começa a se reunir para estudar a criação de uma escola clássica e católica."),
                 ("2022", "Fundação do Colégio, com as primeiras turmas de Educação Infantil e Fundamental I."),
-                ("2023", "Implantação do ensino de Inglês e Francês desde a Educação Infantil."),
+                ("2023", "Implantação do ensino de Inglês em forma de Literatura desde a Educação Infantil."),
                 ("2024", "Abertura do Fundamental II e entrada do Latim no currículo, integrado ao Português."),
                 ("2025", "Criação dos cursos extras de Música e Ballet, abertos também à comunidade."),
                 ("2026", "Consolidação do Fundamental II e revisão integral do currículo clássico."),
@@ -479,7 +495,7 @@ PAGES["proposta-pedagogica.html"] = dict(
         + f'<div style="margin-top:3rem">'
         + cards(
             [
-                ("I", "Inteligência", "Conteúdo sólido, ensinado com método e cobrado com clareza. Turmas de até 18 alunos permitem que nenhuma dúvida passe despercebida."),
+                ("I", "Inteligência", "Conteúdo sólido, ensinado com método e cobrado com clareza. Turmas de até 20 alunos permitem que nenhuma dúvida passe despercebida."),
                 ("II", "Caráter", "Disciplina, pontualidade, respeito e responsabilidade são ensinados como se ensina qualquer matéria: com constância e com exemplo."),
                 ("III", "Fé", "Oração diária, catequese, sacramentos e acompanhamento espiritual, sempre em diálogo respeitoso com as famílias."),
             ]
@@ -541,7 +557,7 @@ PAGES["equipe-docente.html"] = dict(
             [
                 ("100%", "Licenciados", "Todo o corpo docente possui licenciatura plena na disciplina que leciona."),
                 ("68%", "Pós-graduados", "Mais de dois terços dos professores possuem especialização, mestrado ou doutorado."),
-                ("18", "Máximo por turma", "Nenhuma turma do Colégio passa de 18 alunos, em qualquer etapa."),
+                ("20", "Máximo por turma", "Nenhuma turma do Colégio passa de 20 alunos, em qualquer etapa."),
                 ("40h", "Formação anual", "Horas de formação continuada oferecidas pela instituição a cada ano."),
             ],
             4,
@@ -681,8 +697,8 @@ PAGES["ensino-infantil.html"] = dict(
             ("Psicomotricidade", "3"), ("Formação Católica", "2"),
         ],
         [
-            "<strong>Período:</strong> manhã (7h30 às 12h) ou tarde (13h às 17h30)",
-            "<strong>Turmas:</strong> até 15 crianças por turma",
+            "<strong>Período:</strong> matutino (7h30 às 11h45) ou vespertino (13h às 17h15)",
+            "<strong>Turmas:</strong> até 20 crianças por turma",
             "<strong>Equipe:</strong> uma professora regente e uma auxiliar por turma",
             "<strong>Adaptação:</strong> primeiras duas semanas com horário progressivo",
             "<strong>Contraturno:</strong> Música e Ballet disponíveis a partir dos 4 anos",
@@ -719,8 +735,8 @@ PAGES["ensino-fundamental-1.html"] = dict(
             ("Educação Física", "2"), ("Formação Católica", "2"),
         ],
         [
-            "<strong>Período:</strong> manhã (7h30 às 12h30)",
-            "<strong>Turmas:</strong> até 18 alunos",
+            "<strong>Período:</strong> matutino (7h às 12h)",
+            "<strong>Turmas:</strong> até 20 alunos",
             "<strong>Lição de casa:</strong> diária, de 30 a 50 minutos conforme o ano",
             "<strong>Avaliação:</strong> bimestral, com relatório descritivo individual",
             "<strong>Contraturno:</strong> Música, Ballet e plantão de estudos",
@@ -757,7 +773,7 @@ PAGES["ensino-fundamental-2.html"] = dict(
             ("Música ou Teatro", "2"), ("Educação Física", "2"), ("Formação Católica", "2"),
         ],
         [
-            "<strong>Período:</strong> manhã (7h20 às 13h)",
+            "<strong>Período:</strong> matutino (7h às 12h)",
             "<strong>Turmas:</strong> até 20 alunos",
             "<strong>Estudo dirigido:</strong> duas tardes por semana, com professor de plantão",
             "<strong>Avaliação:</strong> provas bimestrais, trabalhos e simulados a partir do 8º ano",
@@ -870,8 +886,9 @@ PAGES["curriculo-artes.html"] = dict(
     title=f"Artes — Currículo — {SCHOOL}",
     description="Artes visuais como disciplina regular: desenho de observação, história da arte e ateliê.",
     body=subject_page(
-        "Artes", "Artes visuais",
-        "Desenho, pintura e história da arte como disciplina séria — porque o belo também se aprende.",
+        "Artes", "Artes visuais e estética",
+        "Desenho, pintura e história da arte como disciplina séria — porque o belo não é questão de "
+        "gosto particular, e também se aprende.",
         [
             "Artes, no Rosário, não é a aula em que se preenche o tempo. É uma disciplina com "
             "programa, progressão e avaliação, ensinada por professores formados em artes visuais.",
@@ -881,11 +898,22 @@ PAGES["curriculo-artes.html"] = dict(
             "Paralelamente, percorremos a história da arte ocidental, da arte sacra medieval ao "
             "modernismo brasileiro, sempre com contato direto com obras: visitas a museus, reproduções "
             "de qualidade e, quando possível, o ateliê a céu aberto da própria cidade.",
+            "Sustentando tudo isso há uma convicção que a tradição clássica formulou como a doutrina "
+            "dos transcendentais: o <em>verum</em>, o <em>bonum</em> e o <em>pulchrum</em> — o "
+            "verdadeiro, o bom e o belo — não são três gostos independentes, mas três modos de "
+            "dizer a mesma realidade. Por isso a estética não é um apêndice decorativo do currículo: "
+            "ensinar uma criança a reconhecer o que é belo é da mesma família que ensiná-la a "
+            "reconhecer o que é verdadeiro em Matemática e o que é bom na conduta.",
+            "Na prática, isso significa que discutimos por que uma obra é boa, e não apenas se o "
+            "aluno gostou dela. O juízo estético é tratado como juízo — com razões, critérios e "
+            "argumentos —, o que prepara o terreno para a Filosofia no Fundamental II.",
         ],
         [
             ("A", "Desenho de observação", "Fundamento técnico trabalhado com progressão do 1º ao 9º ano."),
             ("B", "História da arte", "Da arte sacra medieval ao modernismo, com foco em leitura de obra."),
-            ("C", "Ateliê e exposição", "Produção própria em diversas técnicas, com mostra anual aberta às famílias."),
+            ("C", "Estética", "<em>Verum</em>, <em>bonum</em> e <em>pulchrum</em>: o belo tratado como juízo "
+                  "com razões, e não como preferência particular."),
+            ("D", "Ateliê e exposição", "Produção própria em diversas técnicas, com mostra anual aberta às famílias."),
         ],
         [("Educação Infantil", "2 aulas"), ("Fundamental I", "2 aulas"), ("Fundamental II", "2 aulas")],
         [
@@ -893,7 +921,8 @@ PAGES["curriculo-artes.html"] = dict(
             "Repertório de história da arte ocidental e brasileira",
             "Experiência prática com aquarela, guache, carvão e modelagem",
             "Capacidade de ler e interpretar uma obra de arte",
-            "Apreço formado pelo contato direto com o que é belo",
+            "Juízo estético fundamentado: saber dizer por que uma obra é boa",
+            "Compreensão do belo (<em>pulchrum</em>) em sua unidade com o verdadeiro e o bom",
         ],
     ),
 )
@@ -1058,11 +1087,11 @@ PAGES["cursos-ballet.html"] = dict(
 
 # ---- Admissão ------------------------------------------------------------
 PAGES["admissao.html"] = dict(
-    title=f"Admissão — Matrículas 2026 — {SCHOOL}",
-    description="Processo de admissão 2026: etapas, documentos, calendário e agendamento de visita.",
+    title=f"Admissão — Matrículas 2027 — {SCHOOL}",
+    description="Processo de admissão 2027: etapas, documentos, calendário e agendamento de visita.",
     body=page_hero(
         "Admissão",
-        "Matrículas abertas para 2026. Conheça as etapas do processo e agende sua visita ao Colégio.",
+        "Matrículas abertas para 2027. Conheça as etapas do processo e agende sua visita ao Colégio.",
         "Admissão",
     )
     + section(
@@ -1096,7 +1125,7 @@ PAGES["admissao.html"] = dict(
         "<li>Duas fotos 3x4 recentes</li>"
         "<li>Laudos ou relatórios, quando houver acompanhamento especializado</li>"
         "</ul></div>"
-        '<div class="panel reveal"><h3>Calendário 2026</h3><ul>'
+        '<div class="panel reveal"><h3>Calendário 2026/2027</h3><ul>'
         "<li><strong>Agosto</strong> — Abertura das visitas agendadas</li>"
         "<li><strong>Setembro</strong> — Rematrícula de alunos veteranos</li>"
         "<li><strong>Outubro</strong> — Início das matrículas de novos alunos</li>"
@@ -1177,8 +1206,8 @@ PAGES["contato.html"] = dict(
         '<div class="panel reveal"><h3>Secretaria</h3><ul>'
         "<li><strong>Endereço:</strong> __END_RUA__</li>"
         "<li>__END_BAIRRO__ · __END_CIDADE__ · __END_CEP__</li>"
-        "<li><strong>WhatsApp:</strong> <a href=\"https://wa.me/__WA__\" target=\"_blank\" rel=\"noopener\">__WA_FMT__</a></li>"
-        "<li><strong>E-mail:</strong> <a href=\"mailto:__EMAIL__\">__EMAIL__</a></li>"
+        "<li><strong>WhatsApp:</strong> <a class=\"link-contato\" href=\"https://wa.me/__WA__\" target=\"_blank\" rel=\"noopener\">__WA_FMT__</a></li>"
+        "<li><strong>E-mail:</strong> <a class=\"link-contato\" href=\"mailto:__EMAIL__\">__EMAIL__</a></li>"
         "<li><strong>Atendimento:</strong> seg. a sex., 7h30 às 17h30</li>"
         "<li><strong>CNPJ:</strong> __CNPJ__</li>"
         "</ul>"
@@ -1197,6 +1226,446 @@ PAGES["contato.html"] = dict(
         ' src="https://www.google.com/maps?q=__END_MAPA__&output=embed"></iframe>'
         "</div></div>",
         "section--cream",
+    ),
+)
+
+
+PAGES["curriculo-matematica.html"] = dict(
+    title=f"Matemática — Currículo — {SCHOOL}",
+    description="Matemática clássica: cálculo mental, desenho geométrico com régua e compasso, "
+    "a geometria de Euclides e o paralelo entre demonstração matemática e raciocínio lógico.",
+    body=subject_page(
+        "Matemática", "Raciocínio e demonstração",
+        "Da tabuada automatizada à demonstração euclidiana — a matemática ensinada como treino do "
+        "raciocínio, não como coleção de fórmulas a decorar.",
+        [
+            "No currículo clássico, a Matemática nunca foi uma disciplina técnica isolada. Ela "
+            "integrava o quadrivium justamente por ser o lugar onde o aluno aprende a demonstrar: "
+            "a partir de poucos princípios evidentes, chegar por passos necessários a uma conclusão "
+            "que não se pode recusar.",
+            "Por isso o trabalho começa pelo domínio operatório — cálculo mental diário, tabuada "
+            "automatizada, frações e proporções com segurança — mas não termina nele. A partir do "
+            "Fundamental II, o aluno passa a trabalhar com a geometria de Euclides, acompanhando as "
+            "proposições dos <em>Elementos</em>: enunciado, construção, demonstração, conclusão.",
+            "Ao lado disso vem o desenho geométrico, feito à mão com régua e compasso. Construir uma "
+            "mediatriz ou bissetar um ângulo com instrumentos não é exercício decorativo: é a "
+            "verificação concreta de que a demonstração funciona, e é o que fixa no aluno a diferença "
+            "entre desenhar algo que <em>parece</em> certo e construir algo que <em>é</em> certo.",
+        ],
+        [
+            ("A", "Desenho geométrico", "Régua e compasso, à mão: mediatriz, bissetriz, polígonos regulares, "
+                  "divisão de segmentos. Construção sem medida aproximada."),
+            ("B", "Euclides", "Leitura e reconstrução das proposições dos <em>Elementos</em>, na ordem em que "
+                  "foram escritas — do postulado à conclusão."),
+            ("C", "Paralelo lógico", "A demonstração geométrica e o silogismo têm a mesma estrutura. O aluno "
+                  "percebe isso e leva o raciocínio para as outras disciplinas."),
+        ],
+        [("Fundamental I", "6 aulas"), ("Fundamental II", "6 aulas"), ("Fundamental II — Desenho Geométrico", "1 aula")],
+        [
+            "Cálculo mental seguro e tabuada automatizada",
+            "Domínio de frações, proporções, álgebra elementar e equações",
+            "Construções geométricas exatas com régua e compasso",
+            "Leitura e reconstrução de demonstrações de Euclides",
+            "Reconhecimento da estrutura lógica comum à demonstração e ao silogismo",
+            "Capacidade de distinguir o que foi provado do que apenas parece verdadeiro",
+        ],
+    ),
+)
+
+
+PAGES["curriculo-pre-alfabetizacao.html"] = dict(
+    title=f"Pré-alfabetização — Currículo — {SCHOOL}",
+    description="Pré-alfabetização na Educação Infantil: consciência fonológica, rimas, sílabas e "
+    "fonemas — a base sonora que sustenta a alfabetização pelo método fônico.",
+    body=subject_page(
+        "Pré-alfabetização", "Educação Infantil",
+        "Antes da letra vem o som. A criança aprende a ouvir a língua por dentro — e chega à "
+        "alfabetização com o trabalho mais difícil já feito.",
+        [
+            "Alfabetizar não começa no 1º ano, começa no ouvido. Antes de associar um símbolo a um "
+            "som, a criança precisa perceber que a palavra falada é feita de partes — que "
+            "<em>casa</em> rima com <em>asa</em>, que <em>bola</em> começa com o mesmo som de "
+            "<em>bota</em>, que <em>pato</em> tem duas sílabas e quatro sons.",
+            "Isso se chama consciência fonológica, e é o melhor previsor conhecido do sucesso na "
+            "alfabetização. Não se desenvolve sozinho: exige trabalho sistemático, diário e "
+            "cuidadosamente graduado — das unidades maiores para as menores, da rima à sílaba, da "
+            "sílaba ao fonema.",
+            "Na Educação Infantil do Rosário isso é feito por meio de jogos, parlendas, cantigas e "
+            "brincadeiras orais — sempre com propósito e progressão claros por trás. Não antecipamos "
+            "a alfabetização formal nem transformamos o Infantil em Fundamental precoce: preparamos "
+            "o terreno para que, no 1º ano, o método fônico encontre uma criança já capaz de ouvir "
+            "aquilo que vai aprender a escrever.",
+        ],
+        [
+            ("A", "Da rima ao fonema", "Progressão explícita: rima e aliteração, depois sílabas, depois os "
+                  "sons individuais — nessa ordem, sem pular etapas."),
+            ("B", "Oralidade e vocabulário", "Contação de histórias diária, roda de conversa e parlendas: "
+                  "ninguém escreve bem uma língua que ouve pouco."),
+            ("C", "Traçado e motricidade", "Coordenação fina, orientação espacial e o gesto do traçado, "
+                  "preparando a escrita à mão."),
+        ],
+        [("Infantil III (3 anos)", "5 aulas"), ("Infantil IV (4 anos)", "6 aulas"), ("Infantil V (5 anos)", "8 aulas")],
+        [
+            "Identificação de rimas e aliterações em palavras faladas",
+            "Segmentação de palavras em sílabas e contagem sonora",
+            "Isolamento do som inicial e final das palavras",
+            "Associação segura entre som e letra ao final do Infantil V",
+            "Vocabulário oral amplo, construído por histórias e conversa",
+            "Coordenação motora fina suficiente para o traçado das letras",
+        ],
+    ),
+)
+
+PAGES["curriculo-literatura-estrangeira.html"] = dict(
+    title=f"Literatura Estrangeira — Currículo — {SCHOOL}",
+    description="Literatura estrangeira no currículo: obras integrais das tradições inglesa, "
+    "francesa e greco-latina, lidas em tradução e, progressivamente, no original.",
+    body=subject_page(
+        "Literatura Estrangeira", "Leitura de obras integrais",
+        "As grandes obras que formaram o Ocidente, lidas por inteiro — em tradução no início, no "
+        "original sempre que o aluno já puder.",
+        [
+            "Estudar uma língua estrangeira sem chegar à sua literatura é parar no meio do caminho. "
+            "O aluno que aprende inglês apenas para pedir informação num aeroporto tem uma "
+            "ferramenta; o que lê Dickens tem acesso a um mundo.",
+            "Por isso a literatura estrangeira é tratada aqui como disciplina própria, e não como "
+            "apêndice das aulas de idioma. Lemos obras integrais — nunca resumos, nunca fragmentos "
+            "de apostila — em edições adaptadas ao nível quando necessário, e no original assim que "
+            "a proficiência permite.",
+            "O percurso acompanha as raízes: a épica grega e a poesia latina, que o aluno reencontra "
+            "no Latim; a tradição inglesa, de Shakespeare aos vitorianos; a francesa, de La Fontaine "
+            "a Saint-Exupéry. O objetivo não é cobrir um catálogo, mas ler bem um número pequeno de "
+            "livros grandes.",
+        ],
+        [
+            ("A", "Obras integrais", "O livro inteiro, do começo ao fim. Adaptações só quando o nível "
+                  "linguístico ainda exige."),
+            ("B", "Do traduzido ao original", "A mesma obra pode voltar anos depois, agora na língua em "
+                  "que foi escrita."),
+            ("C", "Discussão em aula", "Leitura acompanhada, com discussão dirigida e escrita sobre o texto — "
+                  "não questionário de interpretação."),
+        ],
+        [("Fundamental I", "1 aula"), ("Fundamental II", "2 aulas"), ("Fundamental II — leitura dirigida", "1 aula")],
+        [
+            "Hábito de ler obras completas, com fôlego para textos longos",
+            "Repertório das tradições grega, latina, inglesa e francesa",
+            "Leitura de textos literários no original em inglês e francês",
+            "Capacidade de discutir uma obra com referência ao texto, não a impressões",
+            "Escrita analítica sobre literatura",
+        ],
+    ),
+)
+
+PAGES["curriculo-filosofia.html"] = dict(
+    title=f"Filosofia Clássica — Currículo — {SCHOOL}",
+    description="Filosofia clássica no Fundamental II: lógica, ética e metafísica na tradição "
+    "aristotélica e tomista, com leitura de fontes e prática de argumentação.",
+    body=subject_page(
+        "Filosofia Clássica", "Tradição aristotélica e tomista",
+        "Aristóteles e Tomás de Aquino ao alcance de um aluno do Fundamental II — não como história "
+        "das ideias, mas como exercício de pensar com ordem.",
+        [
+            "A filosofia entra no currículo porque é ela que dá unidade ao resto. Depois de anos "
+            "aprendendo a demonstrar em Matemática, a analisar em Latim e a argumentar por escrito em "
+            "Português, o aluno encontra na lógica aristotélica o nome e a estrutura daquilo que já "
+            "vinha fazendo.",
+            "Começamos pela lógica: termo, proposição e silogismo; as formas válidas e as falácias "
+            "mais comuns. É a parte mais concreta e a mais imediatamente útil — o aluno passa a "
+            "reconhecer um raciocínio quebrado, inclusive nos próprios textos.",
+            "Em seguida vêm as noções de ética e de metafísica, sempre a partir de fontes lidas "
+            "diretamente, em trechos escolhidos e comentados: as quatro causas, a distinção entre "
+            "ato e potência, a virtude como hábito, o bem como fim da ação. Tomás de Aquino entra "
+            "sobretudo pela forma da <em>quaestio</em> — objeções, resposta, réplicas —, que é ao "
+            "mesmo tempo um método de estudo e uma escola de honestidade intelectual: ninguém "
+            "responde a uma tese sem antes formulá-la em sua versão mais forte.",
+        ],
+        [
+            ("A", "Lógica", "Termo, proposição e silogismo; formas válidas; identificação das falácias "
+                  "mais frequentes."),
+            ("B", "Leitura de fontes", "Trechos de Aristóteles e de Tomás de Aquino lidos e comentados em "
+                  "aula, não resumos sobre eles."),
+            ("C", "Disputatio", "A quaestio tomista como exercício: formular a objeção mais forte antes de "
+                  "responder a ela."),
+        ],
+        [("8º ano", "1 aula"), ("9º ano", "2 aulas"), ("9º ano — seminário de leitura", "1 aula")],
+        [
+            "Domínio das formas básicas do silogismo e reconhecimento de falácias",
+            "Vocabulário filosófico preciso: causa, ato, potência, essência, virtude",
+            "Leitura de trechos de Aristóteles e de Tomás de Aquino com compreensão",
+            "Capacidade de expor uma posição contrária antes de refutá-la",
+            "Argumentação escrita ordenada, com premissas explícitas",
+            "Percepção da unidade entre as disciplinas do currículo",
+        ],
+    ),
+)
+
+
+# --------------------------------------------------------------------------
+# Oficinas — trabalho manual dentro do currículo
+# --------------------------------------------------------------------------
+OFICINAS = [
+    ("Pintura a óleo",
+     "A técnica clássica da pintura ocidental. Preparação da tela, camadas, mistura de pigmentos e "
+     "— sobretudo — o tempo de secagem, que impede qualquer pressa. Natureza-morta e estudo de luz."),
+    ("Pintura em aquarela",
+     "O oposto do óleo: a água não permite correção. Cada gesto é definitivo e o branco do papel é a "
+     "única luz disponível. Ensina decisão e economia de meios."),
+    ("Marcenaria",
+     "Medir, marcar, serrar, encaixar e lixar, com ferramentas manuais. A madeira não perdoa erro de "
+     "medida — e é justamente isso que a torna uma boa professora."),
+    ("Corte e costura",
+     "Do molde ao acabamento: tirar medidas, riscar o tecido, cortar, alinhavar e costurar à mão e à "
+     "máquina, até a peça ficar pronta para vestir."),
+    ("Agricultura",
+     "A horta do Colégio. Preparo do solo, semeadura, rega, capina e colheita, acompanhando o ciclo "
+     "inteiro. A única oficina em que o resultado depende de saber esperar."),
+    ("Tipografia",
+     "Composição com tipos móveis e impressão manual. A palavra vira objeto físico, letra por letra "
+     "— e o aluno descobre por que se diz caixa-alta e caixa-baixa."),
+    ("Escultura",
+     "Modelagem em argila e talhe em materiais macios. Passar do desenho, que é plano, para o volume, "
+     "que só se resolve girando a peça e olhando de todos os lados."),
+]
+
+_oficinas_linhas = "".join(
+    f"<tr><td><strong>{nome}</strong></td><td>{desc}</td></tr>" for nome, desc in OFICINAS
+)
+
+_oficinas_pilares = cards([
+    ("I", "Encontro com a matéria",
+     "A madeira, a argila e o tecido impõem limites que não se negociam. Uma medida errada aparece "
+     "na hora, sem intermediários."),
+    ("II", "Paciência e ordem",
+     "Preparar o material, respeitar o tempo de secagem, guardar a ferramenta limpa. A oficina tem "
+     "um método, e ele é parte do que se ensina."),
+    ("III", "A obra terminada",
+     "Levar uma peça do início ao fim e mostrá-la pronta. É a experiência de ter feito algo que "
+     "existe fora de si."),
+])
+
+PAGES["curriculo-oficinas.html"] = dict(
+    title=f"Oficinas — Currículo — {SCHOOL}",
+    description="Oficinas de trabalho manual no currículo: pintura a óleo e aquarela, marcenaria, "
+    "corte e costura, agricultura, tipografia e escultura.",
+    body=page_hero(
+        "Oficinas",
+        "Trabalho manual como parte do currículo — porque a inteligência que só opera no abstrato "
+        "fica pela metade.",
+        '<a href="curriculo-pre-alfabetizacao.html">Currículo</a> &nbsp;/&nbsp; Oficinas',
+    )
+    + section(
+        text_block(
+            [
+                "Uma escola clássica que ensinasse apenas a ler, calcular e argumentar formaria "
+                "alunos pela metade. A tradição que herdamos nunca separou a mão da inteligência: o "
+                "mesmo monge que copiava manuscritos cuidava da horta, e as artes liberais conviviam "
+                "com as artes mecânicas sem que ninguém achasse aquilo estranho.",
+                "O trabalho manual ensina o que nenhuma prova ensina. A matéria resiste — a madeira "
+                "racha, a tinta escorre, a semente não germina antes da hora — e essa resistência é "
+                "uma forma de verdade objetiva com que a criança precisa se encontrar. Não adianta "
+                "argumentar bem com uma tábua mal medida.",
+                "Ensina também a terminar. Uma peça de marcenaria, uma camisa costurada ou uma "
+                "gravura impressa ou está pronta ou não está; não existe entregar pela metade e "
+                "receber nota parcial. O aluno aprende a levar uma obra até o fim e a assumi-la "
+                "diante dos outros — o que forma o caráter tanto quanto uma aula sobre virtude.",
+                "E devolve dignidade ao fazer com as mãos, numa cultura que aprendeu a tratá-lo como "
+                "destino de quem não estudou. Aqui, o aluno que traduz Latim é o mesmo que lixa uma "
+                "tábua — e não há hierarquia entre as duas coisas.",
+            ],
+            "Por que oficinas",
+            "A mão que pensa",
+        )
+    )
+    + section(
+        intro("O que o trabalho manual forma", "Três coisas que a sala de aula não dá", "")
+        + '<div style="margin-top:3rem">' + _oficinas_pilares + "</div>",
+        "section--cream",
+    )
+    + section(
+        intro("As oficinas", "O que oferecemos",
+              "Cada aluno passa por todas ao longo do percurso, em rodízio, e aprofunda-se naquelas "
+              "com que tiver mais afinidade.")
+        + '<div class="table-wrap reveal" style="margin-top:2.6rem">'
+        "<table><thead><tr><th>Oficina</th><th>O que se faz</th></tr></thead><tbody>"
+        + _oficinas_linhas
+        + "</tbody></table></div>"
+    )
+    + section(
+        '<div class="split">'
+        '<div class="reveal"><p class="eyebrow">Organização</p><h2>Como funcionam</h2><hr class="rule">'
+        '<ul class="list-gold">'
+        "<li><strong>Rodízio bimestral:</strong> a turma passa por uma oficina diferente a cada bimestre</li>"
+        "<li><strong>Turmas divididas:</strong> metade da turma por vez, para o professor acompanhar cada aluno</li>"
+        "<li><strong>Ferramenta de verdade:</strong> instrumentos reais, com instrução de segurança antes do uso</li>"
+        "<li><strong>Material incluído:</strong> fornecido pelo Colégio, sem custo adicional</li>"
+        "<li><strong>Mostra anual:</strong> as peças produzidas são expostas às famílias no fim do ano</li>"
+        "</ul></div>"
+        '<div class="panel reveal"><h3>Carga horária semanal</h3>'
+        '<div class="table-wrap"><table><thead><tr><th>Etapa</th><th>Aulas</th></tr></thead><tbody>'
+        "<tr><td>Educação Infantil</td><td>1 aula</td></tr>"
+        "<tr><td>Fundamental I</td><td>2 aulas</td></tr>"
+        "<tr><td>Fundamental II</td><td>2 aulas</td></tr>"
+        "</tbody></table></div>"
+        '<p style="margin-top:1.4rem;font-size:.92rem">Na Educação Infantil as oficinas são adaptadas: '
+        "modelagem, pintura e horta, sem ferramenta cortante.</p></div></div>",
+        "section--cream",
+    )
+    + CTA,
+)
+
+
+PAGES["curriculo-educacao-fisica.html"] = dict(
+    title=f"Educação Física — Currículo — {SCHOOL}",
+    description="Educação Física como parte da formação integral: ginástica, jogo e esporte "
+    "coletivo formando o corpo, a vontade e o caráter.",
+    body=subject_page(
+        "Educação Física", "Formação integral",
+        "O corpo não é acessório da pessoa. Educá-lo com método é parte de formar o aluno inteiro — "
+        "inteligência, vontade, caráter e corpo.",
+        [
+            "A educação clássica sempre soube que não se forma a alma ignorando o corpo. Na paideia "
+            "grega, a ginástica e a música caminhavam juntas: uma sem a outra produzia ou o rude ou "
+            "o mole. Nossa Educação Física parte dessa mesma convicção — e não da ideia de que a "
+            "aula seja o intervalo entre as matérias sérias.",
+            "Formação integral, aqui, tem sentido preciso: o que o aluno aprende no pátio é da mesma "
+            "natureza do que aprende na sala. A criança que sustenta um esforço até o fim está "
+            "exercitando a mesma fortaleza que a faz terminar uma lista de exercícios difícil. A que "
+            "aceita a regra do jogo quando ela a desfavorece está aprendendo justiça de um modo que "
+            "nenhuma aula expositiva alcança.",
+            "Por isso o trabalho é progressivo e tem conteúdo. Começa pela motricidade ampla e pelos "
+            "jogos tradicionais na Educação Infantil, passa à ginástica formal e à iniciação "
+            "esportiva no Fundamental I e chega, no Fundamental II, à prática regular de esportes "
+            "coletivos, com regra, arbitragem e competição interna.",
+            "E há o simples: criança precisa correr. Num tempo em que a infância se tornou sedentária "
+            "e mediada por telas, garantir movimento diário ao ar livre é uma decisão pedagógica — "
+            "e também de saúde.",
+        ],
+        [
+            ("A", "Ginástica e motricidade", "Coordenação, equilíbrio, postura e consciência corporal, "
+                  "trabalhados com progressão do Infantil ao 9º ano."),
+            ("B", "Jogo e esporte coletivo", "Dos jogos tradicionais à prática regular de esportes com "
+                  "regra, posição e função dentro de uma equipe."),
+            ("C", "Virtudes do corpo", "Fortaleza para sustentar o esforço, temperança para conhecer o "
+                  "próprio limite, justiça para aceitar a regra."),
+        ],
+        [("Educação Infantil", "3 aulas"), ("Fundamental I", "2 aulas"), ("Fundamental II", "2 aulas")],
+        [
+            "Coordenação motora, equilíbrio e postura adequados à idade",
+            "Domínio dos fundamentos dos principais esportes coletivos",
+            "Hábito de esforço físico regular e prazer no movimento",
+            "Cooperação: saber jogar com quem se tem, não com quem se queria ter",
+            "Aceitação da regra e da derrota sem ressentimento",
+            "Noções de higiene, alimentação e cuidado com o próprio corpo",
+        ],
+    ),
+)
+
+PAGES["curriculo-cortesia-civilidade.html"] = dict(
+    title=f"Cortesia e Civilidade — Currículo — {SCHOOL}",
+    description="Cortesia e civilidade no currículo: como se expressar, como tratar os pais, os "
+    "mais velhos, os professores e os colegas — formação diária de convivência.",
+    body=subject_page(
+        "Cortesia e Civilidade", "Formação do dia a dia",
+        "Aprender a falar com as pessoas, a tratar os pais, os mais velhos, os professores e os "
+        "colegas. A caridade nas pequenas coisas — praticada todo dia, até virar segunda natureza.",
+        [
+            "Cortesia não é verniz social nem afetação. É a forma visível do respeito: o modo como "
+            "reconheço, em gestos pequenos e repetidos, que a pessoa diante de mim tem uma dignidade "
+            "que não depende do que eu sinta por ela naquele momento. Por isso a tratamos como "
+            "matéria de formação, e não como assunto de boas maneiras.",
+            "O trabalho começa pela expressão. O aluno aprende a olhar nos olhos ao falar, a "
+            "cumprimentar quem chega, a pedir licença antes de interromper, a agradecer de modo "
+            "audível, a pedir desculpa sem constrangimento e a dizer o que pensa com clareza e sem "
+            "agressão. Quem não sabe se expressar acaba se impondo ou se calando — e nenhuma das duas "
+            "coisas serve.",
+            "Depois vem o trato com cada um. Com os <strong>pais</strong>, a obediência e a gratidão "
+            "que se traduzem em gestos concretos: atender ao ser chamado, ajudar sem que precisem "
+            "pedir duas vezes, agradecer o que se recebe. Com os <strong>mais velhos</strong>, a "
+            "deferência devida a quem já percorreu o caminho: ceder o lugar, ouvir sem interromper, "
+            "tratar por senhor e senhora. Com os <strong>professores</strong>, o respeito que torna "
+            "possível aprender: pontualidade, atenção, dirigir-se com correção e reconhecer a "
+            "autoridade de quem ensina.",
+            "E há o trato <strong>entre si</strong>, que é o mais difícil e o mais decisivo. É entre "
+            "colegas que se aprende a discordar sem ofender, a não excluir quem está sozinho, a não "
+            "rir do erro alheio, a defender quem está sendo tratado injustamente e a pedir perdão "
+            "quando se erra. Uma turma em que isso é cultivado dia após dia é um lugar onde se estuda "
+            "melhor — e onde nenhuma criança tem medo de chegar.",
+            "Nada disso se ensina em uma aula por semana e se esquece nas outras vinte. A civilidade "
+            "é cobrada e praticada o tempo inteiro: na entrada, no corredor, no refeitório, na saída. "
+            "O momento semanal reservado serve para dar nome ao que se pratica e para tratar das "
+            "situações concretas que apareceram na convivência.",
+        ],
+        [
+            ("A", "Saber se expressar", "Olhar nos olhos, cumprimentar, pedir licença, agradecer, pedir "
+                  "desculpa e discordar com clareza — sem agressão nem timidez."),
+            ("B", "O trato com cada um", "Pais, mais velhos, professores e funcionários: a deferência "
+                  "adequada a cada relação, em gestos concretos."),
+            ("C", "Entre colegas", "Não excluir, não rir do erro alheio, defender quem sofre injustiça, "
+                  "pedir perdão e recomeçar."),
+            ("D", "A mesa e o convívio", "Postura, uso dos talheres, esperar todos serem servidos, "
+                  "conversar à mesa e receber uma visita."),
+        ],
+        [("Educação Infantil", "1 aula"), ("Fundamental I", "1 aula"), ("Fundamental II", "1 aula")],
+        [
+            "Expressão oral clara, audível e dirigida ao interlocutor",
+            "Tratamento correto de pais, mais velhos, professores e funcionários",
+            "Hábito de cumprimentar, agradecer, pedir licença e pedir desculpa",
+            "Capacidade de discordar sem ofender e de aceitar correção",
+            "Convivência atenta a quem está sozinho ou sendo tratado com injustiça",
+            "Postura à mesa e desenvoltura para receber e visitar",
+            "Escrita de bilhetes de agradecimento e convites, à mão",
+        ],
+    ),
+)
+
+
+PAGES["curriculo-historia-geografia.html"] = dict(
+    title=f"História e Geografia — Currículo — {SCHOOL}",
+    description="História e Geografia ensinadas juntas: história de Goiás, do Brasil e do mundo; "
+    "geografia física, fauna, flora e cartografia.",
+    body=subject_page(
+        "História e Geografia", "Ensinadas juntas",
+        "Nenhum fato acontece fora de um lugar. História e Geografia caminham juntas no currículo "
+        "porque só se entende o que aconteceu sabendo onde aconteceu.",
+        [
+            "Separar História de Geografia produz dois problemas conhecidos: uma sequência de datas "
+            "sem chão e uma coleção de mapas sem gente. No Rosário as duas são trabalhadas de forma "
+            "integrada, pelo mesmo professor e no mesmo horário, de modo que o aluno nunca estude "
+            "uma bandeirada sem saber por qual rio ela subiu, nem um bioma sem saber quem o ocupou.",
+            "Em <strong>História</strong>, o percurso vai do próximo ao distante. Começa pela "
+            "história local — Goiás, a mineração, as cidades do ouro, a marcha para o oeste, a "
+            "construção de Goiânia e de Brasília —, porque a criança entende melhor o passado quando "
+            "ele deixou marcas que ela pode visitar. Segue para a história do Brasil, do "
+            "descobrimento à República, e se abre para a história do mundo: a antiguidade clássica, "
+            "que ela reencontra no Latim e na Filosofia, a cristandade medieval, as grandes "
+            "navegações e a formação do mundo moderno.",
+            "Em <strong>Geografia</strong>, a ênfase é física. Relevo, clima, solos, hidrografia e "
+            "vegetação vêm antes de qualquer discussão abstrata, porque são a base concreta sobre a "
+            "qual tudo o mais se assenta. Estudamos o cerrado que nos cerca com o mesmo cuidado com "
+            "que estudamos a Amazônia ou os desertos: fauna e flora identificadas pelo nome, "
+            "ecossistemas, ciclo da água, estações.",
+            "A cartografia atravessa os dois. O aluno aprende a ler e a desenhar mapas — escala, "
+            "legenda, coordenadas, curvas de nível, rosa dos ventos — e usa o mapa como instrumento "
+            "de estudo, não como ilustração. Desenhar à mão o traçado de um rio ou a rota de uma "
+            "expedição fixa o conhecimento de um jeito que nenhuma leitura substitui.",
+        ],
+        [
+            ("A", "Do local ao mundo", "Goiás primeiro, depois o Brasil, depois o mundo. O passado "
+                  "começa por aquilo que a criança pode visitar."),
+            ("B", "Geografia física", "Relevo, clima, hidrografia, solos, fauna e flora — o chão "
+                  "concreto antes de qualquer abstração."),
+            ("C", "Cartografia", "Ler e desenhar mapas à mão: escala, legenda, coordenadas e curvas "
+                  "de nível como ferramenta de estudo."),
+        ],
+        [("Fundamental I", "4 aulas"), ("Fundamental II — História", "3 aulas"), ("Fundamental II — Geografia", "3 aulas")],
+        [
+            "Linha do tempo segura, de Goiás ao mundo, sem decorar datas soltas",
+            "Conhecimento da história local: mineração, povoamento e formação de Goiás",
+            "Domínio dos marcos da história do Brasil e da história ocidental",
+            "Identificação de fauna e flora brasileiras, com atenção ao cerrado",
+            "Compreensão de relevo, clima, hidrografia e sua influência na ocupação humana",
+            "Leitura e desenho de mapas com escala, legenda e coordenadas",
+        ],
     ),
 )
 
