@@ -1672,16 +1672,34 @@ PAGES["curriculo-historia-geografia.html"] = dict(
 
 
 # --------------------------------------------------------------------------
-# Materiais — áudios de audição, por série
+# Materiais diversos — áudio, vídeo, imagem e texto, por série
 #
-# As páginas são montadas a partir do conteúdo de assets/audio/<serie>/:
-# basta a Escola copiar os arquivos para a pasta e rodar o build. O título vem
-# de titulos.json, quando existe, ou do próprio nome do arquivo.
+# As páginas são montadas a partir do conteúdo de assets/materiais/<serie>/:
+# a Escola copia o arquivo para a pasta e roda o build. O tipo é deduzido da
+# extensão e o título vem de titulos.json, quando existe, ou do nome do arquivo.
 # --------------------------------------------------------------------------
 import json
 
-AUDIO_DIR = "assets/audio"
-AUDIO_EXTS = (".mp3", ".m4a", ".ogg", ".wav", ".opus", ".aac", ".webm")
+MATERIAIS_DIR = "assets/materiais"
+
+TIPOS = {
+    "audio": {
+        "rotulo": "Áudio",
+        "exts": (".mp3", ".m4a", ".ogg", ".wav", ".opus", ".aac"),
+    },
+    "video": {
+        "rotulo": "Vídeo",
+        "exts": (".mp4", ".webm", ".mov", ".m4v"),
+    },
+    "imagem": {
+        "rotulo": "Imagem",
+        "exts": (".jpg", ".jpeg", ".png", ".webp", ".gif", ".svg"),
+    },
+    "texto": {
+        "rotulo": "Texto",
+        "exts": (".pdf", ".txt", ".md", ".doc", ".docx", ".odt", ".rtf"),
+    },
+}
 
 SERIES = [
     ("1-ano", "1º ano", "Fundamental I"),
@@ -1694,30 +1712,48 @@ SERIES = [
 ]
 
 
+def tipo_do_arquivo(nome):
+    ext = os.path.splitext(nome)[1].lower()
+    for tipo, dados in TIPOS.items():
+        if ext in dados["exts"]:
+            return tipo
+    return None
+
+
 def titulo_do_arquivo(nome):
     """Converte 01-ditado-de-palavras.mp3 em 'Ditado de palavras'."""
     base = os.path.splitext(nome)[0]
     base = re.sub(r"^[\s\d]+[-_.\s]*", "", base)      # prefixo numérico de ordenação
+    base = re.sub(r"\s*\[[^\]]*\]\s*$", "", base)    # id entre colchetes, como o do YouTube
     base = re.sub(r"[-_]+", " ", base).strip()
     base = re.sub(r"\s{2,}", " ", base)
     return base[:1].upper() + base[1:] if base else nome
 
 
-_cache_audios = {}
+def tamanho_legivel(bytes_):
+    if bytes_ < 1024:
+        return f"{bytes_} B"
+    if bytes_ < 1024 * 1024:
+        return f"{bytes_ / 1024:.0f} KB"
+    return f"{bytes_ / (1024 * 1024):.1f} MB".replace(".", ",")
 
 
-def audios_da_serie(slug):
-    """Lista [(arquivo, título, descrição)] da pasta da série, em ordem de nome.
+_cache_materiais = {}
+
+
+def materiais_da_serie(slug):
+    """Lista de dicionários com arquivo, tipo, título, descrição e tamanho.
 
     O resultado fica em cache: a função é consultada várias vezes por build
     (índice e página da série) e sem isso o disco seria lido de novo a cada
     chamada — e um aviso de titulos.json inválido apareceria repetido.
     """
-    if slug in _cache_audios:
-        return _cache_audios[slug]
-    pasta = os.path.join(ROOT, AUDIO_DIR, slug)
+    if slug in _cache_materiais:
+        return _cache_materiais[slug]
+
+    pasta = os.path.join(ROOT, MATERIAIS_DIR, slug)
     if not os.path.isdir(pasta):
-        _cache_audios[slug] = []
+        _cache_materiais[slug] = []
         return []
 
     rotulos = {}
@@ -1733,7 +1769,8 @@ def audios_da_serie(slug):
 
     itens = []
     for nome in sorted(os.listdir(pasta)):
-        if not nome.lower().endswith(AUDIO_EXTS):
+        tipo = tipo_do_arquivo(nome)
+        if not tipo:
             continue
         rotulo = rotulos.get(nome)
         if isinstance(rotulo, (list, tuple)):
@@ -1743,58 +1780,104 @@ def audios_da_serie(slug):
             titulo, descricao = rotulo, ""
         else:
             titulo, descricao = titulo_do_arquivo(nome), ""
-        itens.append((nome, titulo, descricao))
-    _cache_audios[slug] = itens
+        itens.append({
+            "arquivo": nome,
+            "tipo": tipo,
+            "titulo": titulo,
+            "descricao": descricao,
+            "ext": os.path.splitext(nome)[1].lstrip(".").upper(),
+            "tamanho": tamanho_legivel(os.path.getsize(os.path.join(pasta, nome))),
+            "src": f"{MATERIAIS_DIR}/{slug}/{quote(nome)}",
+        })
+    _cache_materiais[slug] = itens
     return itens
 
 
-def player_audio(slug, arquivo, titulo, descricao, indice):
-    """Um item da lista: botão de play, título, barra de progresso e tempo.
-
-    O <audio> traz o atributo controls como reserva: sem JavaScript o CSS
-    mostra o player nativo e esconde os controles próprios.
-    """
-    src = f"{AUDIO_DIR}/{slug}/{quote(arquivo)}"
-    sub = f'<p class="audio-descricao">{descricao}</p>' if descricao else ""
+def _cabecalho_material(m):
+    sub = f'<p class="material-descricao">{m["descricao"]}</p>' if m["descricao"] else ""
     return (
-        f'<li class="audio-item reveal">'
-        f'<audio class="audio-fonte" preload="metadata" controls src="{src}"></audio>'
-        f'<div class="audio-controles">'
-        f'<button class="audio-play" type="button" aria-label="Tocar {titulo}">'
-        f'<span class="audio-icone" aria-hidden="true"></span></button>'
-        f'<div class="audio-info">'
-        f'<p class="audio-titulo">{titulo}</p>{sub}'
-        f'<div class="audio-barra" role="slider" tabindex="0" aria-label="Posição de {titulo}"'
-        f' aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">'
-        f'<div class="audio-progresso"></div></div>'
+        f'<div class="material-cabecalho">'
+        f'<span class="material-tipo material-tipo--{m["tipo"]}">{TIPOS[m["tipo"]]["rotulo"]}</span>'
+        f'<div><p class="material-titulo">{m["titulo"]}</p>{sub}</div>'
+        f'<span class="material-meta">{m["ext"]} · {m["tamanho"]}</span>'
         f"</div>"
-        f'<span class="audio-tempo"><time class="audio-atual">0:00</time>'
-        f'<span aria-hidden="true"> / </span><time class="audio-total">--:--</time></span>'
-        f"</div></li>"
+    )
+
+
+def bloco_material(m):
+    """Renderiza um material conforme o tipo."""
+    cab = _cabecalho_material(m)
+    t, src, titulo = m["tipo"], m["src"], m["titulo"]
+
+    if t == "audio":
+        corpo = (
+            f'<audio class="material-fonte" preload="metadata" controls src="{src}"></audio>'
+            f'<div class="audio-controles">'
+            f'<button class="audio-play" type="button" aria-label="Tocar {titulo}">'
+            f'<span class="audio-icone" aria-hidden="true"></span></button>'
+            f'<div class="audio-info">'
+            f'<div class="audio-barra" role="slider" tabindex="0" aria-label="Posição de {titulo}"'
+            f' aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">'
+            f'<div class="audio-progresso"></div></div></div>'
+            f'<span class="audio-tempo"><time class="audio-atual">0:00</time>'
+            f'<span aria-hidden="true"> / </span><time class="audio-total">--:--</time></span>'
+            f"</div>"
+        )
+    elif t == "video":
+        corpo = (
+            f'<video class="material-video" controls preload="metadata" playsinline '
+            f'src="{src}">Seu navegador não reproduz vídeo. '
+            f'<a href="{src}">Baixar o vídeo</a>.</video>'
+        )
+    elif t == "imagem":
+        corpo = (
+            f'<a class="material-imagem" href="{src}" target="_blank" rel="noopener" '
+            f'aria-label="Abrir {titulo} em tamanho original">'
+            f'<img src="{src}" alt="{titulo}" loading="lazy" decoding="async"></a>'
+        )
+    else:
+        corpo = (
+            f'<a class="btn btn--navy material-abrir" href="{src}" target="_blank" '
+            f'rel="noopener">Abrir {m["ext"]}</a>'
+        )
+
+    return (
+        f'<li class="material-item material-item--{t} reveal" data-tipo="{t}">'
+        f"{cab}{corpo}</li>"
     )
 
 
 def pagina_serie(slug, nome, etapa):
-    faixas = audios_da_serie(slug)
-    if faixas:
-        contagem = f"{len(faixas)} áudio" + ("s" if len(faixas) > 1 else "")
-        lista = (
-            f'<p class="eyebrow reveal">{contagem} disponíve'
-            + ("is" if len(faixas) > 1 else "l")
-            + "</p>"
-            + '<ul class="audio-lista">'
-            + "".join(
-                player_audio(slug, arq, tit, desc, i)
-                for i, (arq, tit, desc) in enumerate(faixas)
+    itens = materiais_da_serie(slug)
+
+    if itens:
+        presentes = [t for t in TIPOS if any(m["tipo"] == t for m in itens)]
+        filtros = ""
+        if len(presentes) > 1:
+            botoes = '<button class="filtro-tipo is-ativo" type="button" data-filtro="todos">Todos</button>'
+            botoes += "".join(
+                f'<button class="filtro-tipo" type="button" data-filtro="{t}">'
+                f'{TIPOS[t]["rotulo"]}</button>'
+                for t in presentes
             )
+            filtros = f'<div class="filtros reveal" role="group" aria-label="Filtrar por tipo">{botoes}</div>'
+
+        plural = "materiais" if len(itens) > 1 else "material"
+        lista = (
+            f'<p class="eyebrow reveal">{len(itens)} {plural} disponíve'
+            + ("is" if len(itens) > 1 else "l")
+            + "</p>"
+            + filtros
+            + '<ul class="material-lista">'
+            + "".join(bloco_material(m) for m in itens)
             + "</ul>"
         )
     else:
         lista = (
             '<div class="aviso-vazio reveal">'
-            "<h3>Nenhum áudio publicado ainda</h3>"
-            f"<p>Os áudios de audição do {nome} serão disponibilizados aqui ao longo do "
-            "ano letivo. Esta página fica sempre no mesmo endereço — vale guardar o link.</p>"
+            "<h3>Nenhum material publicado ainda</h3>"
+            f"<p>Os materiais do {nome} serão disponibilizados aqui ao longo do ano letivo. "
+            "Esta página fica sempre no mesmo endereço — vale guardar o link.</p>"
             "</div>"
         )
 
@@ -1806,7 +1889,8 @@ def pagina_serie(slug, nome, etapa):
     return (
         page_hero(
             f"Materiais — {nome}",
-            f"Áudios de audição do {nome} ({etapa}), para ouvir em casa quantas vezes for preciso.",
+            f"Materiais diversos do {nome} ({etapa}): áudio, vídeo, imagem e texto, "
+            "para consultar em casa quantas vezes for preciso.",
             '<a href="materiais.html">Materiais</a> &nbsp;/&nbsp; ' + nome,
         )
         + section('<nav class="series-nav reveal" aria-label="Outras séries">' + outras + "</nav>"
@@ -1816,14 +1900,15 @@ def pagina_serie(slug, nome, etapa):
             '<div class="reveal"><p class="eyebrow">Como usar</p><h2>Orientações às famílias</h2>'
             '<hr class="rule">'
             '<ul class="list-gold">'
-            "<li>Ouvir em ambiente silencioso, sem outras telas por perto</li>"
-            "<li>Repetir o mesmo áudio quantas vezes o aluno precisar</li>"
+            "<li>Áudios e vídeos podem ser repetidos quantas vezes o aluno precisar</li>"
             "<li>Pausar e voltar trechos é parte do exercício</li>"
+            "<li>Imagens abrem em tamanho original ao serem clicadas</li>"
+            "<li>Materiais de texto abrem em nova aba e podem ser impressos</li>"
             "<li>Em caso de dúvida sobre a atividade, falar com o professor da disciplina</li>"
             "</ul></div>"
             '<div class="panel reveal"><h3>Precisa de ajuda?</h3>'
-            "<p>Se algum áudio não tocar ou o link não abrir, avise a Secretaria pelo WhatsApp "
-            "que corrigimos rapidamente.</p>"
+            "<p>Se algum material não abrir ou o link não funcionar, avise a Secretaria pelo "
+            "WhatsApp que corrigimos rapidamente.</p>"
             '<p style="margin-top:1.2rem">'
             '<a class="btn btn--gold" href="https://wa.me/__WA__" target="_blank" rel="noopener">'
             "Falar com a Secretaria</a></p></div></div>",
@@ -1832,29 +1917,45 @@ def pagina_serie(slug, nome, etapa):
     )
 
 
+def _resumo_serie(slug):
+    itens = materiais_da_serie(slug)
+    if not itens:
+        return "Em breve →"
+    contagem = {}
+    for m in itens:
+        contagem[m["tipo"]] = contagem.get(m["tipo"], 0) + 1
+    partes = [f'{n} {TIPOS[t]["rotulo"].lower()}' + ("s" if n > 1 else "")
+              for t, n in contagem.items()]
+    return " · ".join(partes) + " →"
+
+
 PAGES["materiais.html"] = dict(
     title=f"Materiais — Currículo — {SCHOOL}",
-    description="Materiais de apoio por série: áudios de audição do 1º ao 7º ano do Ensino "
-    "Fundamental, para ouvir em casa.",
+    description="Materiais diversos por série — áudio, vídeo, imagem e texto — do 1º ao 7º ano "
+    "do Ensino Fundamental.",
     body=page_hero(
         "Materiais",
-        "Materiais de apoio organizados por série. Nesta primeira etapa, os áudios de audição "
-        "para os alunos ouvirem em casa.",
+        "Materiais diversos organizados por série: áudio, vídeo, imagem e texto, para o aluno "
+        "consultar em casa.",
         '<a href="curriculo-pre-alfabetizacao.html">Currículo</a> &nbsp;/&nbsp; Materiais',
     )
     + section(
         text_block(
             [
-                "A audição é um exercício que pede repetição — e repetição é justamente o que a "
-                "sala de aula não consegue oferecer em quantidade suficiente. Por isso "
-                "disponibilizamos aqui os áudios trabalhados em classe, para que o aluno os ouça "
-                "em casa quantas vezes precisar, no próprio ritmo.",
+                "Boa parte do que se trabalha em classe pede retomada — e retomada é justamente o "
+                "que o tempo de aula não permite em quantidade suficiente. Por isso reunimos aqui "
+                "os materiais usados pelos professores, para que o aluno volte a eles em casa, no "
+                "próprio ritmo.",
+                "São de quatro tipos: <strong>áudio</strong>, para exercícios de escuta e leitura "
+                "em voz alta; <strong>vídeo</strong>, para demonstrações e registros de atividades; "
+                "<strong>imagem</strong>, para mapas, obras de arte e ilustrações estudadas; e "
+                "<strong>texto</strong>, para roteiros, partituras, listas de exercícios e leituras.",
                 "Os materiais estão organizados por série. Escolha o ano do aluno abaixo; a página "
-                "de cada série mantém sempre o mesmo endereço, e novos áudios vão sendo publicados "
-                "ao longo do ano letivo.",
+                "de cada série mantém sempre o mesmo endereço, e novos materiais vão sendo "
+                "publicados ao longo do ano letivo.",
             ],
             "Apoio ao estudo",
-            "Para ouvir quantas vezes for preciso",
+            "Para consultar quantas vezes for preciso",
         )
     )
     + section(
@@ -1864,15 +1965,7 @@ PAGES["materiais.html"] = dict(
             f'<a class="card card--link reveal" href="materiais-{s}.html">'
             f'<div class="icon" aria-hidden="true">{n.split("º")[0]}</div>'
             f"<h3>{n}</h3><p>{etapa}</p>"
-            f'<span class="more">'
-            + (
-                f"{len(audios_da_serie(s))} áudio"
-                + ("s" if len(audios_da_serie(s)) != 1 else "")
-                + " →"
-                if audios_da_serie(s)
-                else "Em breve →"
-            )
-            + "</span></a>"
+            f'<span class="more">{_resumo_serie(s)}</span></a>'
             for s, n, etapa in SERIES
         )
         + "</div>",
@@ -1884,7 +1977,8 @@ PAGES["materiais.html"] = dict(
 for _slug, _nome, _etapa in SERIES:
     PAGES[f"materiais-{_slug}.html"] = dict(
         title=f"Materiais — {_nome} — {SCHOOL}",
-        description=f"Áudios de audição do {_nome} do Ensino Fundamental, para ouvir em casa.",
+        description=f"Materiais diversos do {_nome} do Ensino Fundamental: áudio, vídeo, "
+        "imagem e texto.",
         body=pagina_serie(_slug, _nome, _etapa),
     )
 

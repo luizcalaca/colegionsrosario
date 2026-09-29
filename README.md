@@ -86,26 +86,37 @@ um arquivo com proporção diferente não é achatado nem provoca salto de layou
 Recorte a margem transparente antes: sobra de margem faz o brasão renderizar
 menor do que a largura pedida.
 
-## Materiais (áudios por série)
+## Materiais (áudio, vídeo, imagem e texto, por série)
 
-`assets/audio/<serie>/` guarda os áudios; `build.py` varre as pastas e monta as
-páginas `materiais.html` e `materiais-1-ano.html` … `materiais-7-ano.html`.
+`assets/materiais/<serie>/` guarda os arquivos; `build.py` varre as pastas e monta
+`materiais.html` e `materiais-1-ano.html` … `materiais-7-ano.html`. O tipo é
+deduzido pela extensão do arquivo — não é preciso indicar nada além de colocar
+o arquivo na pasta certa.
 
-Para publicar um áudio: copie o arquivo para a pasta da série e rode
-`python3 build.py`. Instruções completas em `assets/audio/LEIA-ME.txt`.
+Para publicar: copie o arquivo para a pasta da série e rode `python3 build.py`.
+Instruções completas em `assets/materiais/LEIA-ME.txt`.
 
-- Formatos: `.mp3` (recomendado), `.m4a`, `.ogg`, `.wav`, `.opus`, `.aac`, `.webm`
+| Tipo | Extensões aceitas | Como aparece |
+|---|---|---|
+| Áudio | `.mp3` `.m4a` `.ogg` `.wav` `.opus` `.aac` | player com play, barra e tempo |
+| Vídeo | `.mp4` `.webm` `.mov` `.m4v` | player de vídeo com controles nativos |
+| Imagem | `.jpg` `.png` `.webp` `.gif` `.svg` | exibida na página, abre em tamanho real ao clicar |
+| Texto | `.pdf` `.txt` `.md` `.doc` `.docx` `.odt` `.rtf` | cartão com botão "Abrir" em nova aba |
+
 - Título: vem do nome do arquivo (`01-ditado-de-palavras.mp3` → "Ditado de
-  palavras"); prefixo numérico só ordena e não aparece
-- Para outro título, crie `titulos.json` na pasta da série
-- Série sem áudio exibe aviso de "em breve" — não quebra nada
+  palavras"); prefixo numérico e IDs entre colchetes (ex. do YouTube) não aparecem
+- Para outro título ou uma descrição, crie `titulos.json` na pasta da série
+- Série sem material exibe aviso de "em breve" — não quebra nada
+- Uma série com mais de um tipo ganha filtro (Todos / Áudio / Vídeo / Imagem / Texto)
 
-O player tem botão de play, título, barra de progresso clicável e tempo.
-Sem JavaScript, o `<audio controls>` nativo aparece no lugar.
+O player de áudio tem botão de play, título, barra de progresso clicável (com
+navegação por teclado) e tempo. Sem JavaScript, o `<audio controls>` nativo
+aparece no lugar.
 
 **A hospedagem precisa aceitar requisições Range** (`Accept-Ranges: bytes`) para
-o usuário conseguir arrastar a posição do áudio. Apache e Nginx fazem isso por
-padrão; o `python -m http.server` não, então localmente a barra não busca.
+o usuário conseguir arrastar a posição de áudio ou vídeo. Apache e Nginx fazem
+isso por padrão; o `python -m http.server` não, então localmente a barra não
+busca posição.
 
 ## Cache dos assets
 

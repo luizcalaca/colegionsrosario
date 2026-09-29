@@ -110,7 +110,7 @@
   /* ------------------------------------------------------------------
      Materiais: player de áudio com botão de play, título e barra
      ------------------------------------------------------------------ */
-  var players = [].slice.call(document.querySelectorAll('.audio-item'));
+  var players = [].slice.call(document.querySelectorAll('.material-item--audio'));
 
   var formatarTempo = function (segundos) {
     if (!isFinite(segundos) || segundos < 0) return '--:--';
@@ -120,13 +120,13 @@
   };
 
   players.forEach(function (item) {
-    var audio = item.querySelector('.audio-fonte');
+    var audio = item.querySelector('.material-fonte');
     var botao = item.querySelector('.audio-play');
     var barra = item.querySelector('.audio-barra');
     var progresso = item.querySelector('.audio-progresso');
     var atual = item.querySelector('.audio-atual');
     var total = item.querySelector('.audio-total');
-    var titulo = item.querySelector('.audio-titulo');
+    var titulo = item.querySelector('.material-titulo');
     if (!audio || !botao) return;
 
     var nome = titulo ? titulo.textContent.trim() : 'áudio';
@@ -142,7 +142,7 @@
         /* Um áudio por vez: pausa os demais antes de tocar este. */
         players.forEach(function (outro) {
           if (outro === item) return;
-          var a = outro.querySelector('.audio-fonte');
+          var a = outro.querySelector('.material-fonte');
           if (a && !a.paused) a.pause();
         });
         audio.play().catch(function () {
@@ -198,6 +198,34 @@
         e.preventDefault();
       });
     }
+  });
+
+  /* Filtro por tipo de material */
+  document.querySelectorAll('.filtros').forEach(function (grupo) {
+    var botoes = [].slice.call(grupo.querySelectorAll('.filtro-tipo'));
+    var lista = grupo.parentElement.querySelector('.material-lista');
+    if (!lista) return;
+    var itens = [].slice.call(lista.querySelectorAll('.material-item'));
+
+    botoes.forEach(function (botao) {
+      botao.addEventListener('click', function () {
+        var alvo = botao.getAttribute('data-filtro');
+
+        botoes.forEach(function (b) {
+          var ativo = b === botao;
+          b.classList.toggle('is-ativo', ativo);
+          b.setAttribute('aria-pressed', String(ativo));
+        });
+
+        itens.forEach(function (item) {
+          var mostra = alvo === 'todos' || item.getAttribute('data-tipo') === alvo;
+          item.hidden = !mostra;
+          /* Um material escondido pelo filtro não pode continuar tocando. */
+          var midia = item.querySelector('audio, video');
+          if (!mostra && midia && !midia.paused) midia.pause();
+        });
+      });
+    });
   });
 
   /* Formulários: em vez de um back-end, montam uma mensagem organizada e abrem

@@ -1,0 +1,43 @@
+MATERIAIS DIVERSOS — como publicar
+==================================
+
+1. Copie o arquivo para a pasta da série:
+
+      assets/materiais/1-ano/   ... até ...   assets/materiais/7-ano/
+
+   TIPOS ACEITOS
+   -------------
+   Áudio   .mp3  .m4a  .ogg  .wav  .opus  .aac      (recomendado: .mp3)
+   Vídeo   .mp4  .webm  .mov  .m4v                  (recomendado: .mp4)
+   Imagem  .jpg  .jpeg  .png  .webp  .gif  .svg
+   Texto   .pdf  .txt  .md  .doc  .docx  .odt  .rtf (recomendado: .pdf)
+
+   O site detecta o tipo pela extensão e mostra o controle certo:
+   áudio e vídeo ganham player, imagem aparece na página, texto vira
+   um cartão com botão para abrir.
+
+2. O TÍTULO vem do nome do arquivo. Exemplo:
+
+      01-ditado-de-palavras.mp3   ->   "Ditado de palavras"
+      02 Mapa do cerrado.png      ->   "Mapa do cerrado"
+
+   O número na frente serve só para ordenar e não aparece no site.
+
+   Para um título diferente, crie titulos.json na pasta da série:
+
+      {
+        "01-ditado.mp3": "Ditado de palavras — unidade 1",
+        "mapa.png": ["Mapa do cerrado", "Usado na aula de Geografia"]
+      }
+
+3. Rode o gerador:
+
+      python3 build.py
+
+4. Faça commit e push. Séries sem material mostram aviso de "em breve".
+
+OBSERVAÇÃO SOBRE TAMANHO
+------------------------
+Vídeos pesados deixam o repositório grande e a publicação lenta. Acima de
+uns 50 MB, prefira subir o vídeo ao YouTube (não listado) e publicar aqui
+apenas um material de texto com o link.
