@@ -137,6 +137,20 @@
     if (audio.readyState >= 1) mostrarDuracao();
     audio.addEventListener('loadedmetadata', mostrarDuracao);
 
+    /* Um arquivo ausente ou corrompido no servidor dispara o evento nativo
+       'error' do <audio> — independente de alguém já ter clicado em play.
+       Sem isso, o player fica com uma barra em 0:00/--:-- para sempre, sem
+       nenhuma explicação de que o material não está disponível. */
+    var marcarIndisponivel = function () {
+      item.classList.add('material-item--indisponivel');
+      item.classList.remove('is-tocando');
+      botao.disabled = true;
+      botao.setAttribute('aria-label', nome + ' — arquivo indisponível no momento');
+      var tempo = item.querySelector('.audio-tempo');
+      if (tempo) tempo.textContent = 'Indisponível';
+    };
+    audio.addEventListener('error', marcarIndisponivel);
+
     botao.addEventListener('click', function () {
       if (audio.paused) {
         /* Um áudio por vez: pausa os demais antes de tocar este. */
@@ -145,10 +159,7 @@
           var a = outro.querySelector('.material-fonte');
           if (a && !a.paused) a.pause();
         });
-        audio.play().catch(function () {
-          if (total) total.textContent = 'erro';
-          botao.setAttribute('aria-label', 'Não foi possível tocar ' + nome);
-        });
+        audio.play().catch(marcarIndisponivel);
       } else {
         audio.pause();
       }

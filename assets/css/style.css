@@ -678,6 +678,17 @@ a.link-contato:focus-visible,
 /* --- Texto --- */
 .material-abrir { margin-top: 1rem; }
 
+/* Material cujo arquivo deu erro ao carregar (ex.: removido do servidor) */
+.material-item--indisponivel { opacity: .6; }
+.material-item--indisponivel .audio-play {
+  cursor: not-allowed;
+  background: rgba(11,27,63,.12);
+  box-shadow: none;
+}
+.material-item--indisponivel .audio-play:hover { transform: none; box-shadow: none; }
+.material-item--indisponivel .audio-icone { border-color: transparent transparent transparent var(--ink-soft); }
+.material-item--indisponivel .audio-tempo { color: #B3261E; font-weight: 700; }
+
 /* Série ainda sem materiais */
 .aviso-vazio {
   text-align: center; padding: 3rem 2rem;
