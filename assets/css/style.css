@@ -543,6 +543,17 @@ a.link-contato:focus-visible,
 .serie-atalho:hover { background: var(--gold-200); color: var(--navy-900); }
 .serie-atalho.is-atual { background: var(--navy-800); color: var(--gold-200); border-color: var(--navy-800); }
 
+/* Grupos por matéria (Inglês, Francês, ...) dentro da página de uma série */
+.materia-grupo + .materia-grupo {
+  margin-top: 2.6rem; padding-top: 2.2rem;
+  border-top: 1px solid rgba(201,162,39,.3);
+}
+.materia-titulo {
+  margin: 0 0 .3rem;
+  font-family: var(--serif); font-size: 1.5rem; font-weight: 600;
+  color: var(--navy-900);
+}
+
 /* Filtro por tipo */
 .filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1.4rem; }
 .filtro-tipo {

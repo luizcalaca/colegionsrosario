@@ -93,7 +93,13 @@ menor do que a largura pedida.
 deduzido pela extensão do arquivo — não é preciso indicar nada além de colocar
 o arquivo na pasta certa.
 
-Para publicar: copie o arquivo para a pasta da série e rode `python3 build.py`.
+Dentro de cada série, subpastas separam por matéria:
+`assets/materiais/<serie>/ingles/` e `.../frances/` aparecem no site como
+seções "Inglês" e "Francês". Um arquivo solto na raiz da série (fora dessas
+subpastas) cai numa seção "Geral". Outras matérias podem ser adicionadas
+criando uma nova subpasta — o rótulo sai do nome dela.
+
+Para publicar: copie o arquivo para a subpasta certa e rode `python3 build.py`.
 Instruções completas em `assets/materiais/LEIA-ME.txt`.
 
 | Tipo | Extensões aceitas | Como aparece |

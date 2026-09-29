@@ -1738,37 +1738,39 @@ def tamanho_legivel(bytes_):
     return f"{bytes_ / (1024 * 1024):.1f} MB".replace(".", ",")
 
 
+# Subpastas de matéria dentro de cada série: assets/materiais/<serie>/ingles/,
+# .../frances/ etc. O rótulo exibido vem daqui; uma subpasta com nome fora
+# deste mapa ainda funciona — o rótulo é derivado do próprio nome da pasta.
+SUBJECTS = {
+    "ingles": "Inglês",
+    "frances": "Francês",
+}
+
 _cache_materiais = {}
 
 
-def materiais_da_serie(slug):
-    """Lista de dicionários com arquivo, tipo, título, descrição e tamanho.
-
-    O resultado fica em cache: a função é consultada várias vezes por build
-    (índice e página da série) e sem isso o disco seria lido de novo a cada
-    chamada — e um aviso de titulos.json inválido apareceria repetido.
-    """
-    if slug in _cache_materiais:
-        return _cache_materiais[slug]
-
-    pasta = os.path.join(ROOT, MATERIAIS_DIR, slug)
-    if not os.path.isdir(pasta):
-        _cache_materiais[slug] = []
-        return []
-
-    rotulos = {}
+def _titulos_da_pasta(pasta):
+    """Lê titulos.json de uma pasta, se existir. Um JSON inválido não pode
+    derrubar o build inteiro: avisa e segue usando os nomes dos arquivos."""
     caminho_json = os.path.join(pasta, "titulos.json")
-    if os.path.exists(caminho_json):
-        try:
-            with open(caminho_json, encoding="utf-8") as fh:
-                rotulos = json.load(fh)
-        except (ValueError, OSError) as erro:
-            # Um JSON inválido não pode derrubar o build inteiro: avisa e segue
-            # usando os nomes dos arquivos.
-            print(f"  ! {slug}/titulos.json ignorado ({erro})")
+    if not os.path.exists(caminho_json):
+        return {}
+    try:
+        with open(caminho_json, encoding="utf-8") as fh:
+            return json.load(fh)
+    except (ValueError, OSError) as erro:
+        print(f"  ! titulos.json ignorado em {os.path.relpath(pasta, ROOT)} ({erro})")
+        return {}
 
+
+def _materiais_da_pasta(pasta, prefixo_src, materia, materia_label):
+    """Lista os materiais soltos (não-subpasta) de uma única pasta."""
+    rotulos = _titulos_da_pasta(pasta)
     itens = []
     for nome in sorted(os.listdir(pasta)):
+        caminho = os.path.join(pasta, nome)
+        if not os.path.isfile(caminho):
+            continue
         tipo = tipo_do_arquivo(nome)
         if not tipo:
             continue
@@ -1786,9 +1788,48 @@ def materiais_da_serie(slug):
             "titulo": titulo,
             "descricao": descricao,
             "ext": os.path.splitext(nome)[1].lstrip(".").upper(),
-            "tamanho": tamanho_legivel(os.path.getsize(os.path.join(pasta, nome))),
-            "src": f"{MATERIAIS_DIR}/{slug}/{quote(nome)}",
+            "tamanho": tamanho_legivel(os.path.getsize(caminho)),
+            "src": f"{prefixo_src}/{quote(nome)}",
+            "materia": materia,
+            "materia_label": materia_label,
         })
+    return itens
+
+
+def materiais_da_serie(slug):
+    """Lista de dicionários com arquivo, tipo, título, descrição, tamanho e
+    matéria (Inglês, Francês, ou None para o que está solto na raiz da série).
+
+    Primeiro os materiais soltos na raiz da série, depois cada subpasta de
+    matéria — matérias conhecidas (SUBJECTS) na ordem do mapa, as demais em
+    ordem alfabética. É essa ordem que decide a ordem das seções na página.
+
+    O resultado fica em cache: a função é consultada várias vezes por build
+    (índice e página da série) e sem isso o disco seria lido de novo a cada
+    chamada — e um aviso de titulos.json inválido apareceria repetido.
+    """
+    if slug in _cache_materiais:
+        return _cache_materiais[slug]
+
+    pasta_serie = os.path.join(ROOT, MATERIAIS_DIR, slug)
+    if not os.path.isdir(pasta_serie):
+        _cache_materiais[slug] = []
+        return []
+
+    itens = _materiais_da_pasta(pasta_serie, f"{MATERIAIS_DIR}/{slug}", None, None)
+
+    subpastas = sorted(
+        (n for n in os.listdir(pasta_serie)
+         if os.path.isdir(os.path.join(pasta_serie, n)) and not n.startswith(".")),
+        key=lambda n: (list(SUBJECTS).index(n) if n in SUBJECTS else len(SUBJECTS), n),
+    )
+    for nome_pasta in subpastas:
+        caminho = os.path.join(pasta_serie, nome_pasta)
+        rotulo = SUBJECTS.get(nome_pasta, titulo_do_arquivo(nome_pasta))
+        itens += _materiais_da_pasta(
+            caminho, f"{MATERIAIS_DIR}/{slug}/{quote(nome_pasta)}", nome_pasta, rotulo,
+        )
+
     _cache_materiais[slug] = itens
     return itens
 
@@ -1847,30 +1888,72 @@ def bloco_material(m):
     )
 
 
+def _bloco_grupo_materia(itens_grupo, titulo_grupo):
+    """Uma seção da página: cabeçalho de matéria (se houver mais de um grupo),
+    contagem, filtro por tipo (se houver mais de um tipo neste grupo) e a lista."""
+    presentes = [t for t in TIPOS if any(m["tipo"] == t for m in itens_grupo)]
+    filtros = ""
+    if len(presentes) > 1:
+        botoes = '<button class="filtro-tipo is-ativo" type="button" data-filtro="todos">Todos</button>'
+        botoes += "".join(
+            f'<button class="filtro-tipo" type="button" data-filtro="{t}">'
+            f'{TIPOS[t]["rotulo"]}</button>'
+            for t in presentes
+        )
+        filtros = f'<div class="filtros reveal" role="group" aria-label="Filtrar por tipo">{botoes}</div>'
+
+    plural = "materiais" if len(itens_grupo) > 1 else "material"
+    cabecalho = f'<h3 class="materia-titulo reveal">{titulo_grupo}</h3>' if titulo_grupo else ""
+    contagem = (
+        f'<p class="eyebrow reveal">{len(itens_grupo)} {plural} disponíve'
+        + ("is" if len(itens_grupo) > 1 else "l") + "</p>"
+    )
+
+    return (
+        '<div class="materia-grupo">'
+        + cabecalho + contagem + filtros
+        + '<ul class="material-lista">'
+        + "".join(bloco_material(m) for m in itens_grupo)
+        + "</ul></div>"
+    )
+
+
 def pagina_serie(slug, nome, etapa):
     itens = materiais_da_serie(slug)
 
     if itens:
-        presentes = [t for t in TIPOS if any(m["tipo"] == t for m in itens)]
-        filtros = ""
-        if len(presentes) > 1:
-            botoes = '<button class="filtro-tipo is-ativo" type="button" data-filtro="todos">Todos</button>'
-            botoes += "".join(
-                f'<button class="filtro-tipo" type="button" data-filtro="{t}">'
-                f'{TIPOS[t]["rotulo"]}</button>'
-                for t in presentes
-            )
-            filtros = f'<div class="filtros reveal" role="group" aria-label="Filtrar por tipo">{botoes}</div>'
+        # Agrupa preservando a ordem de aparição já decidida por materiais_da_serie:
+        # o que está solto na raiz da série primeiro, depois cada matéria.
+        grupos = []
+        for m in itens:
+            if grupos and grupos[-1][0] == m["materia"]:
+                grupos[-1][2].append(m)
+            else:
+                grupos.append((m["materia"], m["materia_label"], [m]))
 
-        plural = "materiais" if len(itens) > 1 else "material"
-        lista = (
-            f'<p class="eyebrow reveal">{len(itens)} {plural} disponíve'
-            + ("is" if len(itens) > 1 else "l")
-            + "</p>"
-            + filtros
-            + '<ul class="material-lista">'
-            + "".join(bloco_material(m) for m in itens)
-            + "</ul>"
+        # Um grupo de matéria (Inglês, Francês, ...) sempre mostra seu título,
+        # mesmo sendo o único preenchido até agora — é assim que a separação por
+        # matéria fica visível já com um só idioma publicado. Já "Geral" (o que
+        # está solto na raiz da série, sem subpasta de matéria) só ganha esse
+        # rótulo quando existe outra seção ao lado; sozinho, fica sem cabeçalho —
+        # mantém o comportamento simples de antes das subpastas de matéria.
+        varias_secoes = len(grupos) > 1
+
+        def _titulo_secao(materia, materia_label):
+            if materia is not None:
+                return materia_label
+            return "Geral" if varias_secoes else None
+
+        total = len(itens)
+        plural_total = "materiais" if total > 1 else "material"
+        resumo_total = (
+            f'<p class="eyebrow reveal">{total} {plural_total} no total</p>'
+            if varias_secoes else ""
+        )
+
+        lista = resumo_total + "".join(
+            _bloco_grupo_materia(grupo_itens, _titulo_secao(materia, materia_label))
+            for materia, materia_label, grupo_itens in grupos
         )
     else:
         lista = (

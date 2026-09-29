@@ -1,9 +1,22 @@
 MATERIAIS DIVERSOS — como publicar
 ==================================
 
-1. Copie o arquivo para a pasta da série:
+1. ORGANIZAÇÃO POR SÉRIE E MATÉRIA
+   --------------------------------
+   Cada série tem sua pasta, e dentro dela subpastas de matéria:
 
-      assets/materiais/1-ano/   ... até ...   assets/materiais/7-ano/
+      assets/materiais/1-ano/ingles/     -> aparece como "Inglês"
+      assets/materiais/1-ano/frances/    -> aparece como "Francês"
+
+   Isso existe do 1-ano ao 7-ano. Coloque o arquivo na subpasta certa e ele
+   sai no site já dentro da seção daquela matéria.
+
+   Se colocar um arquivo direto na pasta da série (fora de ingles/ ou
+   frances/), ele aparece numa seção separada chamada "Geral".
+
+   Para adicionar outra matéria além de Inglês e Francês, basta criar uma
+   nova subpasta com o nome dela (ex.: assets/materiais/1-ano/matematica/).
+   O título da seção sai a partir do nome da pasta.
 
    TIPOS ACEITOS
    -------------
@@ -22,8 +35,11 @@ MATERIAIS DIVERSOS — como publicar
       02 Mapa do cerrado.png      ->   "Mapa do cerrado"
 
    O número na frente serve só para ordenar e não aparece no site.
+   Um id entre colchetes no fim do nome (comum em áudios baixados do
+   YouTube) também é removido automaticamente do título.
 
-   Para um título diferente, crie titulos.json na pasta da série:
+   Para um título diferente, crie titulos.json na mesma pasta do arquivo
+   (a de matéria, ou a raiz da série):
 
       {
         "01-ditado.mp3": "Ditado de palavras — unidade 1",
