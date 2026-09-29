@@ -18,6 +18,22 @@ MATERIAIS DIVERSOS — como publicar
    nova subpasta com o nome dela (ex.: assets/materiais/1-ano/matematica/).
    O título da seção sai a partir do nome da pasta.
 
+   MATERIAL COMPARTILHADO ENTRE VÁRIAS SÉRIES
+   -------------------------------------------
+   Quando o MESMO arquivo vale para uma faixa de anos (por exemplo, o mesmo
+   áudio de Francês para o 1º ao 5º ano), não duplique o arquivo em cada
+   pasta de série. Em vez disso, crie uma pasta de faixa na raiz de
+   assets/materiais/, com o padrão "N-a-M-ano":
+
+      assets/materiais/1-a-5-ano/frances/  -> aparece em "Francês" nas
+                                               páginas do 1º ao 5º ano
+
+   Essa pasta funciona exatamente como a de uma série normal (mesmas
+   subpastas de matéria, mesmo titulos.json). O material aparece somado ao
+   que a série já tiver na mesma matéria — por exemplo, o 1º ano pode ter um
+   áudio de Francês só dele em assets/materiais/1-ano/frances/ e ainda
+   assim mostrar o áudio compartilhado da faixa, os dois na mesma seção.
+
    TIPOS ACEITOS
    -------------
    Áudio   .mp3  .m4a  .ogg  .wav  .opus  .aac      (recomendado: .mp3)

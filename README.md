@@ -99,6 +99,12 @@ seções "Inglês" e "Francês". Um arquivo solto na raiz da série (fora dessas
 subpastas) cai numa seção "Geral". Outras matérias podem ser adicionadas
 criando uma nova subpasta — o rótulo sai do nome dela.
 
+Um material que vale para várias séries ao mesmo tempo (ex.: o mesmo áudio
+de Francês do 1º ao 5º ano) não precisa ser duplicado em cada pasta: uma
+pasta de faixa `assets/materiais/1-a-5-ano/frances/` na raiz de
+`assets/materiais/` aparece automaticamente na seção "Francês" de todas as
+séries de 1 a 5, sem repetir o arquivo em disco.
+
 Para publicar: copie o arquivo para a subpasta certa e rode `python3 build.py`.
 Instruções completas em `assets/materiais/LEIA-ME.txt`.
 

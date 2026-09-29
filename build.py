@@ -1711,6 +1711,21 @@ SERIES = [
     ("7-ano", "7º ano", "Fundamental II"),
 ]
 
+# Pasta compartilhada entre uma faixa de séries: assets/materiais/1-a-5-ano/
+# aparece nas páginas de todas as séries de 1 a 5, sem duplicar o arquivo.
+# Útil quando o mesmo áudio/vídeo/texto vale para vários anos ao mesmo tempo.
+RE_FAIXA_SERIES = re.compile(r"^(\d+)-a-(\d+)-ano$")
+
+
+def _series_da_faixa(nome_pasta):
+    """Para uma pasta como '1-a-5-ano', devolve os slugs de série que ela cobre
+    (['1-ano', ..., '5-ano']), ou None se o nome não segue esse padrão."""
+    m = RE_FAIXA_SERIES.match(nome_pasta)
+    if not m:
+        return None
+    ini, fim = sorted((int(m.group(1)), int(m.group(2))))
+    return [f"{n}-ano" for n in range(ini, fim + 1)]
+
 
 def tipo_do_arquivo(nome):
     ext = os.path.splitext(nome)[1].lower()
@@ -1811,24 +1826,46 @@ def materiais_da_serie(slug):
     if slug in _cache_materiais:
         return _cache_materiais[slug]
 
-    pasta_serie = os.path.join(ROOT, MATERIAIS_DIR, slug)
-    if not os.path.isdir(pasta_serie):
-        _cache_materiais[slug] = []
-        return []
-
-    itens = _materiais_da_pasta(pasta_serie, f"{MATERIAIS_DIR}/{slug}", None, None)
-
-    subpastas = sorted(
-        (n for n in os.listdir(pasta_serie)
-         if os.path.isdir(os.path.join(pasta_serie, n)) and not n.startswith(".")),
-        key=lambda n: (list(SUBJECTS).index(n) if n in SUBJECTS else len(SUBJECTS), n),
-    )
-    for nome_pasta in subpastas:
-        caminho = os.path.join(pasta_serie, nome_pasta)
-        rotulo = SUBJECTS.get(nome_pasta, titulo_do_arquivo(nome_pasta))
-        itens += _materiais_da_pasta(
-            caminho, f"{MATERIAIS_DIR}/{slug}/{quote(nome_pasta)}", nome_pasta, rotulo,
+    def _subpastas_de_materia(pasta):
+        return sorted(
+            (n for n in os.listdir(pasta)
+             if os.path.isdir(os.path.join(pasta, n)) and not n.startswith(".")),
+            key=lambda n: (list(SUBJECTS).index(n) if n in SUBJECTS else len(SUBJECTS), n),
         )
+
+    itens = []
+
+    pasta_serie = os.path.join(ROOT, MATERIAIS_DIR, slug)
+    if os.path.isdir(pasta_serie):
+        itens += _materiais_da_pasta(pasta_serie, f"{MATERIAIS_DIR}/{slug}", None, None)
+        for nome_pasta in _subpastas_de_materia(pasta_serie):
+            caminho = os.path.join(pasta_serie, nome_pasta)
+            rotulo = SUBJECTS.get(nome_pasta, titulo_do_arquivo(nome_pasta))
+            itens += _materiais_da_pasta(
+                caminho, f"{MATERIAIS_DIR}/{slug}/{quote(nome_pasta)}", nome_pasta, rotulo,
+            )
+
+    # Pastas de faixa (ex.: assets/materiais/1-a-5-ano/frances/) que cobrem
+    # esta série entram como se fossem mais uma subpasta de matéria dela —
+    # por isso usam a mesma chave de matéria (o nome da subpasta), e acabam
+    # agrupadas junto de qualquer conteúdo próprio da série na mesma matéria.
+    raiz_materiais = os.path.join(ROOT, MATERIAIS_DIR)
+    if os.path.isdir(raiz_materiais):
+        for nome_faixa in sorted(os.listdir(raiz_materiais)):
+            caminho_faixa = os.path.join(raiz_materiais, nome_faixa)
+            if not os.path.isdir(caminho_faixa):
+                continue
+            series_cobertas = _series_da_faixa(nome_faixa)
+            if not series_cobertas or slug not in series_cobertas:
+                continue
+            for nome_pasta in _subpastas_de_materia(caminho_faixa):
+                caminho = os.path.join(caminho_faixa, nome_pasta)
+                rotulo = SUBJECTS.get(nome_pasta, titulo_do_arquivo(nome_pasta))
+                itens += _materiais_da_pasta(
+                    caminho,
+                    f"{MATERIAIS_DIR}/{quote(nome_faixa)}/{quote(nome_pasta)}",
+                    nome_pasta, rotulo,
+                )
 
     _cache_materiais[slug] = itens
     return itens
@@ -1922,14 +1959,21 @@ def pagina_serie(slug, nome, etapa):
     itens = materiais_da_serie(slug)
 
     if itens:
-        # Agrupa preservando a ordem de aparição já decidida por materiais_da_serie:
-        # o que está solto na raiz da série primeiro, depois cada matéria.
+        # Agrupa por matéria (não só por adjacência): um item da própria série
+        # e outro vindo de uma pasta de faixa compartilhada (ex.: 1-a-5-ano/)
+        # podem ter a mesma matéria sem estarem lado a lado na lista bruta, e
+        # aqui os dois caem na mesma seção mesmo assim. A ordem da seção segue
+        # a primeira vez que aquela matéria aparece.
+        indice_do_grupo = {}
         grupos = []
         for m in itens:
-            if grupos and grupos[-1][0] == m["materia"]:
-                grupos[-1][2].append(m)
-            else:
-                grupos.append((m["materia"], m["materia_label"], [m]))
+            chave = m["materia"]
+            if chave not in indice_do_grupo:
+                indice_do_grupo[chave] = len(grupos)
+                grupos.append([chave, m["materia_label"], []])
+            grupos[indice_do_grupo[chave]][2].append(m)
+            if not grupos[indice_do_grupo[chave]][1] and m["materia_label"]:
+                grupos[indice_do_grupo[chave]][1] = m["materia_label"]
 
         # Um grupo de matéria (Inglês, Francês, ...) sempre mostra seu título,
         # mesmo sendo o único preenchido até agora — é assim que a separação por
