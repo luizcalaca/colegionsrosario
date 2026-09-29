@@ -527,6 +527,117 @@ a.link-contato:focus-visible,
   text-underline-offset: .22em;
 }
 
+/* ==========================================================================
+   Materiais — player de áudio
+   ========================================================================== */
+
+/* Atalhos entre séries */
+.series-nav { display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center; }
+.serie-atalho {
+  padding: .5rem 1.1rem;
+  font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--navy-800); background: var(--white);
+  border: 1px solid rgba(201,162,39,.4); border-radius: 2px;
+  transition: all .2s var(--ease);
+}
+.serie-atalho:hover { background: var(--gold-200); color: var(--navy-900); }
+.serie-atalho.is-atual { background: var(--navy-800); color: var(--gold-200); border-color: var(--navy-800); }
+
+.audio-lista { list-style: none; margin: 1.6rem 0 0; padding: 0; }
+
+.audio-item {
+  background: var(--white);
+  border: 1px solid rgba(201,162,39,.28);
+  border-radius: 4px;
+  margin-bottom: .9rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color .25s var(--ease), box-shadow .25s var(--ease);
+}
+.audio-item:hover { border-color: var(--gold-400); box-shadow: var(--shadow-md); }
+.audio-item.is-tocando { border-color: var(--gold-500); box-shadow: 0 6px 22px rgba(201,162,39,.25); }
+
+/* Sem JavaScript vale o player nativo; com JS, os controles próprios. */
+.audio-fonte { width: 100%; padding: 1rem; }
+.js .audio-fonte { display: none; }
+.audio-controles { display: none; }
+.js .audio-controles { display: flex; align-items: center; gap: 1.1rem; padding: 1.1rem 1.4rem; }
+
+.audio-play {
+  flex-shrink: 0;
+  width: 52px; height: 52px; padding: 0;
+  display: grid; place-items: center;
+  border: 0; border-radius: 50%; cursor: pointer;
+  background: linear-gradient(135deg, var(--gold-300), var(--gold-500));
+  box-shadow: 0 4px 14px rgba(201,162,39,.35);
+  transition: transform .2s var(--ease), box-shadow .2s var(--ease);
+}
+.audio-play:hover { transform: scale(1.06); box-shadow: 0 6px 20px rgba(201,162,39,.5); }
+.audio-play:focus-visible { outline: 3px solid var(--navy-600); outline-offset: 3px; }
+
+/* Triângulo de play em CSS; vira duas barras (pause) quando está tocando. */
+.audio-icone {
+  width: 0; height: 0; margin-left: 4px;
+  border-style: solid; border-width: 9px 0 9px 15px;
+  border-color: transparent transparent transparent var(--navy-900);
+  transition: none;
+}
+.is-tocando .audio-icone {
+  margin-left: 0;
+  width: 14px; height: 17px;
+  border-width: 0; border-radius: 1px;
+  background: linear-gradient(90deg,
+    var(--navy-900) 0 5px, transparent 5px 9px, var(--navy-900) 9px 14px);
+}
+
+.audio-info { flex: 1; min-width: 0; }
+.audio-titulo {
+  margin: 0 0 .15rem;
+  font-family: var(--serif); font-size: 1.16rem; font-weight: 600;
+  color: var(--navy-900); line-height: 1.25;
+}
+.audio-descricao { margin: 0 0 .5rem; font-size: .84rem; color: var(--ink-soft); }
+
+.audio-barra {
+  position: relative; height: 6px; margin-top: .55rem;
+  background: rgba(11,27,63,.12); border-radius: 3px; cursor: pointer;
+}
+.audio-barra:focus-visible { outline: 2px solid var(--navy-600); outline-offset: 4px; }
+.audio-progresso {
+  position: absolute; inset: 0 auto 0 0; width: 0;
+  background: linear-gradient(90deg, var(--gold-400), var(--gold-500));
+  border-radius: 3px;
+}
+.audio-progresso::after {
+  content: ""; position: absolute; right: -5px; top: 50%;
+  width: 12px; height: 12px; margin-top: -6px; border-radius: 50%;
+  background: var(--gold-500); box-shadow: 0 1px 4px rgba(11,27,63,.35);
+  opacity: 0; transition: opacity .2s var(--ease);
+}
+.audio-item:hover .audio-progresso::after,
+.audio-item.is-tocando .audio-progresso::after { opacity: 1; }
+
+.audio-tempo {
+  flex-shrink: 0;
+  font-size: .82rem; font-variant-numeric: tabular-nums lining-nums;
+  color: var(--ink-soft); white-space: nowrap;
+}
+
+/* Série ainda sem áudios */
+.aviso-vazio {
+  text-align: center; padding: 3rem 2rem;
+  background: var(--white);
+  border: 1px dashed rgba(201,162,39,.55); border-radius: 4px;
+}
+.aviso-vazio h3 { margin-bottom: .6rem; }
+.aviso-vazio p { max-width: 52ch; margin-inline: auto; }
+
+@media (max-width: 620px) {
+  .js .audio-controles { flex-wrap: wrap; gap: .8rem 1rem; padding: 1rem; }
+  .audio-info { flex: 1 1 calc(100% - 64px); }
+  .audio-tempo { flex: 1 0 100%; text-align: right; }
+  .audio-play { width: 46px; height: 46px; }
+}
+
 /* Tabelas dentro de painéis escuros herdam a paleta do painel */
 .panel table { background: transparent; }
 .panel th { background: rgba(201,162,39,.16); color: var(--gold-200); }

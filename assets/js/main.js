@@ -107,6 +107,99 @@
     targets.forEach(function (t) { t.classList.add('is-visible'); });
   }
 
+  /* ------------------------------------------------------------------
+     Materiais: player de áudio com botão de play, título e barra
+     ------------------------------------------------------------------ */
+  var players = [].slice.call(document.querySelectorAll('.audio-item'));
+
+  var formatarTempo = function (segundos) {
+    if (!isFinite(segundos) || segundos < 0) return '--:--';
+    var m = Math.floor(segundos / 60);
+    var s = Math.floor(segundos % 60);
+    return m + ':' + (s < 10 ? '0' : '') + s;
+  };
+
+  players.forEach(function (item) {
+    var audio = item.querySelector('.audio-fonte');
+    var botao = item.querySelector('.audio-play');
+    var barra = item.querySelector('.audio-barra');
+    var progresso = item.querySelector('.audio-progresso');
+    var atual = item.querySelector('.audio-atual');
+    var total = item.querySelector('.audio-total');
+    var titulo = item.querySelector('.audio-titulo');
+    if (!audio || !botao) return;
+
+    var nome = titulo ? titulo.textContent.trim() : 'áudio';
+
+    var mostrarDuracao = function () {
+      if (total) total.textContent = formatarTempo(audio.duration);
+    };
+    if (audio.readyState >= 1) mostrarDuracao();
+    audio.addEventListener('loadedmetadata', mostrarDuracao);
+
+    botao.addEventListener('click', function () {
+      if (audio.paused) {
+        /* Um áudio por vez: pausa os demais antes de tocar este. */
+        players.forEach(function (outro) {
+          if (outro === item) return;
+          var a = outro.querySelector('.audio-fonte');
+          if (a && !a.paused) a.pause();
+        });
+        audio.play().catch(function () {
+          if (total) total.textContent = 'erro';
+          botao.setAttribute('aria-label', 'Não foi possível tocar ' + nome);
+        });
+      } else {
+        audio.pause();
+      }
+    });
+
+    audio.addEventListener('play', function () {
+      item.classList.add('is-tocando');
+      botao.setAttribute('aria-label', 'Pausar ' + nome);
+    });
+
+    var aoParar = function () {
+      item.classList.remove('is-tocando');
+      botao.setAttribute('aria-label', 'Tocar ' + nome);
+    };
+    audio.addEventListener('pause', aoParar);
+    audio.addEventListener('ended', function () {
+      aoParar();
+      audio.currentTime = 0;
+    });
+
+    audio.addEventListener('timeupdate', function () {
+      var fracao = audio.duration ? audio.currentTime / audio.duration : 0;
+      if (progresso) progresso.style.width = (fracao * 100) + '%';
+      if (atual) atual.textContent = formatarTempo(audio.currentTime);
+      if (barra) barra.setAttribute('aria-valuenow', Math.round(fracao * 100));
+    });
+
+    /* Clique na barra posiciona o áudio */
+    var posicionar = function (clientX) {
+      if (!audio.duration) return;
+      var r = barra.getBoundingClientRect();
+      var fracao = Math.min(Math.max((clientX - r.left) / r.width, 0), 1);
+      audio.currentTime = fracao * audio.duration;
+    };
+    if (barra) {
+      barra.addEventListener('click', function (e) { posicionar(e.clientX); });
+
+      /* Mesma navegação pelo teclado, já que a barra é um slider */
+      barra.addEventListener('keydown', function (e) {
+        if (!audio.duration) return;
+        var passo = 5;
+        if (e.key === 'ArrowRight') audio.currentTime = Math.min(audio.currentTime + passo, audio.duration);
+        else if (e.key === 'ArrowLeft') audio.currentTime = Math.max(audio.currentTime - passo, 0);
+        else if (e.key === 'Home') audio.currentTime = 0;
+        else if (e.key === 'End') audio.currentTime = audio.duration;
+        else return;
+        e.preventDefault();
+      });
+    }
+  });
+
   /* Formulários: em vez de um back-end, montam uma mensagem organizada e abrem
      a conversa com o WhatsApp da Secretaria já preenchida. */
   document.querySelectorAll('form[data-form]').forEach(function (form) {

@@ -1,0 +1,5 @@
+# As páginas .html são GERADAS por build.py — editá-las ou formatá-las é inútil:
+# o próximo build desfaz a mudança, e o workflow de publicação falha porque o
+# HTML commitado deixa de corresponder ao gerador. Edite build.py.
+*.html
+sitemap.xml
