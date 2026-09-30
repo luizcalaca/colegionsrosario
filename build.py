@@ -1796,7 +1796,21 @@ def _titulos_da_pasta(pasta):
 
 
 def _materiais_da_pasta(pasta, prefixo_src, materia, materia_label):
-    """Lista os materiais soltos (não-subpasta) de uma única pasta."""
+    """Lista os materiais soltos (não-subpasta) de uma única pasta.
+
+    O nome retornado por os.listdir() é normalizado para NFC antes de virar
+    URL, título ou chave de busca no titulos.json. Sem isso, um build feito
+    no macOS (que guarda nomes acentuados em NFD — "e" + acento combinante
+    separado) gera uma URL codificada em NFD; mas o Git normaliza caminhos
+    para NFC ao commitar, e é esse arquivo em NFC que de fato existe no
+    servidor depois do deploy (que roda em Linux). A URL em NFD aponta para
+    um arquivo que não existe — 404 silencioso, só visível testando ao vivo.
+    A leitura do arquivo em si (isfile/getsize) usa o nome ORIGINAL, sem
+    normalizar: no Linux não faz diferença (listdir já dá NFC), e no macOS
+    evita depender de o sistema de arquivos aceitar a forma "trocada" — a
+    normalização vale só para o que vai para fora (URL, título), nunca para
+    o acesso ao arquivo local em si.
+    """
     rotulos = _titulos_da_pasta(pasta)
     itens = []
     for nome in sorted(os.listdir(pasta), key=_chave_ordem_natural):
@@ -1806,23 +1820,23 @@ def _materiais_da_pasta(pasta, prefixo_src, materia, materia_label):
         tipo = tipo_do_arquivo(nome)
         if not tipo:
             continue
-        # mesma normalização do lado do nome real do arquivo em disco.
-        rotulo = rotulos.get(unicodedata.normalize("NFC", nome))
+        nome_norm = unicodedata.normalize("NFC", nome)
+        rotulo = rotulos.get(nome_norm)
         if isinstance(rotulo, (list, tuple)):
-            titulo = rotulo[0] if rotulo else titulo_do_arquivo(nome)
+            titulo = rotulo[0] if rotulo else titulo_do_arquivo(nome_norm)
             descricao = rotulo[1] if len(rotulo) > 1 else ""
         elif isinstance(rotulo, str):
             titulo, descricao = rotulo, ""
         else:
-            titulo, descricao = titulo_do_arquivo(nome), ""
+            titulo, descricao = titulo_do_arquivo(nome_norm), ""
         itens.append({
-            "arquivo": nome,
+            "arquivo": nome_norm,
             "tipo": tipo,
             "titulo": titulo,
             "descricao": descricao,
-            "ext": os.path.splitext(nome)[1].lstrip(".").upper(),
+            "ext": os.path.splitext(nome_norm)[1].lstrip(".").upper(),
             "tamanho": tamanho_legivel(os.path.getsize(caminho)),
-            "src": f"{prefixo_src}/{quote(nome)}",
+            "src": f"{prefixo_src}/{quote(nome_norm)}",
             "materia": materia,
             "materia_label": materia_label,
         })
