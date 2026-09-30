@@ -10,6 +10,7 @@ import os
 import re
 from urllib.parse import quote_plus, quote
 import hashlib
+import unicodedata
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://colegionsrosario.com.br"
@@ -1774,16 +1775,24 @@ _cache_materiais = {}
 
 def _titulos_da_pasta(pasta):
     """Lê titulos.json de uma pasta, se existir. Um JSON inválido não pode
-    derrubar o build inteiro: avisa e segue usando os nomes dos arquivos."""
+    derrubar o build inteiro: avisa e segue usando os nomes dos arquivos.
+
+    As chaves são normalizadas para NFC. O macOS guarda nomes de arquivo com
+    acento em NFD (é = "e" + acento combinante separado); o Git normaliza
+    caminhos para NFC ao commitar. Sem isso, um titulos.json escrito a partir
+    de os.listdir() no Mac casa certinho ali — mas falha silenciosamente no
+    Linux do CI, que vê os mesmos arquivos em NFC após o checkout, gerando
+    um HTML diferente do que foi gerado localmente."""
     caminho_json = os.path.join(pasta, "titulos.json")
     if not os.path.exists(caminho_json):
         return {}
     try:
         with open(caminho_json, encoding="utf-8") as fh:
-            return json.load(fh)
+            dados = json.load(fh)
     except (ValueError, OSError) as erro:
         print(f"  ! titulos.json ignorado em {os.path.relpath(pasta, ROOT)} ({erro})")
         return {}
+    return {unicodedata.normalize("NFC", k): v for k, v in dados.items()}
 
 
 def _materiais_da_pasta(pasta, prefixo_src, materia, materia_label):
@@ -1797,7 +1806,8 @@ def _materiais_da_pasta(pasta, prefixo_src, materia, materia_label):
         tipo = tipo_do_arquivo(nome)
         if not tipo:
             continue
-        rotulo = rotulos.get(nome)
+        # mesma normalização do lado do nome real do arquivo em disco.
+        rotulo = rotulos.get(unicodedata.normalize("NFC", nome))
         if isinstance(rotulo, (list, tuple)):
             titulo = rotulo[0] if rotulo else titulo_do_arquivo(nome)
             descricao = rotulo[1] if len(rotulo) > 1 else ""
