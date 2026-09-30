@@ -180,12 +180,30 @@
       audio.currentTime = 0;
     });
 
-    audio.addEventListener('timeupdate', function () {
+    /* 'timeupdate' dispara nativamente ~4x por segundo. Escrever no DOM a
+       cada disparo, num áudio de 7-8 minutos, soma milhares de mutações — o
+       tipo de volume que faz uma extensão do navegador com MutationObserver
+       (bloqueador de anúncio, tradutor, etc.) tentar falar repetidamente com
+       o próprio background script e poluir o console de quem a tem instalada
+       (o erro é da extensão, não nosso, mas a frequência é nossa). Aqui a
+       escrita real é limitada a 2x por segundo — imperceptível numa barra de
+       progresso e num relógio que só mostra segundos inteiros.
+       'seeked' sempre atualiza na hora, sem essa limitação, para o clique
+       na barra não parecer atrasado. */
+    var ultimaAtualizacaoDOM = 0;
+    var atualizarProgresso = function () {
       var fracao = audio.duration ? audio.currentTime / audio.duration : 0;
       if (progresso) progresso.style.width = (fracao * 100) + '%';
       if (atual) atual.textContent = formatarTempo(audio.currentTime);
       if (barra) barra.setAttribute('aria-valuenow', Math.round(fracao * 100));
+    };
+    audio.addEventListener('timeupdate', function () {
+      var agora = (window.performance && performance.now) ? performance.now() : Date.now();
+      if (agora - ultimaAtualizacaoDOM < 500) return;
+      ultimaAtualizacaoDOM = agora;
+      atualizarProgresso();
     });
+    audio.addEventListener('seeked', atualizarProgresso);
 
     /* Clique na barra posiciona o áudio */
     var posicionar = function (clientX) {
