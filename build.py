@@ -1745,6 +1745,14 @@ def titulo_do_arquivo(nome):
     return base[:1].upper() + base[1:] if base else nome
 
 
+def _chave_ordem_natural(nome):
+    """Ordena 'Chapter 2' antes de 'Chapter 10': cada trecho numérico do nome
+    vira inteiro para comparação, em vez de comparar dígito a dígito como
+    texto (onde '10' < '2' porque '1' < '2'). Sem isso, o Capítulo 10 aparece
+    entre o 1 e o 2 na lista."""
+    return [int(p) if p.isdigit() else p.lower() for p in re.split(r"(\d+)", nome)]
+
+
 def tamanho_legivel(bytes_):
     if bytes_ < 1024:
         return f"{bytes_} B"
@@ -1782,7 +1790,7 @@ def _materiais_da_pasta(pasta, prefixo_src, materia, materia_label):
     """Lista os materiais soltos (não-subpasta) de uma única pasta."""
     rotulos = _titulos_da_pasta(pasta)
     itens = []
-    for nome in sorted(os.listdir(pasta)):
+    for nome in sorted(os.listdir(pasta), key=_chave_ordem_natural):
         caminho = os.path.join(pasta, nome)
         if not os.path.isfile(caminho):
             continue
