@@ -59,8 +59,13 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
           port: 21
-          # Pasta pública do cPanel na GoDaddy. Precisa terminar com barra.
-          server-dir: public_html/
+          # A conta de FTP (admin@colegionsrosario.com.br) já entra direto na
+          # raiz servida pelo site — não existe uma subpasta "public_html"
+          # dentro do jail dela. Confirmado ao vivo: um arquivo de teste
+          # enviado em "/" ficou acessível em https://colegionsrosario.com.br/
+          # imediatamente; com server-dir: public_html/, o Action cria essa
+          # pasta do zero e sobe tudo para dentro dela — visível a ninguém.
+          server-dir: ./
           # Arquivos de desenvolvimento não vão para o servidor.
           exclude: |
             **/.git*
