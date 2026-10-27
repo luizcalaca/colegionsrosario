@@ -2341,12 +2341,87 @@ def lista_infantil_iii():
     ]
 
 
+def lista_infantil_v():
+    return [
+        ("Material", [
+            ("Avental plástico, sem personagem de TV, cinema ou times de futebol estampados", "1 unidade"),
+            ("Bexigas coloridas", "2 pacotes"),
+            ("Borrachas grandes, brancas e macias", "4 unidades"),
+            ("Apontador de plástico para lápis, com depósito", "4 unidades"),
+            ("Brinquedo pedagógico — pote de letras e números, plástico", "1 unidade"),
+            ("Pasta plástica grossa com elástico, na cor vermelha, A4", "1 unidade"),
+            ("Caderno brochura grande, 100 folhas — capa dura vermelha ou quadriculado vermelho", "1 unidade"),
+            ("Caderno brochura pequeno (ficar na mochila), 48 folhas — capa dura vermelha", "1 unidade"),
+            ("Pasta plástica fina com elástico, tamanho A4, na cor vermelha (ficar na mochila)", "1 unidade"),
+            ("Cola branca líquida", "3 unidades"),
+            ("Cola bastão", "5 unidades"),
+            ("Caixa organizadora de plástico duro e transparente, 20 L. Para alunos veteranos, reutilizar as "
+             "caixas já adquiridas.", "1 unidade"),
+            ("Cola colorida (6 cores)", "1 caixa"),
+            ("Bastão de cola quente fino", "5 unidades"),
+            ("Estojo com duas divisórias, sem personagens de televisão, cinema ou times de futebol estampados",
+             "1 unidade"),
+            ("Fita crepe", "2 unidades"),
+            ("Lápis de cor, 12 cores (preferencialmente das marcas Cis, Faber-Castell, Tris, Maped e Norma)",
+             "5 caixas"),
+            ("Lápis grafite HB triangular", "10 unidades"),
+            ("Mala ou mochila, sem personagens de TV, cinema ou times de futebol estampados, que caiba uma "
+             "pasta tamanho A4", "1 unidade"),
+            ("Massa de modelar 500 g (modelo soft, como a da marca Acrilex)", "2 unidades"),
+            ("Papel branco tamanho A4, 140 g/m² (Canson)", "20 folhas"),
+            ("Papel sulfite branco, A4 (resma 500 folhas)", "1 pacote"),
+            ("Perfex (pano multiuso) para aula de pintura", "4 pacotes"),
+            ("Kit de pincel Soft Touch, Faber-Castell", "1 unidade"),
+            ("Tela para pintura 10x15", "1 unidade"),
+            ("Tesoura pequena e sem ponta (preferencialmente Tramontina ou Mundial)", "2 unidades"),
+            ("Palito de picolé colorido (50 unidades)", "1 pacote"),
+            ("Material Dourado, mínimo de 111 peças", "1 caixa"),
+            ("Paleta ou godê (plástico)", "1 unidade"),
+            ("Flauta doce barroca", "1 unidade"),
+            ("Pincel para quadro branco (cor azul) — recarregável", "3 unidades"),
+            ("Ábaco", "1 unidade"),
+            ("Canetinhas 12 cores", "1 pacote"),
+            ("E.V.A — azul escuro, verde, amarelo, preto e branco (um de cada)", "4 unidades"),
+            ("E.V.A com glitter — laranja e vermelho (um de cada)", "2 unidades"),
+            ("Papel crepom — azul escuro, verde, vermelho e amarelo (um de cada)", "4 unidades"),
+            ("Tinta guache 6 cores", "2 caixas"),
+            ("Papel colorido Creative Paper A4, 75 g/m²", "4 unidades"),
+            ("Jogo de letras em madeira, mínimo de 80 peças", "1 caixa"),
+        ]),
+        ("Para manter na mochila de uso diário", [
+            ("Troca de roupa de acordo com as normas do colégio", "1 unidade"),
+            ("Garrafinha para beber água (sem personagens)", "1 unidade"),
+            ("Escova de dentes e creme dental", "1 unidade"),
+            ("Lancheira sem personagens de TV, cinema ou times de futebol", "1 unidade"),
+            ("Lenço de papel — 100 unidades", "1 pacote"),
+            ("Sacos plásticos 5 kg (para enviar roupas sujas)", "1 unidade"),
+            ("Necessaire pequena para o kit de escovação", "2 unidades"),
+            ("Toalha para o lanche (manter na lancheira)", "4 unidades"),
+        ]),
+        ("Livros literários (trabalharemos todos os títulos)", [
+            ("Fábulas de La Fontaine — Martin Claret", "1º bimestre"),
+            ("Poesias infantis — Livros Vivos", "2º bimestre"),
+            ("Ou isto ou aquilo — Global Editora", "3º bimestre"),
+            ("Fábulas de Esopo — Editora Principis", "4º bimestre"),
+        ], "Período"),
+        ("Livros didáticos e paradidáticos", [
+            ("Alfabetização Fônica — Pearson / apostilas didáticas (fornecidas pelo colégio e cobradas à parte)",
+             None),
+            ("Apostila de Matemática / Primeiros Números (Sergio Morselli) — fornecida pelo colégio e cobrada "
+             "à parte", None),
+            ("Flauta doce barroca", None),
+            ("Santa Missa Ilustrada", None),
+        ]),
+    ]
+
+
 # Turmas que já têm lista. As demais exibem “em preparação” até a lista chegar:
 # basta adicionar a turma aqui.
 LISTAS_MATERIAL = {
     "bercario": lista_bercario(),
     "infantil-ii": lista_infantil_ii(),
     "infantil-iii": lista_infantil_iii(),
+    "infantil-v": lista_infantil_v(),
 }
 
 
