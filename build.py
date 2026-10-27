@@ -2433,23 +2433,42 @@ def _tabela_lista(titulo, linhas, coluna="Quantidade"):
             f"<tbody>{corpo}</tbody></table></div>")
 
 
+# Kit de desenho geométrico: vale para todas as turmas do Fundamental (1º ao 7º ano).
+KIT_COMPASSO = ("Kit compasso", [
+    ("Régua 30 cm", "1 unidade"),
+    ("Transferidor 180°", "1 unidade"),
+    ("Transferidor 360°", "1 unidade"),
+    ("Esquadro 45°", "1 unidade"),
+    ("Esquadro 60°", "1 unidade"),
+    ("Compasso", "1 unidade"),
+])
+TURMAS_COM_KIT = {s for s, _ in TURMAS_LISTA if s.endswith("-ano")}
+
+
 def _painel_lista(slug, nome):
-    secoes = LISTAS_MATERIAL.get(slug)
+    secoes = list(LISTAS_MATERIAL.get(slug, []))
+    kit = [KIT_COMPASSO] if slug in TURMAS_COM_KIT else []
+    nota = (
+        '<ul class="list-gold">'
+        "<li><strong>Coloque o nome do aluno em todos os materiais</strong>, principalmente "
+        "os de uso pessoal (borracha, lápis, garrafa d’água etc.).</li>"
+        "<li>Ao longo do ano letivo, os professores poderão solicitar outros materiais "
+        "e/ou livros literários.</li></ul>"
+    )
     if secoes:
-        conteudo = (
-            '<ul class="list-gold">'
-            "<li><strong>Coloque o nome do aluno em todos os materiais</strong>, principalmente "
-            "os de uso pessoal (borracha, lápis, garrafa d’água etc.).</li>"
-            "<li>Ao longo do ano letivo, os professores poderão solicitar outros materiais "
-            "e/ou livros literários.</li></ul>"
-            + "".join(_tabela_lista(*secao) for secao in secoes)
-        )
+        conteudo = nota + "".join(_tabela_lista(*sec) for sec in secoes + kit)
     else:
         conteudo = (
             '<div class="aviso-vazio"><h3>Lista em preparação</h3>'
             f"<p>A lista de material do {nome} será publicada aqui assim que estiver disponível. "
             "Esta página fica sempre no mesmo endereço — vale guardar o link.</p></div>"
         )
+        if kit:
+            conteudo += (
+                '<p style="margin:2rem 0 1rem">Enquanto isso, já pode providenciar o item abaixo, '
+                "que vale para todo o Ensino Fundamental:</p>"
+                + "".join(_tabela_lista(*sec) for sec in kit)
+            )
     return (
         f'<div class="aba-painel" id="painel-{slug}" role="tabpanel" aria-labelledby="aba-{slug}" tabindex="0">'
         f"<h2>Lista de Material Escolar 2026 — {nome}</h2><hr class=\"rule\">{conteudo}</div>"
