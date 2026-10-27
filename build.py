@@ -2405,12 +2405,8 @@ def lista_infantil_v():
             ("Fábulas de Esopo — Editora Principis", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            ("Alfabetização Fônica — Pearson / apostilas didáticas (fornecidas pelo colégio e cobradas à parte)",
-             None),
-            ("Apostila de Matemática / Primeiros Números (Sergio Morselli) — fornecida pelo colégio e cobrada "
-             "à parte", None),
+            ("Os livros didáticos são adquiridos na Escola.", None),
             ("Flauta doce barroca", None),
-            ("Santa Missa Ilustrada", None),
         ]),
     ]
 
