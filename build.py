@@ -2210,20 +2210,76 @@ def lista_bercario():
     ]
 
 
+def lista_infantil_ii():
+    return [
+        ("Material", [
+            ("Algodão em formato de bolinhas coloridas", "1 pacote"),
+            ("Avental plástico para aulas de pintura (sem personagens estampados no avental)", "1 unidade"),
+            ("Brinquedo pedagógico adequado à idade (alinhavo, encaixe, blocos, quebra-cabeça)", "2 unidades"),
+            ("Caderno de desenho grande, de 100 folhas, com capa na cor amarela, ou encapado com plástico amarelo", "1 unidade"),
+            ("Caderno 50 folhas com pauta — capa amarela", "1 unidade"),
+            ("Caixa organizadora, de plástico duro, transparente, tamanho médio (20 L), com tampa", "1 caixa"),
+            ("Cola branca lavável, 1 kg", "1 unidade"),
+            ("Fita crepe", "2 rolos"),
+            ("Fósforo (pequeno)", "1 unidade"),
+            ("Gizão de cera grande ou sextavado (12 cores)", "2 caixas"),
+            ("Mala ou mochila sem personagens de televisão, cinema ou com logotipos de futebol. Manter dentro "
+             "da mochila diariamente uma troca completa de roupas (roupas de acordo com as normas do colégio)",
+             "1 unidade"),
+            ("Massinha de modelar atóxica — kit com 10 potes", "2 kits"),
+            ("Palito de sorvete colorido", "1 pacote"),
+            ("Papel colorido (“creative paper”), tamanho A4, 75 g/m²", "50 folhas"),
+            ("Papel crepom colorido — verde e amarelo", "2 rolos"),
+            ("Papel para desenho, branco, tamanho A4, 140 g/m² (como o da marca Canson)", "20 folhas"),
+            ("Perfex (para aula de pintura e uso diário)", "5 pacotes"),
+            ("Tinta para pintura a dedo, lavável, 6 cores", "2 caixas"),
+            ("Um pacote com 100 bolinhas (pompom) coloridas", "1 pacote"),
+            ("Pregador de madeira", "1 pacote"),
+            ("Tubo de cola quente fino", "5 unidades"),
+            ("Jogo de letras em madeira, mínimo de 80 peças", "1 jogo"),
+        ]),
+        ("Para higiene / cuidados pessoais", [
+            ("Creme dental infantil sem flúor e corante", "1 tubo"),
+            ("Escova de dentes / porta-escova de dentes", "1 escova"),
+            ("Lenços de papel (100 lenços por caixa)", "1 caixa"),
+            ("Lenços umedecidos (será necessário trazer pacote e não baldinho, para facilitar o armazenamento)",
+             "1 pacote"),
+        ]),
+        ("Para crianças que ainda usam fraldas (continuação da lista de higiene)", [
+            ("Fraldas descartáveis (deve ser reposto semanalmente)", "1 pacote"),
+            ("Pomada para evitar assaduras", "1 tubo"),
+            ("Sabonete líquido neutro (para higiene nas trocas de fraldas)", "1 tubo"),
+            ("Saquinhos plásticos (para enviar roupas sujas)", "1 unidade"),
+            ("Toalha de banho", "1 unidade"),
+            ("Uma troca de roupa de acordo com as normas da escola", "1 unidade"),
+        ]),
+        ("Livros literários", [
+            ("A arca de Noé (capa dura) — Vinicius de Moraes", "1º trimestre"),
+            ("Mundo de Nárnia: O leão, a feiticeira e o guarda-roupa", "2º trimestre"),
+            ("Minhas fábulas de Esopo (capa dura) — Michael Morpurgo", "3º trimestre"),
+        ], "Período"),
+        ("Livros didáticos e paradidáticos", [
+            ("Material próprio do colégio — pagar à parte na secretaria", None),
+            ("Sineta (sino de mão) — Musicalização", None),
+        ]),
+    ]
+
+
 # Turmas que já têm lista. As demais exibem “em preparação” até a lista chegar:
 # basta adicionar a turma aqui.
 LISTAS_MATERIAL = {
     "bercario": lista_bercario(),
+    "infantil-ii": lista_infantil_ii(),
 }
 
 
-def _tabela_lista(titulo, linhas):
+def _tabela_lista(titulo, linhas, coluna="Quantidade"):
     com_qtd = any(q for _, q in linhas)
     if com_qtd:
-        cab = "<tr><th>" + titulo + "</th><th>Quantidade</th></tr>"
+        cab = f"<tr><th>{titulo}</th><th>{coluna}</th></tr>"
         corpo = "".join(f"<tr><td>{i}</td><td>{q}</td></tr>" for i, q in linhas)
     else:
-        cab = "<tr><th>" + titulo + "</th></tr>"
+        cab = f"<tr><th>{titulo}</th></tr>"
         corpo = "".join(f"<tr><td>{i}</td></tr>" for i, _ in linhas)
     return (f'<div class="table-wrap lista-tabela"><table><thead>{cab}</thead>'
             f"<tbody>{corpo}</tbody></table></div>")
@@ -2238,7 +2294,7 @@ def _painel_lista(slug, nome):
             "os de uso pessoal (borracha, lápis, garrafa d’água etc.).</li>"
             "<li>Ao longo do ano letivo, os professores poderão solicitar outros materiais "
             "e/ou livros literários.</li></ul>"
-            + "".join(_tabela_lista(t, l) for t, l in secoes)
+            + "".join(_tabela_lista(*secao) for secao in secoes)
         )
     else:
         conteudo = (
