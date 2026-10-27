@@ -2265,11 +2265,88 @@ def lista_infantil_ii():
     ]
 
 
+def lista_infantil_iii():
+    return [
+        ("Material", [
+            ("Algodão em bolinhas", "1 pacote"),
+            ("Apontadores plásticos para lápis tamanho Jumbo — com depósito", "2 unidades"),
+            ("Avental plástico para as aulas de pintura, sem personagens de televisão, cinema ou times de "
+             "futebol estampados", "1 unidade"),
+            ("Bexigas coloridas", "3 pacotes"),
+            ("Brinquedo pedagógico: bloco de montagem, alinhavo, quebra-cabeça, sem personagens de televisão, "
+             "cinema ou times de futebol estampados", "2 unidades"),
+            ("Caderno de desenho grande (Meu primeiro Canson A4 de 140 g/m²), com 40 folhas, com capa inteira "
+             "na cor azul, ou encapado com plástico quadriculado azul", "1 unidade"),
+            ("Pasta plástica fina com elástico, tamanho A4, na cor azul (ficar na mochila)", "1 unidade"),
+            ("Caderno com pauta, 100 folhas — capa dura inteira na cor azul, ou encapado com plástico "
+             "quadriculado azul", "1 unidade"),
+            ("Caixa organizadora, de plástico duro, transparente, tamanho médio (20 L ou 10 kg), com tampa",
+             "1 unidade"),
+            ("Cola branca lavável, pequena, tubo de tamanho que caiba no estojo", "4 tubos"),
+            ("Cola colorida (com 6 cores)", "1 caixa"),
+            ("Estojo com duas divisórias, sem personagens de televisão, cinema ou times de futebol estampados",
+             "1 unidade"),
+            ("Fita durex larga", "2 unidades"),
+            ("Fita crepe larga", "2 unidades"),
+            ("Fósforo (pequeno)", "1 caixinha"),
+            ("Lápis de cor, tamanho Jumbo — com 12 cores cada caixa (como o da marca Tris)", "4 caixas"),
+            ("Lápis preto, tamanho Jumbo, corpo triangular", "4 unidades"),
+            ("Mochila, sem personagens de televisão, cinema ou times de futebol estampados, com dimensões "
+             "suficientes para comportarem apostilas e pasta tamanho A4", "1 unidade"),
+            ("Massa para modelar (preferencialmente modelo soft, como a da marca Uti Guti) — com 6 cores cada",
+             "6 caixas"),
+            ("Palito de sorvete coloridos", "1 pacote"),
+            ("Papel colorido (“creative paper”), tamanho A4, 75 g/m²", "50 folhas"),
+            ("Papel crepom (amarelo, marrom, verde, azul e vermelho)", "2 unidades"),
+            ("Papel para desenho, branco, tamanho A4, 140 g/m² (como o da marca Canson)", "40 folhas"),
+            ("Pincel chato de cabo amarelo (tamanho 12), como o da marca Tigre", "1 unidade"),
+            ("Perfex (para aula de pintura)", "5 pacotes"),
+            ("Pote com números em plástico (brinquedo educativo)", "1 pote"),
+            ("Jogo de letras em madeira, mínimo de 80 peças", "1 caixa"),
+            ("Papel sulfite branco, tamanho A4", "1 resma"),
+            ("Borracha grande e macia (branca)", "3 unidades"),
+            ("Tesoura pequena e sem ponta (preferencialmente Tramontina ou Mundial)", "2 unidades"),
+            ("Tinta guache — com 6 cores", "1 caixa"),
+            ("Pompom colorido (100 unidades)", "1 pacote"),
+            ("Pregador de roupa de madeira", "2 unidades"),
+            ("Tubete plástico com tampa branca", "3 unidades"),
+            ("Tubo de cola quente fino", "5 unidades"),
+        ]),
+        ("Para higiene", [
+            ("Garrafa de plástico, para beber água, de uso pessoal (manter na mochila diariamente)", "1 unidade"),
+            ("Saquinho plástico (para enviar roupas sujas)", "2 unidades"),
+            ("Creme dental infantil com o nome do aluno (tubo pequeno e fino, para caber no estojo de higiene "
+             "dental). Repor quando necessário", "1 unidade"),
+            ("Escovas de dentes infantis com o nome do aluno", "1 unidade"),
+            ("Lancheira, sem personagens de televisão, cinema ou times de futebol estampados, em tamanho "
+             "suficiente para acomodar devidamente os lanches", "1 unidade"),
+            ("Toalhinha ou guardanapo de pano para o lanchinho (manter na lancheira diariamente)", "1 unidade"),
+            ("Necessaire pequena, de plástico duro, para armazenar o kit de escovação (ficar na mochila)",
+             "1 unidade"),
+            ("Lenços umedecidos (deverão ser mantidos na mochila)", "1 unidade"),
+            ("Lenço de papel, que deverá ser mantido na mochila diariamente", "1 caixa"),
+            ("Uma troca de roupa de acordo com a norma da escola (deixar na mochila)", "1 unidade"),
+        ]),
+        ("Livros literários", [
+            ("Alice no país das maravilhas — Ciranda Cultural", "1º bimestre"),
+            ("A Ilíada (em quadrinhos) — Cortez Editora", "2º bimestre"),
+            ("Fábulas de La Fontaine — Martin Claret", "3º bimestre"),
+            ("Será que Deus está acordado? — Thomas Nelson Brasil", "4º bimestre"),
+        ], "Período"),
+        ("Livros didáticos e paradidáticos", [
+            ("Apostila de Coordenação Motora — adquirir no colégio", None),
+            ("Apostilas de Matemática Sérgio Morselli — adquirir no colégio", None),
+            ("Clave Pinus em madeira infantil (Liverpool) — Musicalização", None),
+        ]),
+    ]
+
+
 # Turmas que já têm lista. As demais exibem “em preparação” até a lista chegar:
 # basta adicionar a turma aqui.
 LISTAS_MATERIAL = {
     "bercario": lista_bercario(),
     "infantil-ii": lista_infantil_ii(),
+    "infantil-iii": lista_infantil_iii(),
 }
 
 
