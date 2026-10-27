@@ -70,6 +70,7 @@ NAV = [
         ("Proposta Pedagógica", "proposta-pedagogica.html"),
         ("Equipe Docente", "equipe-docente.html"),
         ("Regimento Escolar", "regimento-escolar.html"),
+        ("Lista de Materiais", "lista-de-materiais.html"),
     ]),
     ("Ensino", None, [
         ("Educação Infantil", "ensino-infantil.html"),
@@ -153,6 +154,7 @@ FOOTER = """<footer class="site-footer">
           <li><a href="proposta-pedagogica.html">Proposta Pedagógica</a></li>
           <li><a href="equipe-docente.html">Equipe Docente</a></li>
           <li><a href="regimento-escolar.html">Regimento Escolar</a></li>
+          <li><a href="lista-de-materiais.html">Lista de Materiais</a></li>
         </ul>
       </div>
       <div>
@@ -2140,6 +2142,143 @@ for _slug, _nome, _etapa in SERIES:
         "imagem e texto.",
         body=pagina_serie(_slug, _nome, _etapa),
     )
+
+
+# --------------------------------------------------------------------------
+# Lista de Materiais Escolar — uma aba por turma
+# --------------------------------------------------------------------------
+# Cada turma tem um slug (vira o #âncora da aba, então o link direto funciona),
+# o nome exibido e, quando já recebida, a lista. Turma sem lista mostra um aviso.
+TURMAS_LISTA = [
+    ("bercario", "Berçário"),
+    ("infantil-ii", "Infantil II"),
+    ("infantil-iii", "Infantil III"),
+    ("infantil-iv", "Infantil IV"),
+    ("infantil-v", "Infantil V"),
+    ("1-ano", "1º ano"),
+    ("2-ano", "2º ano"),
+    ("3-ano", "3º ano"),
+    ("4-ano", "4º ano"),
+    ("5-ano", "5º ano"),
+    ("6-ano", "6º ano"),
+    ("7-ano", "7º ano"),
+]
+
+
+def lista_bercario():
+    return [
+        ("Material", [
+            ("Brinquedo pedagógico adequado para a idade (Chocalho, blocos de montar)", "2 unidades"),
+            ("Caixa organizadora de plástico duro e transparente 20L. Para alunos de anos anteriores "
+             "serão reutilizadas as caixas já adquiridas.", "1 unidade"),
+            ("Fita crepe", "1 unidade"),
+            ("Giz de cera (como o “Meu primeiro Giz” da marca Acrilex), com 6 cores — a partir de 12 meses", "1 unidade"),
+            ("Um caderno sem pauta, 50 folhas — capa na cor laranja (maiores de 1 ano)", "1 unidade"),
+            ("Mala ou mochila, sem personagens de TV, cinema ou times de futebol estampados, "
+             "que caiba uma pasta tamanho A4", "1 unidade"),
+            ("Cola colorida 6 cores — a partir de 12 meses", "1 unidade"),
+            ("Tinta guache 12 cores — a partir de 12 meses", "1 unidade"),
+            ("Avental sem personagens de TV", "1 unidade"),
+            ("Papel sulfite branco A4 (resma 500 folhas)", "1 unidade"),
+            ("E.V.A — rosa, azul, verde, amarelo, branco", "2 unidades"),
+            ("E.V.A com glitter — dourado, prata, azul", "2 unidades"),
+        ]),
+        ("Itens que deverão ser enviados semanalmente", [
+            ("Toalha / toalha fralda", "1 unidade"),
+            ("Lençol para berço e fronha, caso faça uso de travesseiro", "1 unidade"),
+            ("Cobertor", "1 unidade"),
+            ("Fralda de pano", "1 unidade"),
+        ]),
+        ("Para higiene", [
+            ("Cotonetes", "1 unidade"),
+            ("Creme dental sem flúor — a partir de 12 meses", "1 unidade"),
+            ("Escova de dente infantil", "1 unidade"),
+            ("Fraldas descartáveis da marca de costume da criança", "1 unidade"),
+            ("Lenço de papel (100 folhas)", "1 unidade"),
+            ("Lenço umedecido (trazer pacote e não baldinho, para facilitar o armazenamento)", "1 unidade"),
+            ("Pente ou escova de cabelo", "1 unidade"),
+            ("Pomada para assaduras — repor de acordo com a necessidade", "1 unidade"),
+            ("Sabonete líquido neutro", "1 unidade"),
+            ("Sacos plásticos para armazenar roupas sujas", "1 unidade"),
+            ("Uma troca de roupa (de acordo com as normas do colégio) para deixar no berçário", "1 conjunto"),
+        ]),
+        ("Para alimentação", [
+            ("Babador lavável e com coletor / pratinho e talheres de costume.", None),
+            ("Mamadeira (leite, água e suco) — para bebês de até 1 ano; acima de 1 ano, substituir a "
+             "mamadeira por copos com tampa e válvula anti-vazamento.", None),
+        ]),
+    ]
+
+
+# Turmas que já têm lista. As demais exibem “em preparação” até a lista chegar:
+# basta adicionar a turma aqui.
+LISTAS_MATERIAL = {
+    "bercario": lista_bercario(),
+}
+
+
+def _tabela_lista(titulo, linhas):
+    com_qtd = any(q for _, q in linhas)
+    if com_qtd:
+        cab = "<tr><th>" + titulo + "</th><th>Quantidade</th></tr>"
+        corpo = "".join(f"<tr><td>{i}</td><td>{q}</td></tr>" for i, q in linhas)
+    else:
+        cab = "<tr><th>" + titulo + "</th></tr>"
+        corpo = "".join(f"<tr><td>{i}</td></tr>" for i, _ in linhas)
+    return (f'<div class="table-wrap lista-tabela"><table><thead>{cab}</thead>'
+            f"<tbody>{corpo}</tbody></table></div>")
+
+
+def _painel_lista(slug, nome):
+    secoes = LISTAS_MATERIAL.get(slug)
+    if secoes:
+        conteudo = (
+            '<ul class="list-gold">'
+            "<li><strong>Coloque o nome do aluno em todos os materiais</strong>, principalmente "
+            "os de uso pessoal (borracha, lápis, garrafa d’água etc.).</li>"
+            "<li>Ao longo do ano letivo, os professores poderão solicitar outros materiais "
+            "e/ou livros literários.</li></ul>"
+            + "".join(_tabela_lista(t, l) for t, l in secoes)
+        )
+    else:
+        conteudo = (
+            '<div class="aviso-vazio"><h3>Lista em preparação</h3>'
+            f"<p>A lista de material do {nome} será publicada aqui assim que estiver disponível. "
+            "Esta página fica sempre no mesmo endereço — vale guardar o link.</p></div>"
+        )
+    return (
+        f'<div class="aba-painel" id="painel-{slug}" role="tabpanel" aria-labelledby="aba-{slug}" tabindex="0">'
+        f"<h2>Lista de Material Escolar 2026 — {nome}</h2><hr class=\"rule\">{conteudo}</div>"
+    )
+
+
+def _pagina_lista_materiais():
+    abas = "".join(
+        f'<button class="aba" type="button" role="tab" id="aba-{s}" aria-controls="painel-{s}" '
+        f'aria-selected="{"true" if i == 0 else "false"}" data-aba="{s}">{n}</button>'
+        for i, (s, n) in enumerate(TURMAS_LISTA)
+    )
+    paineis = "".join(_painel_lista(s, n) for s, n in TURMAS_LISTA)
+    return (
+        page_hero(
+            "Lista de Materiais",
+            "Material escolar 2026, turma por turma — do Berçário ao 7º ano.",
+            '<a href="historia.html">O Colégio</a> &nbsp;/&nbsp; Lista de Materiais',
+        )
+        + section(
+            '<div class="abas-grupo" data-abas>'
+            f'<div class="abas" role="tablist" aria-label="Turmas">{abas}</div>'
+            f'<div class="abas-paineis">{paineis}</div></div>'
+        )
+        + CTA
+    )
+
+
+PAGES["lista-de-materiais.html"] = dict(
+    title=f"Lista de Materiais 2026 — O Colégio — {SCHOOL}",
+    description="Lista de material escolar 2026 por turma, do Berçário ao 7º ano do Ensino Fundamental.",
+    body=_pagina_lista_materiais(),
+)
 
 
 # --------------------------------------------------------------------------

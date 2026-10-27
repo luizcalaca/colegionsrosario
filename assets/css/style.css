@@ -710,3 +710,29 @@ a.link-contato:focus-visible,
 .panel th { background: rgba(201,162,39,.16); color: var(--gold-200); }
 .panel td { color: rgba(255,255,255,.8); border-bottom-color: rgba(255,255,255,.14); }
 .panel tbody tr:hover { background: rgba(255,255,255,.05); }
+
+/* Lista de Materiais: abas por turma.
+   Sem JavaScript, as abas somem e todos os painéis aparecem em sequência. */
+.abas { display: none; flex-wrap: wrap; gap: .5rem; margin-bottom: 2.2rem; }
+.js .abas { display: flex; }
+.aba {
+  padding: .5rem 1.1rem;
+  font-family: var(--sans); font-size: .76rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--ink-soft); background: transparent;
+  border: 1px solid rgba(11,27,63,.2); border-radius: 100px; cursor: pointer;
+  transition: all .2s var(--ease);
+}
+.aba:hover { border-color: var(--gold-400); color: var(--navy-800); }
+.aba[aria-selected="true"] { background: var(--navy-800); border-color: var(--navy-800); color: var(--gold-200); }
+.aba:focus-visible, .aba-painel:focus-visible { outline: 2px solid var(--gold-500); outline-offset: 3px; }
+.js .aba-painel:not(.is-ativo) { display: none; }
+.aba-painel { max-width: 920px; margin-inline: auto; }
+.aba-painel + .aba-painel { margin-top: 3.5rem; }
+.aba-painel .list-gold { margin-bottom: 2rem; }
+.lista-tabela { margin-bottom: 2rem; box-shadow: var(--shadow-sm); }
+.lista-tabela td:last-child:not(:first-child) { white-space: nowrap; width: 1%; font-variant-numeric: lining-nums; }
+@media print {
+  .abas, .site-header, .site-footer, .cta-band { display: none !important; }
+  .js .aba-painel:not(.is-ativo) { display: none; }
+}

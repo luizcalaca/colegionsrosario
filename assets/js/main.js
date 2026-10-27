@@ -257,6 +257,48 @@
     });
   });
 
+  /* Abas da Lista de Materiais: teclado (setas, Home, End) e link direto por #turma */
+  document.querySelectorAll('[data-abas]').forEach(function (grupo) {
+    var abas = [].slice.call(grupo.querySelectorAll('[role="tab"]'));
+    var paineis = [].slice.call(grupo.querySelectorAll('[role="tabpanel"]'));
+
+    function ativar(aba, foco, atualizaHash) {
+      abas.forEach(function (a) {
+        var ativa = a === aba;
+        a.setAttribute('aria-selected', String(ativa));
+        a.tabIndex = ativa ? 0 : -1;
+      });
+      paineis.forEach(function (p) {
+        p.classList.toggle('is-ativo', p.id === aba.getAttribute('aria-controls'));
+      });
+      if (foco) aba.focus();
+      if (atualizaHash && history.replaceState) {
+        history.replaceState(null, '', '#' + aba.getAttribute('data-aba'));
+      }
+    }
+
+    abas.forEach(function (aba, i) {
+      aba.addEventListener('click', function () { ativar(aba, false, true); });
+      aba.addEventListener('keydown', function (e) {
+        var destino = null;
+        if (e.key === 'ArrowRight') destino = abas[(i + 1) % abas.length];
+        else if (e.key === 'ArrowLeft') destino = abas[(i - 1 + abas.length) % abas.length];
+        else if (e.key === 'Home') destino = abas[0];
+        else if (e.key === 'End') destino = abas[abas.length - 1];
+        if (!destino) return;
+        e.preventDefault();
+        ativar(destino, true, true);
+      });
+    });
+
+    function doHash() {
+      var alvo = abas.filter(function (a) { return '#' + a.getAttribute('data-aba') === location.hash; })[0];
+      ativar(alvo || abas[0], false, false);
+    }
+    window.addEventListener('hashchange', doHash);
+    doHash();
+  });
+
   /* Formulários: em vez de um back-end, montam uma mensagem organizada e abrem
      a conversa com o WhatsApp da Secretaria já preenchida. */
   document.querySelectorAll('form[data-form]').forEach(function (form) {
