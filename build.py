@@ -2335,7 +2335,6 @@ def lista_infantil_iii():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             ("Apostila de Coordenação Motora — adquirir no colégio", None),
-            ("Apostilas de Matemática Sérgio Morselli — adquirir no colégio", None),
             ("Clave Pinus em madeira infantil (Liverpool) — Musicalização", None),
         ]),
     ]
@@ -2378,7 +2377,6 @@ def lista_infantil_v():
             ("Material Dourado, mínimo de 111 peças", "1 caixa"),
             ("Paleta ou godê (plástico)", "1 unidade"),
             ("Flauta doce barroca", "1 unidade"),
-            ("Pincel para quadro branco (cor azul) — recarregável", "3 unidades"),
             ("Ábaco", "1 unidade"),
             ("Canetinhas 12 cores", "1 pacote"),
             ("E.V.A — azul escuro, verde, amarelo, preto e branco (um de cada)", "4 unidades"),
@@ -2452,7 +2450,6 @@ def lista_infantil_iv():
             ("Pratinho descartável", "20 unidades"),
             ("Material Dourado, 111 peças (mínimo)", "1 caixa"),
             ("Tubo de cola quente fino", "5 unidades"),
-            ("Pincel para quadro branco (azul e preto) — recarregável", "2 unidades"),
         ]),
         ("Para manter na mochila", [
             ("Uma troca de roupa de acordo com as normas da escola", "1 unidade"),
@@ -2469,7 +2466,6 @@ def lista_infantil_iv():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             ("Apostilas ou livros didáticos (serão fornecidos pelo Colégio e cobrados à parte)", None),
-            ("Apostila de Matemática — Sergio Morselli (será fornecida pelo Colégio e cobrada à parte)", None),
             ("Alfabetização Fônica: construindo competências de leitura e escrita — Pearson", None),
             ("Xilofone Vanguarda 8 notas", None),
             ("Santa Missa Ilustrada", None),
@@ -2517,9 +2513,6 @@ def lista_5_ano():
             ("Canetinha (12 cores)", "1 pacote"),
             ("Folhas de E.V.A com glitter — cores dourado e prata", "2 unidades"),
             ("Bastão de cola quente fino", "4 unidades"),
-            ("Pincel para quadro branco (cor azul)", "2 unidades"),
-            ("Pincel para quadro branco (cor preta)", "2 unidades"),
-            ("Pincel para quadro branco (cor vermelha)", "1 unidade"),
             ("Papel vegetal", "5 folhas"),
             ("Pasta preta com ferragem, com plástico grosso, tamanho ofício — Música", "1 unidade"),
             ("Massa de biscuit branca", "1 unidade"),
@@ -2540,13 +2533,10 @@ def lista_5_ano():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostilas Morselli de Matemática (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostila de Inglês, método natural (fornecida pelo colégio e cobrada à parte)", None),
-            ("Apostila de Francês, método natural (fornecida pelo colégio e cobrada à parte)", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
-            ("Devotionarium: orações cotidianas", None),
+            ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ]),
     ]
 
@@ -2596,9 +2586,6 @@ def lista_3_ano():
             ("Régua de 20 cm, em acrílico", "1 unidade"),
             ("Folhas de E.V.A com glitter — cores dourado e prata", "2 unidades"),
             ("Bastão de cola quente fino", "5 unidades"),
-            ("Pincel para quadro branco (cor azul)", "2 unidades"),
-            ("Pincel para quadro branco (cor preta)", "2 unidades"),
-            ("Pincel para quadro branco (cor vermelha)", "1 unidade"),
             ("Papel vegetal", "5 folhas"),
             ("Pasta preta com ferragem, com plástico grosso, tamanho ofício — Música", "1 unidade"),
             ("Barbante", "1 unidade"),
@@ -2611,18 +2598,14 @@ def lista_3_ano():
             ("Toalhinha para o lanche (manter na lancheira)", "1 unidade"),
         ]),
         ("Livros literários", [
-            ("I Just Forgot — Mercer Mayer (Inglês)", None),
             ("O Pequeno Príncipe — Antoine de Saint-Exupéry (no original, em francês)", "1º bimestre"),
             ("O Rei Artur (nova edição) e os cavaleiros da Távola Redonda", "2º bimestre"),
             ("Um conto de Natal — Charles Dickens", "3º bimestre"),
             ("O pequeno fazendeiro — Laura Ingalls Wilder", "4º bimestre"),
-            ("Devotionarium: orações cotidianas", None),
+            ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostilas Morselli de Matemática (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostila de Inglês, método natural (fornecida pelo colégio e cobrada à parte)", None),
-            ("Apostila de Francês, método natural (fornecida pelo colégio e cobrada à parte)", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2676,9 +2659,6 @@ def lista_2_ano():
             ("Régua de 20 cm, em acrílico", "1 unidade"),
             ("Folhas de E.V.A com glitter — cores dourado e prata", "4 unidades"),
             ("Bastão de cola quente fino", "5 unidades"),
-            ("Pincel para quadro branco (cor azul)", "2 unidades"),
-            ("Pincel para quadro branco (cor preta)", "2 unidades"),
-            ("Pincel para quadro branco (cor vermelha)", "1 unidade"),
             ("Tela para pintura 15x20", "2 unidades"),
             ("Canetão vermelho", "1 unidade"),
             ("Compasso", "1 unidade"),
@@ -2699,13 +2679,10 @@ def lista_2_ano():
             ("As Crianças do Vagão — Gertrude Chandler Warner", "3º bimestre"),
             ("A teia de Charlotte — E. B. White", "4º bimestre"),
             ("God Gave Us You — Lisa Tawn Bergren", None),
-            ("Devotionarium: orações cotidianas", None),
+            ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostilas Morselli de Matemática (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostila de Inglês, método natural (fornecida pelo colégio e cobrada à parte)", None),
-            ("Apostila de Francês, método natural (fornecida pelo colégio e cobrada à parte)", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2756,9 +2733,6 @@ def lista_1_ano():
             ("Régua de 20 cm, em acrílico", "1 unidade"),
             ("Folhas de E.V.A com glitter — cores vermelho, azul, branco, preto etc.", "4 unidades"),
             ("Bastão de cola quente fino", "5 unidades"),
-            ("Pincel para quadro branco (cor azul)", "1 unidade"),
-            ("Pincel para quadro branco (cor preta)", "2 unidades"),
-            ("Pincel para quadro branco (cor vermelha)", "1 unidade"),
             ("Palito de picolé, cores diferentes", "1 pacote"),
             ("Pasta catálogo preta, com 10 plásticos — Música", "1 unidade"),
             ("Material Dourado, mínimo de 111 peças", "1 unidade"),
@@ -2770,19 +2744,14 @@ def lista_1_ano():
             ("Toalhinha para o lanche (manter na lancheira)", "1 unidade"),
         ]),
         ("Livros literários", [
-            ("Marcelino Pão e Vinho", "1º bimestre"),
+            ("Braz e a primeira comunhão — Condessa de Ségur", "1º bimestre"),
             ("Pinóquio — Carlo Collodi, Editora Pelicano", "2º bimestre"),
-            ("Memórias de um Burro — Condessa de Ségur, Editora Princípios", "3º bimestre"),
+            ("O Livro das Virtudes para crianças (edição em português) — William Bennett", "3º bimestre"),
             ("Cantos para os meus netos — poemas de Victor Hugo", "4º bimestre"),
-            ("Just Go to Bed — Mercer Mayer", None),
-            ("Devotionarium: orações cotidianas", None),
-            ("Preparação para a Primeira Comunhão — Mons. Álvaro Negromonte. Editora Caritatem", None),
+            ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostilas Morselli de Matemática (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostila de Inglês, método natural (fornecida pelo colégio e cobrada à parte)", None),
-            ("Apostila de Francês, método natural (fornecida pelo colégio e cobrada à parte)", None),
             ("Sugestão de leitura para a família (os pais podem ler em casa; o livro não será trabalhado em "
              "aula): “Estimulando a Inteligência”, de Pierluigi Piazzi. Editora Aleph.", None),
         ]),
@@ -2833,9 +2802,6 @@ def lista_4_ano():
             ("Régua de 20 cm, em acrílico", "1 unidade"),
             ("Folhas de E.V.A com glitter — cores dourado e prata", "2 unidades"),
             ("Bastão de cola quente fino", "5 unidades"),
-            ("Pincel para quadro branco (cor azul)", "2 unidades"),
-            ("Pincel para quadro branco (cor preta)", "2 unidades"),
-            ("Pincel para quadro branco (cor vermelha)", "1 unidade"),
             ("Papel vegetal", "5 folhas"),
             ("Massa de biscuit", "2 pacotes"),
             ("Régua 30 cm", "1 unidade"),
@@ -2850,20 +2816,14 @@ def lista_4_ano():
             ("Necessaire pequena, de plástico, para armazenar o kit de escovação", "1 unidade"),
         ]),
         ("Livros literários", [
-            ("The Snail and the Whale — Puffin Books", None),
             ("Os Lusíadas para crianças — Martins Fontes", "1º bimestre"),
             ("As aventuras de Odisseu — Hugh Lupton", "2º bimestre"),
             ("A Amizade — Cícero / Lafonte", "3º bimestre"),
             ("Os três mosqueteiros — Alexandre Dumas / Companhia das Letrinhas", "4º bimestre"),
-            ("Devotionarium: orações cotidianas", None),
-            ("Heidi — Johanna Spyri", None),
-            ("Os meninos da rua Paulo — Companhia das Letras", None),
+            ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostilas Morselli de Matemática (fornecidas pelo colégio e cobradas à parte)", None),
-            ("Apostila de Inglês, método natural (fornecida pelo colégio e cobrada à parte)", None),
-            ("Apostila de Francês, método natural (fornecida pelo colégio e cobrada à parte)", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2914,6 +2874,9 @@ TURMAS_COM_KIT = {s for s, _ in TURMAS_LISTA if s.endswith("-ano")}
 
 # Itens que já valem para a turma mesmo antes de a lista completa chegar.
 # Ao entrar a lista em LISTAS_MATERIAL, essas seções vão para o fim dela.
+DEVOTIONARIUM_6_7_ANO = ("Livros literários", [
+    ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
+])
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     ("Catecismo de São Pio X", None),
 ])
@@ -2933,8 +2896,8 @@ ESCRITA_6_7_ANO = ("Escrita e uso diário", [
 ])
 SECOES_FIXAS = {
     **{s: [KIT_COMPASSO] for s in TURMAS_COM_KIT},
-    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LIVROS_6_7_ANO],
-    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LIVROS_6_7_ANO],
+    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, DEVOTIONARIUM_6_7_ANO, LIVROS_6_7_ANO],
+    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, DEVOTIONARIUM_6_7_ANO, LIVROS_6_7_ANO],
 }
 
 
