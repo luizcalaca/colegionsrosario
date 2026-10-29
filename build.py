@@ -2506,7 +2506,6 @@ def lista_5_ano():
             ("Kit 4 pincéis de pintura Faber-Castell Soft Touch Artístico", "1 kit"),
             ("Cartolina (2 cores, sendo 1 branca)", "2 unidades"),
             ("Tinta guache 12 cores", "1 unidade"),
-            ("Régua 20 cm em acrílico", "1 unidade"),
             ("Tesoura pequena e sem ponta (preferencialmente Tramontina ou Mundial)", "2 unidades"),
             ("Perfex (para aula de Artes)", "4 pacotes"),
             ("Papel carbono", "5 folhas"),
@@ -2583,7 +2582,6 @@ def lista_3_ano():
             ("Tela para pintura 20x20 (não mudar o tamanho)", "1 unidade"),
             ("Tela para pintura 15x20 (não mudar o tamanho)", "1 unidade"),
             ("Canetinha (12 cores)", "1 pacote"),
-            ("Régua de 20 cm, em acrílico", "1 unidade"),
             ("Folhas de E.V.A com glitter — cores dourado e prata", "2 unidades"),
             ("Bastão de cola quente fino", "5 unidades"),
             ("Papel vegetal", "5 folhas"),
@@ -2656,7 +2654,6 @@ def lista_2_ano():
              "1 unidade"),
             ("Papel carbono", "4 unidades"),
             ("Aquarela 12 cores", "1 kit"),
-            ("Régua de 20 cm, em acrílico", "1 unidade"),
             ("Folhas de E.V.A com glitter — cores dourado e prata", "4 unidades"),
             ("Bastão de cola quente fino", "5 unidades"),
             ("Tela para pintura 15x20", "2 unidades"),
@@ -2678,7 +2675,6 @@ def lista_2_ano():
             ("Uma casa na floresta — Laura Ingalls Wilder", "2º bimestre"),
             ("As Crianças do Vagão — Gertrude Chandler Warner", "3º bimestre"),
             ("A teia de Charlotte — E. B. White", "4º bimestre"),
-            ("God Gave Us You — Lisa Tawn Bergren", None),
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
@@ -2730,7 +2726,6 @@ def lista_1_ano():
             ("Gesso em pó (secagem rápida), 1 kg", "1 pacote"),
             ("Tesoura pequena e sem ponta (preferencialmente Tramontina ou Mundial)", "3 unidades"),
             ("Estojo de aquarela (12 cores)", "1 estojo"),
-            ("Régua de 20 cm, em acrílico", "1 unidade"),
             ("Folhas de E.V.A com glitter — cores vermelho, azul, branco, preto etc.", "4 unidades"),
             ("Bastão de cola quente fino", "5 unidades"),
             ("Palito de picolé, cores diferentes", "1 pacote"),
@@ -2747,7 +2742,7 @@ def lista_1_ano():
             ("Braz e a primeira comunhão — Condessa de Ségur", "1º bimestre"),
             ("Pinóquio — Carlo Collodi, Editora Pelicano", "2º bimestre"),
             ("O Livro das Virtudes para crianças (edição em português) — William Bennett", "3º bimestre"),
-            ("Cantos para os meus netos — poemas de Victor Hugo", "4º bimestre"),
+            ("O Pequeno Lorde — Frances Hodgson Burnett", "4º bimestre"),
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
@@ -2799,13 +2794,10 @@ def lista_4_ano():
             ("Atadura gessada", "2 pacotes"),
             ("Tesoura pequena e sem ponta (preferencialmente Tramontina ou Mundial)", "2 unidades"),
             ("Canetinha (12 cores)", "1 pacote"),
-            ("Régua de 20 cm, em acrílico", "1 unidade"),
             ("Folhas de E.V.A com glitter — cores dourado e prata", "2 unidades"),
             ("Bastão de cola quente fino", "5 unidades"),
             ("Papel vegetal", "5 folhas"),
             ("Massa de biscuit", "2 pacotes"),
-            ("Régua 30 cm", "1 unidade"),
-            ("Transferidor", "1 unidade"),
             ("Taxa — atividades de Artes", "R$ 15"),
         ]),
         ("Para higiene", [
@@ -2874,11 +2866,21 @@ TURMAS_COM_KIT = {s for s, _ in TURMAS_LISTA if s.endswith("-ano")}
 
 # Itens que já valem para a turma mesmo antes de a lista completa chegar.
 # Ao entrar a lista em LISTAS_MATERIAL, essas seções vão para o fim dela.
-DEVOTIONARIUM_6_7_ANO = ("Livros literários", [
-    ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
-])
+# Os bimestres sem título definido ficam com o campo em branco.
+def _literarios_6_7_ano(por_bimestre):
+    linhas = [(por_bimestre.get(n, ""), f"{n}º bimestre") for n in range(1, 5)]
+    linhas.append(("Devotionarium: orações cotidianas — Editora Ecclesiae", None))
+    return ("Livros literários", linhas, "Período")
+
+
+LITERARIOS_6_ANO = _literarios_6_7_ano({})
+LITERARIOS_7_ANO = _literarios_6_7_ano({
+    3: "O Homem que Calculava (edição em português) — Malba Tahan",
+    4: "A História da Música — Otto Maria Carpeaux",
+})
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     ("Catecismo de São Pio X", None),
+    ("Constituição da República Federativa do Brasil", None),
 ])
 ESCRITA_6_7_ANO = ("Escrita e uso diário", [
     ("Lápis grafite ou lapiseiras", "4 lápis ou 2 lapiseiras"),
@@ -2896,8 +2898,8 @@ ESCRITA_6_7_ANO = ("Escrita e uso diário", [
 ])
 SECOES_FIXAS = {
     **{s: [KIT_COMPASSO] for s in TURMAS_COM_KIT},
-    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, DEVOTIONARIUM_6_7_ANO, LIVROS_6_7_ANO],
-    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, DEVOTIONARIUM_6_7_ANO, LIVROS_6_7_ANO],
+    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_6_ANO, LIVROS_6_7_ANO],
+    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_7_ANO, LIVROS_6_7_ANO],
 }
 
 
