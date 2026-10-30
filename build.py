@@ -2868,15 +2868,23 @@ TURMAS_COM_KIT = {s for s, _ in TURMAS_LISTA if s.endswith("-ano")}
 # Ao entrar a lista em LISTAS_MATERIAL, essas seções vão para o fim dela.
 # Os bimestres sem título definido ficam com o campo em branco.
 def _literarios_6_7_ano(por_bimestre):
-    linhas = [(por_bimestre.get(n, ""), f"{n}º bimestre") for n in range(1, 5)]
+    linhas = []
+    for n in range(1, 5):
+        for titulo in por_bimestre.get(n, [""]):
+            linhas.append((titulo, f"{n}º bimestre"))
     linhas.append(("Devotionarium: orações cotidianas — Editora Ecclesiae", None))
     return ("Livros literários", linhas, "Período")
 
 
-LITERARIOS_6_ANO = _literarios_6_7_ano({})
+LITERARIOS_6_ANO = _literarios_6_7_ano({
+    1: ["Ética a Nicômaco — Aristóteles, tradução de Edson Bini, Editora Edipro"],
+})
 LITERARIOS_7_ANO = _literarios_6_7_ano({
-    3: "O Homem que Calculava (edição em português) — Malba Tahan",
-    4: "A História da Música — Otto Maria Carpeaux",
+    1: ["A Moça de Caráter (3ª edição) — Monsenhor Tihamer Toth (para as meninas)",
+        "O Moço de Caráter — Monsenhor Tihamer Toth (para os meninos)"],
+    2: ["Órganon — Aristóteles, tradução e edição de Edson Bini, Editora Edipro"],
+    3: ["O Homem que Calculava (edição em português) — Malba Tahan"],
+    4: ["A História da Música — Otto Maria Carpeaux"],
 })
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     ("Catecismo de São Pio X", None),
@@ -2896,10 +2904,16 @@ ESCRITA_6_7_ANO = ("Escrita e uso diário", [
     ("Canetinhas hidrográficas", "1 conjunto"),
     ("Caderno de 96 folhas", "10 unidades"),
 ])
+LEITURAS_PAIS_5_7_ANO = ("Sugestões de leituras para a formação dos pais", [
+    ("A Formação Religiosa da Juventude — Mons. Tihamer Toth", None),
+    ("Psicologia da Fé — Leonel Franca", None),
+    ("A Educação dos Filhos — Álvaro Negromonte", None),
+])
 SECOES_FIXAS = {
     **{s: [KIT_COMPASSO] for s in TURMAS_COM_KIT},
-    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_6_ANO, LIVROS_6_7_ANO],
-    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_7_ANO, LIVROS_6_7_ANO],
+    "5-ano": [KIT_COMPASSO, LEITURAS_PAIS_5_7_ANO],
+    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_5_7_ANO],
+    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_5_7_ANO],
 }
 
 
