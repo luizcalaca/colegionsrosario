@@ -2936,6 +2936,8 @@ ROBOTICA_STEAM = ("Kit de Robótica para as aulas STEAM (Science, Technology, Ar
      "Kit Arduino Iniciante V2</a>", "1 kit"),
     ('<a href="https://www.eletrogate.com/caixa-organizadora-transparente" target="_blank" rel="noopener">'
      "Caixa organizadora transparente</a> — para guardar o kit", "1 unidade"),
+    ('<a href="https://www.amazon.com.br/Mult%C3%ADmetro-Digital-Profissional-Port%C3%A1til-Bateria/dp/B0GT6Z9678" '
+     'target="_blank" rel="noopener">Multímetro digital</a>', "1 unidade"),
     ("Notebook para as aulas, com 8 GB de RAM, processador Core i5 ou superior e sistema Windows "
      "atualizado (o aluno deverá trazê-lo)", "1 unidade"),
 ])
@@ -2978,6 +2980,8 @@ LITERARIOS_8_ANO = _literarios_6_7_ano({
     1: ["Retórica — Aristóteles, Editora Edipro"],
     2: ["Retórica Clássica para o Estudante Moderno — Edward P. J. Corbett"],
     3: ["A Formação das Almas: o imaginário da República no Brasil (edição em português) — José Murilo de Carvalho"],
+    4: ["Discursos clássicos selecionados: Oração Fúnebre de Péricles (431 a.C.), A Apologia de Sócrates "
+        "(399 a.C.), O Discurso de Carataco perante o Imperador Cláudio (51 d.C.), dentre outros"],
 }, "Retórica, Política e História")
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
