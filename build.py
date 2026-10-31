@@ -1477,10 +1477,10 @@ PAGES["curriculo-steam.html"] = dict(
         )
     )
     + section(
-        intro("O que se aprende", "Da eletrônica à programação",
+        intro("O que se aprende", "Da eletrônica à inteligência artificial",
               "Cada projeto reúne conceitos de várias áreas, observando ainda diversos outros "
               "conceitos da Química e da Física.")
-        + '<div class="split" style="margin-top:3rem">'
+        + '<div class="grid grid--3" style="margin-top:3rem">'
         '<div class="panel reveal"><h3>Eletrônica básica</h3><ul class="list-gold">'
         "<li>Amperagem e voltagem</li>"
         "<li>Resistência elétrica</li>"
@@ -1490,9 +1490,19 @@ PAGES["curriculo-steam.html"] = dict(
         "<li>Prototipagem</li>"
         "</ul></div>"
         '<div class="panel reveal"><h3>Programação</h3><ul class="list-gold">'
-        "<li>Programação de computadores</li>"
+        "<li>Aprendizagem da lógica de programação e de suas estruturas fundamentais, incluindo "
+        "problemas da Olimpíada Brasileira de Informática</li>"
+        "<li>Conceitos de Matemática finita</li>"
+        "<li>Grafos</li>"
+        "<li>Arquitetura de computadores</li>"
+        "<li>Estruturas de dados</li>"
         "<li>Dispositivos embarcados, como o Arduino</li>"
         "<li>Conceitos de Química e de Física aplicados aos projetos</li>"
+        "</ul></div>"
+        '<div class="panel reveal"><h3>Inteligência Artificial</h3><ul class="list-gold">'
+        "<li>Como funcionam os neurônios artificiais em sistemas digitais</li>"
+        "<li>Computação paralela e distribuída</li>"
+        "<li>Aprendizagem de ferramentas de IA generativa</li>"
         "</ul></div></div>",
         "section--cream",
     )
@@ -2975,7 +2985,7 @@ LITERARIOS_7_ANO = _literarios_6_7_ano({
     2: ["Órganon — Aristóteles, tradução e edição de Edson Bini, Editora Edipro"],
     3: ["Os Temperamentos: conhece-te a ti mesmo — Conrad Hock"],
     4: ["A História da Música — Otto Maria Carpeaux"],
-}, "Psicologia, Religião e Lógica")
+}, "Psicologia, Música, Religião e Lógica")
 LITERARIOS_8_ANO = _literarios_6_7_ano({
     1: ["Retórica — Aristóteles, Editora Edipro"],
     2: ["Retórica Clássica para o Estudante Moderno — Edward P. J. Corbett"],
