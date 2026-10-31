@@ -2878,6 +2878,15 @@ KIT_COMPASSO = ("Kit compasso", [
 ])
 TURMAS_COM_KIT = {s for s, _ in TURMAS_LISTA if s.endswith("-ano")}
 
+ROBOTICA_STEAM = ("Kit de Robótica para as aulas STEAM (Science, Technology, Arts and Mathematics)", [
+    ('<a href="https://www.eletrogate.com/kit-arduino-iniciante-v2" target="_blank" rel="noopener">'
+     "Kit Arduino Iniciante V2</a>", "1 kit"),
+    ('<a href="https://www.eletrogate.com/caixa-organizadora-transparente" target="_blank" rel="noopener">'
+     "Caixa organizadora transparente</a> — para guardar o kit", "1 unidade"),
+    ("Notebook para as aulas, com 8 GB de RAM, processador Core i5 ou superior e sistema Windows "
+     "atualizado (o aluno deverá trazê-lo)", "1 unidade"),
+])
+
 AGENDA = ("Agenda escolar", [
     ("A agenda deverá ser adquirida junto à Escola.", None),
 ])
@@ -2934,9 +2943,9 @@ LEITURAS_PAIS_4_5_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [
 SECOES_FIXAS = {
     **{s: [KIT_COMPASSO, AGENDA] for s in TURMAS_COM_KIT},
     "4-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
-    "5-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
-    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, AGENDA, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
-    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, AGENDA, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
+    "5-ano": [KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LEITURAS_PAIS_4_5_ANO],
+    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
+    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
 }
 
 
