@@ -2887,6 +2887,7 @@ LITERARIOS_7_ANO = _literarios_6_7_ano({
     4: ["A História da Música — Otto Maria Carpeaux"],
 })
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
+    ("Os livros didáticos das matérias do currículo são adquiridos na Secretaria.", None),
     ("Catecismo de São Pio X", None),
     ("Constituição da República Federativa do Brasil", None),
 ])
@@ -2904,16 +2905,20 @@ ESCRITA_6_7_ANO = ("Escrita e uso diário", [
     ("Canetinhas hidrográficas", "1 conjunto"),
     ("Caderno de 96 folhas", "10 unidades"),
 ])
-LEITURAS_PAIS_5_7_ANO = ("Sugestões de leituras para a formação dos pais", [
+LEITURAS_PAIS_6_7_ANO = ("Sugestões de leituras para a formação dos pais", [
     ("A Formação Religiosa da Juventude — Mons. Tihamer Toth", None),
     ("Psicologia da Fé — Leonel Franca", None),
     ("A Educação dos Filhos — Álvaro Negromonte", None),
 ])
+LEITURAS_PAIS_4_5_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [
+    ("A Educação da Sexualidade — Álvaro Negromonte", None),
+])
 SECOES_FIXAS = {
     **{s: [KIT_COMPASSO] for s in TURMAS_COM_KIT},
-    "5-ano": [KIT_COMPASSO, LEITURAS_PAIS_5_7_ANO],
-    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_5_7_ANO],
-    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_5_7_ANO],
+    "4-ano": [KIT_COMPASSO, LEITURAS_PAIS_4_5_ANO],
+    "5-ano": [KIT_COMPASSO, LEITURAS_PAIS_4_5_ANO],
+    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
+    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
 }
 
 
