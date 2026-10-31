@@ -2165,8 +2165,8 @@ TURMAS_LISTA = [
 ]
 
 
-# Aviso padrão sobre os livros didáticos; vale para todas as turmas.
-LIVRO_DIDATICO_COBRADO = ("Livros didáticos (fornecidos pelo colégio e cobrados à parte)", None)
+# Aviso padrão sobre a compra dos livros didáticos; vale para todas as turmas.
+LIVROS_NA_SECRETARIA = ("Os livros didáticos das matérias do currículo são adquiridos na Secretaria.", None)
 
 
 def lista_bercario():
@@ -2212,7 +2212,7 @@ def lista_bercario():
              "mamadeira por copos com tampa e válvula anti-vazamento.", None),
         ]),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
         ]),
     ]
 
@@ -2266,7 +2266,7 @@ def lista_infantil_ii():
             ("Minhas fábulas de Esopo (capa dura) — Michael Morpurgo", "3º trimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
             ("Material próprio do colégio — pagar à parte na secretaria", None),
             ("Sineta (sino de mão) — Musicalização", None),
         ]),
@@ -2342,7 +2342,7 @@ def lista_infantil_iii():
             ("Será que Deus está acordado? — Thomas Nelson Brasil", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
             ("Apostila de Coordenação Motora — adquirir no colégio", None),
             ("Clave Pinus em madeira infantil (Liverpool) — Musicalização", None),
         ]),
@@ -2412,8 +2412,7 @@ def lista_infantil_v():
             ("Fábulas de Esopo — Editora Principis", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
-            ("Os livros didáticos são adquiridos na Escola.", None),
+            LIVROS_NA_SECRETARIA,
             ("Flauta doce barroca", None),
         ]),
     ]
@@ -2475,7 +2474,7 @@ def lista_infantil_iv():
             ("Fábulas de La Fontaine — Martin Claret", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
             ("Alfabetização Fônica: construindo competências de leitura e escrita — Pearson", None),
             ("Xilofone Vanguarda 8 notas", None),
             ("Santa Missa Ilustrada", None),
@@ -2541,7 +2540,7 @@ def lista_5_ano():
             ("The Secret Garden — Inglês", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
             ("Catecismo de São Pio X", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
@@ -2614,7 +2613,7 @@ def lista_3_ano():
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
             ("Catecismo de São Pio X", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
@@ -2690,7 +2689,7 @@ def lista_2_ano():
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
             ("Catecismo de São Pio X", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
@@ -2759,7 +2758,7 @@ def lista_1_ano():
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
             ("Catecismo de São Pio X", None),
             ("Sugestão de leitura para a família (os pais podem ler em casa; o livro não será trabalhado em "
              "aula): “Estimulando a Inteligência”, de Pierluigi Piazzi. Editora Aleph.", None),
@@ -2829,7 +2828,7 @@ def lista_4_ano():
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            LIVRO_DIDATICO_COBRADO,
+            LIVROS_NA_SECRETARIA,
             ("Catecismo de São Pio X", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
@@ -2879,6 +2878,10 @@ KIT_COMPASSO = ("Kit compasso", [
 ])
 TURMAS_COM_KIT = {s for s, _ in TURMAS_LISTA if s.endswith("-ano")}
 
+AGENDA = ("Agenda escolar", [
+    ("A agenda deverá ser adquirida junto à Escola.", None),
+])
+
 # Itens que já valem para a turma mesmo antes de a lista completa chegar.
 # Ao entrar a lista em LISTAS_MATERIAL, essas seções vão para o fim dela.
 # Os bimestres sem título definido ficam com o campo em branco.
@@ -2902,8 +2905,7 @@ LITERARIOS_7_ANO = _literarios_6_7_ano({
     4: ["A História da Música — Otto Maria Carpeaux"],
 })
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
-    LIVRO_DIDATICO_COBRADO,
-    ("Os livros didáticos das matérias do currículo são adquiridos na Secretaria.", None),
+    LIVROS_NA_SECRETARIA,
     ("Catecismo de São Pio X", None),
     ("Constituição da República Federativa do Brasil", None),
 ])
@@ -2930,11 +2932,11 @@ LEITURAS_PAIS_4_5_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [
     ("A Educação da Sexualidade — Álvaro Negromonte", None),
 ])
 SECOES_FIXAS = {
-    **{s: [KIT_COMPASSO] for s in TURMAS_COM_KIT},
-    "4-ano": [KIT_COMPASSO, LEITURAS_PAIS_4_5_ANO],
-    "5-ano": [KIT_COMPASSO, LEITURAS_PAIS_4_5_ANO],
-    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
-    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
+    **{s: [KIT_COMPASSO, AGENDA] for s in TURMAS_COM_KIT},
+    "4-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
+    "5-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
+    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, AGENDA, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
+    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, AGENDA, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
 }
 
 
