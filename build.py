@@ -2165,6 +2165,10 @@ TURMAS_LISTA = [
 ]
 
 
+# Aviso padrão sobre os livros didáticos; vale para todas as turmas.
+LIVRO_DIDATICO_COBRADO = ("Livros didáticos (fornecidos pelo colégio e cobrados à parte)", None)
+
+
 def lista_bercario():
     return [
         ("Material", [
@@ -2206,6 +2210,9 @@ def lista_bercario():
             ("Babador lavável e com coletor / pratinho e talheres de costume.", None),
             ("Mamadeira (leite, água e suco) — para bebês de até 1 ano; acima de 1 ano, substituir a "
              "mamadeira por copos com tampa e válvula anti-vazamento.", None),
+        ]),
+        ("Livros didáticos e paradidáticos", [
+            LIVRO_DIDATICO_COBRADO,
         ]),
     ]
 
@@ -2259,6 +2266,7 @@ def lista_infantil_ii():
             ("Minhas fábulas de Esopo (capa dura) — Michael Morpurgo", "3º trimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
+            LIVRO_DIDATICO_COBRADO,
             ("Material próprio do colégio — pagar à parte na secretaria", None),
             ("Sineta (sino de mão) — Musicalização", None),
         ]),
@@ -2334,6 +2342,7 @@ def lista_infantil_iii():
             ("Será que Deus está acordado? — Thomas Nelson Brasil", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
+            LIVRO_DIDATICO_COBRADO,
             ("Apostila de Coordenação Motora — adquirir no colégio", None),
             ("Clave Pinus em madeira infantil (Liverpool) — Musicalização", None),
         ]),
@@ -2403,6 +2412,7 @@ def lista_infantil_v():
             ("Fábulas de Esopo — Editora Principis", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
+            LIVRO_DIDATICO_COBRADO,
             ("Os livros didáticos são adquiridos na Escola.", None),
             ("Flauta doce barroca", None),
         ]),
@@ -2465,7 +2475,7 @@ def lista_infantil_iv():
             ("Fábulas de La Fontaine — Martin Claret", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            ("Apostilas ou livros didáticos (serão fornecidos pelo Colégio e cobrados à parte)", None),
+            LIVRO_DIDATICO_COBRADO,
             ("Alfabetização Fônica: construindo competências de leitura e escrita — Pearson", None),
             ("Xilofone Vanguarda 8 notas", None),
             ("Santa Missa Ilustrada", None),
@@ -2531,7 +2541,8 @@ def lista_5_ano():
             ("The Secret Garden — Inglês", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
+            LIVRO_DIDATICO_COBRADO,
+            ("Catecismo de São Pio X", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2603,7 +2614,8 @@ def lista_3_ano():
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
+            LIVRO_DIDATICO_COBRADO,
+            ("Catecismo de São Pio X", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2678,7 +2690,8 @@ def lista_2_ano():
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
+            LIVRO_DIDATICO_COBRADO,
+            ("Catecismo de São Pio X", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2746,7 +2759,8 @@ def lista_1_ano():
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
+            LIVRO_DIDATICO_COBRADO,
+            ("Catecismo de São Pio X", None),
             ("Sugestão de leitura para a família (os pais podem ler em casa; o livro não será trabalhado em "
              "aula): “Estimulando a Inteligência”, de Pierluigi Piazzi. Editora Aleph.", None),
         ]),
@@ -2815,7 +2829,8 @@ def lista_4_ano():
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
-            ("Apostilas didáticas (fornecidas pelo colégio e cobradas à parte)", None),
+            LIVRO_DIDATICO_COBRADO,
+            ("Catecismo de São Pio X", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2887,6 +2902,7 @@ LITERARIOS_7_ANO = _literarios_6_7_ano({
     4: ["A História da Música — Otto Maria Carpeaux"],
 })
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
+    LIVRO_DIDATICO_COBRADO,
     ("Os livros didáticos das matérias do currículo são adquiridos na Secretaria.", None),
     ("Catecismo de São Pio X", None),
     ("Constituição da República Federativa do Brasil", None),
