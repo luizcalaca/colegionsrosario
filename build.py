@@ -1450,8 +1450,8 @@ _oficinas_pilares = cards([
 
 PAGES["curriculo-steam.html"] = dict(
     title=f"STEAM — Currículo — {SCHOOL}",
-    description="STEAM no currículo: aulas que integram Ciência, Tecnologia, Artes e Matemática, "
-    "com robótica e programação a partir do 5º ano.",
+    description="STEAM no currículo: Ciência, Tecnologia, Artes e Matemática, com eletrônica básica, "
+    "programação de computadores e Arduino a partir do 5º ano.",
     body=page_hero(
         "STEAM",
         "Science, Technology, Arts and Mathematics — o saber que se aprende pensando e fazendo.",
@@ -1464,10 +1464,10 @@ PAGES["curriculo-steam.html"] = dict(
                 "Ciência, Tecnologia, Artes e Matemática. Nas aulas de STEAM, essas áreas deixam de "
                 "ser compartimentos separados e passam a trabalhar juntas em projetos concretos, nos "
                 "quais o aluno precisa observar, calcular, planejar, construir e conferir o resultado.",
-                "Entre os recursos das aulas está a robótica: com um kit de Arduino, os alunos "
-                "montam circuitos e programam pequenos dispositivos, aplicando na prática o que "
-                "estudam em Matemática e em Ciências. A tecnologia entra como instrumento a serviço "
-                "da inteligência, e não como substituta dela.",
+                "O eixo das aulas é a robótica: com um kit de Arduino, os alunos aprendem eletrônica "
+                "básica, montam circuitos e programam pequenos dispositivos, aplicando na prática o "
+                "que estudam em Matemática e em Ciências. A tecnologia entra como instrumento a "
+                "serviço da inteligência, e não como substituta dela.",
                 "As aulas de STEAM acontecem no 5º, 6º e 7º ano. Cada aluno traz o seu notebook e o "
                 "kit de robótica, conforme a <a href=\"lista-de-materiais.html#5-ano\">lista de "
                 "materiais</a> da turma.",
@@ -1475,6 +1475,26 @@ PAGES["curriculo-steam.html"] = dict(
             "Currículo",
             "Pensar e fazer",
         )
+    )
+    + section(
+        intro("O que se aprende", "Da eletrônica à programação",
+              "Cada projeto reúne conceitos de várias áreas, observando ainda diversos outros "
+              "conceitos da Química e da Física.")
+        + '<div class="split" style="margin-top:3rem">'
+        '<div class="panel reveal"><h3>Eletrônica básica</h3><ul class="list-gold">'
+        "<li>Amperagem e voltagem</li>"
+        "<li>Resistência elétrica</li>"
+        "<li>Potenciômetro</li>"
+        "<li>Portas analógicas e digitais</li>"
+        "<li>Sensores e atuadores</li>"
+        "<li>Prototipagem</li>"
+        "</ul></div>"
+        '<div class="panel reveal"><h3>Programação</h3><ul class="list-gold">'
+        "<li>Programação de computadores</li>"
+        "<li>Dispositivos embarcados, como o Arduino</li>"
+        "<li>Conceitos de Química e de Física aplicados aos projetos</li>"
+        "</ul></div></div>",
+        "section--cream",
     )
     + CTA,
 )
