@@ -2905,12 +2905,14 @@ def _literarios_6_7_ano(por_bimestre):
 
 LITERARIOS_6_ANO = _literarios_6_7_ano({
     1: ["Ética a Nicômaco — Aristóteles, tradução de Edson Bini, Editora Edipro"],
+    2: ["O Jovem Instruído — Dom Bosco"],
+    3: ["Os Temperamentos: conhece-te a ti mesmo — Conrad Hock"],
 })
 LITERARIOS_7_ANO = _literarios_6_7_ano({
     1: ["A Moça de Caráter (3ª edição) — Monsenhor Tihamer Toth (para as meninas)",
         "O Moço de Caráter — Monsenhor Tihamer Toth (para os meninos)"],
     2: ["Órganon — Aristóteles, tradução e edição de Edson Bini, Editora Edipro"],
-    3: ["O Homem que Calculava (edição em português) — Malba Tahan"],
+    3: ["Os Temperamentos: conhece-te a ti mesmo — Conrad Hock"],
     4: ["A História da Música — Otto Maria Carpeaux"],
 })
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
