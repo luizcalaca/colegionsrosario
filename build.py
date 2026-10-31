@@ -89,6 +89,7 @@ NAV = [
         ("Artes", "curriculo-artes.html"),
         ("Música e Teatro", "curriculo-musica-teatro.html"),
         ("Oficinas", "curriculo-oficinas.html"),
+        ("STEAM", "curriculo-steam.html"),
         ("Educação Física", "curriculo-educacao-fisica.html"),
         ("Cortesia e Civilidade", "curriculo-cortesia-civilidade.html"),
         ("Materiais", "materiais.html"),
@@ -1446,6 +1447,37 @@ _oficinas_pilares = cards([
      "Levar uma peça do início ao fim e mostrá-la pronta. É a experiência de ter feito algo que "
      "existe fora de si."),
 ])
+
+PAGES["curriculo-steam.html"] = dict(
+    title=f"STEAM — Currículo — {SCHOOL}",
+    description="STEAM no currículo: aulas que integram Ciência, Tecnologia, Artes e Matemática, "
+    "com robótica e programação a partir do 5º ano.",
+    body=page_hero(
+        "STEAM",
+        "Science, Technology, Arts and Mathematics — o saber que se aprende pensando e fazendo.",
+        '<a href="curriculo-pre-alfabetizacao.html">Currículo</a> &nbsp;/&nbsp; STEAM',
+    )
+    + section(
+        text_block(
+            [
+                "STEAM é a sigla, em inglês, de <em>Science, Technology, Arts and Mathematics</em>: "
+                "Ciência, Tecnologia, Artes e Matemática. Nas aulas de STEAM, essas áreas deixam de "
+                "ser compartimentos separados e passam a trabalhar juntas em projetos concretos, nos "
+                "quais o aluno precisa observar, calcular, planejar, construir e conferir o resultado.",
+                "Entre os recursos das aulas está a robótica: com um kit de Arduino, os alunos "
+                "montam circuitos e programam pequenos dispositivos, aplicando na prática o que "
+                "estudam em Matemática e em Ciências. A tecnologia entra como instrumento a serviço "
+                "da inteligência, e não como substituta dela.",
+                "As aulas de STEAM acontecem no 5º, 6º e 7º ano. Cada aluno traz o seu notebook e o "
+                "kit de robótica, conforme a <a href=\"lista-de-materiais.html#5-ano\">lista de "
+                "materiais</a> da turma.",
+            ],
+            "Currículo",
+            "Pensar e fazer",
+        )
+    )
+    + CTA,
+)
 
 PAGES["curriculo-oficinas.html"] = dict(
     title=f"Oficinas — Currículo — {SCHOOL}",
