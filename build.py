@@ -2957,11 +2957,12 @@ LITERARIOS_7_ANO = _literarios_6_7_ano({
 LITERARIOS_8_ANO = _literarios_6_7_ano({
     1: ["Retórica — Aristóteles, Editora Edipro"],
     2: ["Retórica Clássica para o Estudante Moderno — Edward P. J. Corbett"],
-}, "Retórica")
+    3: ["A Formação das Almas: o imaginário da República no Brasil (edição em português) — José Murilo de Carvalho"],
+}, "Retórica, Política e História")
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
     ("Catecismo de São Pio X", None),
-    ("Constituição da República Federativa do Brasil", None),
+    ("Constituição da República Federativa do Brasil (Filosofia do Direito)", None),
 ])
 ESCRITA_6_7_ANO = ("Escrita e uso diário", [
     ("Lápis grafite ou lapiseiras", "4 lápis ou 2 lapiseiras"),
