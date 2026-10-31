@@ -2906,7 +2906,8 @@ def _literarios_6_7_ano(por_bimestre):
 LITERARIOS_6_ANO = _literarios_6_7_ano({
     1: ["Ética a Nicômaco — Aristóteles, tradução de Edson Bini, Editora Edipro"],
     2: ["O Jovem Instruído — Dom Bosco"],
-    3: ["Os Temperamentos: conhece-te a ti mesmo — Conrad Hock"],
+    3: ["A História da Psicologia: uma leitura tomista — Robert Edward Brennan"],
+    4: ["Os Temperamentos: conhece-te a ti mesmo — Conrad Hock"],
 })
 LITERARIOS_7_ANO = _literarios_6_7_ano({
     1: ["A Moça de Caráter (3ª edição) — Monsenhor Tihamer Toth (para as meninas)",
