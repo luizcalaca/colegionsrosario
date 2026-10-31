@@ -2194,6 +2194,7 @@ TURMAS_LISTA = [
     ("5-ano", "5º ano"),
     ("6-ano", "6º ano"),
     ("7-ano", "7º ano"),
+    ("8-ano", "8º ano"),
 ]
 
 
@@ -2899,7 +2900,7 @@ def _tabela_lista(titulo, linhas, coluna="Quantidade"):
             f"<tbody>{corpo}</tbody></table></div>")
 
 
-# Kit de desenho geométrico: vale para todas as turmas do Fundamental (1º ao 7º ano).
+# Kit de desenho geométrico: vale para todas as turmas do Fundamental (1º ao 8º ano).
 KIT_COMPASSO = ("Kit compasso", [
     ("Régua 30 cm", "1 unidade"),
     ("Transferidor 180°", "1 unidade"),
@@ -2919,6 +2920,11 @@ ROBOTICA_STEAM = ("Kit de Robótica para as aulas STEAM (Science, Technology, Ar
      "atualizado (o aluno deverá trazê-lo)", "1 unidade"),
 ])
 
+LEITURA_PAIS_INFANTIL = ("Sugestão de leitura para a formação dos pais", [
+    ("Os Neurônios da Leitura: como a ciência explica a nossa capacidade de ler — Stanislas Dehaene, "
+     "tradução de Leonor Scliar-Cabral", None),
+])
+
 AGENDA = ("Agenda escolar", [
     ("A agenda deverá ser adquirida junto à Escola.", None),
 ])
@@ -2926,13 +2932,13 @@ AGENDA = ("Agenda escolar", [
 # Itens que já valem para a turma mesmo antes de a lista completa chegar.
 # Ao entrar a lista em LISTAS_MATERIAL, essas seções vão para o fim dela.
 # Os bimestres sem título definido ficam com o campo em branco.
-def _literarios_6_7_ano(por_bimestre):
+def _literarios_6_7_ano(por_bimestre, area):
     linhas = []
     for n in range(1, 5):
         for titulo in por_bimestre.get(n, [""]):
             linhas.append((titulo, f"{n}º bimestre"))
     linhas.append(("Devotionarium: orações cotidianas — Editora Ecclesiae", None))
-    return ("Livros literários", linhas, "Período")
+    return (f"Livros literários ({area})", linhas, "Período")
 
 
 LITERARIOS_6_ANO = _literarios_6_7_ano({
@@ -2940,14 +2946,18 @@ LITERARIOS_6_ANO = _literarios_6_7_ano({
     2: ["O Jovem Instruído — Dom Bosco"],
     3: ["A História da Psicologia: uma leitura tomista — Robert Edward Brennan"],
     4: ["Os Temperamentos: conhece-te a ti mesmo — Conrad Hock"],
-})
+}, "Psicologia")
 LITERARIOS_7_ANO = _literarios_6_7_ano({
     1: ["A Moça de Caráter (3ª edição) — Monsenhor Tihamer Toth (para as meninas)",
         "O Moço de Caráter — Monsenhor Tihamer Toth (para os meninos)"],
     2: ["Órganon — Aristóteles, tradução e edição de Edson Bini, Editora Edipro"],
     3: ["Os Temperamentos: conhece-te a ti mesmo — Conrad Hock"],
     4: ["A História da Música — Otto Maria Carpeaux"],
-})
+}, "Psicologia, Religião e Lógica")
+LITERARIOS_8_ANO = _literarios_6_7_ano({
+    1: ["Retórica — Aristóteles, Editora Edipro"],
+    2: ["Retórica Clássica para o Estudante Moderno — Edward P. J. Corbett"],
+}, "Retórica")
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
     ("Catecismo de São Pio X", None),
@@ -2977,10 +2987,12 @@ LEITURAS_PAIS_4_5_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [
 ])
 SECOES_FIXAS = {
     **{s: [KIT_COMPASSO, AGENDA] for s in TURMAS_COM_KIT},
+    **{t: [LEITURA_PAIS_INFANTIL] for t in ("infantil-ii", "infantil-iii", "infantil-iv", "infantil-v")},
     "4-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
     "5-ano": [KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LEITURAS_PAIS_4_5_ANO],
     "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
     "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
+    "8-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_8_ANO, ("Livros didáticos e paradidáticos", [LIVROS_NA_SECRETARIA])],
 }
 
 
@@ -3023,7 +3035,7 @@ def _pagina_lista_materiais():
     return (
         page_hero(
             "Lista de Materiais",
-            "Material escolar 2026, turma por turma — do Berçário ao 7º ano.",
+            "Material escolar 2026, turma por turma — do Berçário ao 8º ano.",
             '<a href="historia.html">O Colégio</a> &nbsp;/&nbsp; Lista de Materiais',
         )
         + section(
@@ -3037,7 +3049,7 @@ def _pagina_lista_materiais():
 
 PAGES["lista-de-materiais.html"] = dict(
     title=f"Lista de Materiais 2026 — O Colégio — {SCHOOL}",
-    description="Lista de material escolar 2026 por turma, do Berçário ao 7º ano do Ensino Fundamental.",
+    description="Lista de material escolar 2026 por turma, do Berçário ao 8º ano do Ensino Fundamental.",
     body=_pagina_lista_materiais(),
 )
 
