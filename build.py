@@ -2999,6 +2999,7 @@ LITERARIOS_8_ANO = _literarios_6_7_ano({
 }, "Retórica, Política e História")
 LITERARIOS_9_ANO = _literarios_6_7_ano({
     1: ["O Estado Servil (edição em português) — Hilaire Belloc"],
+    2: ["A Oração de Santo Afonso"],
 }, "Filosofia da Economia")
 LIVROS_8_9_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
