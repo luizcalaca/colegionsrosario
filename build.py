@@ -772,10 +772,12 @@ PAGES["ensino-fundamental-2.html"] = dict(
             ("♦", "Argumentação", "Dissertação, seminários, debate regrado e leitura de obras clássicas integrais."),
         ],
         [
-            ("Português e Literatura", "6"), ("Latim", "2"), ("Matemática", "6"),
-            ("Ciências / Física / Química / Biologia", "5"), ("História", "3"), ("Geografia", "3"),
-            ("Inglês", "4"), ("Francês", "3"), ("Artes", "2"),
-            ("Música ou Teatro", "2"), ("Educação Física", "2"), ("Formação Católica", "2"),
+            ("Português, Latim e Literatura", "6"), ("Matemática", "4"),
+            ("Ciências / Física / Química / Biologia", "2"), ("História", "2"), ("Geografia", "2"),
+            ("Inglês", "4"), ("Artes", "1"), ("Música e Teatro", "2"), ("Educação Física", "2"),
+            ("Filosofia da Religião", "1"),
+            ("Filosofia: Lógica | Retórica | Psicologia | Ética", "1"),
+            ("Pensamento Computacional", "1"),
         ],
         [
             "<strong>Período:</strong> matutino (7h às 12h)",
@@ -3003,6 +3005,7 @@ LITERARIOS_9_ANO = _literarios_6_7_ano({
 }, "Filosofia da Economia")
 LIVROS_8_9_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
+    ("Constituição da República Federativa do Brasil (Filosofia do Direito)", None),
     ("Código Civil brasileiro", None),
 ])
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
@@ -3069,7 +3072,7 @@ def _painel_lista(slug, nome):
             )
     return (
         f'<div class="aba-painel" id="painel-{slug}" role="tabpanel" aria-labelledby="aba-{slug}" tabindex="0">'
-        f"<h2>Lista de Material Escolar 2026 — {nome}</h2><hr class=\"rule\">{conteudo}</div>"
+        f"<h2>Lista de Material Escolar 2027 — {nome}</h2><hr class=\"rule\">{conteudo}</div>"
     )
 
 
@@ -3083,7 +3086,7 @@ def _pagina_lista_materiais():
     return (
         page_hero(
             "Lista de Materiais",
-            "Material escolar 2026, turma por turma — do Berçário ao 9º ano.",
+            "Material escolar 2027, turma por turma — do Berçário ao 9º ano.",
             '<a href="historia.html">O Colégio</a> &nbsp;/&nbsp; Lista de Materiais',
         )
         + section(
@@ -3096,8 +3099,8 @@ def _pagina_lista_materiais():
 
 
 PAGES["lista-de-materiais.html"] = dict(
-    title=f"Lista de Materiais 2026 — O Colégio — {SCHOOL}",
-    description="Lista de material escolar 2026 por turma, do Berçário ao 9º ano do Ensino Fundamental.",
+    title=f"Lista de Materiais 2027 — O Colégio — {SCHOOL}",
+    description="Lista de material escolar 2027 por turma, do Berçário ao 9º ano do Ensino Fundamental.",
     body=_pagina_lista_materiais(),
 )
 
