@@ -2997,6 +2997,10 @@ LITERARIOS_8_ANO = _literarios_6_7_ano({
 LITERARIOS_9_ANO = _literarios_6_7_ano({
     1: ["O Estado Servil (edição em português) — Hilaire Belloc"],
 }, "Filosofia da Economia")
+LIVROS_8_9_ANO = ("Livros didáticos e paradidáticos", [
+    LIVROS_NA_SECRETARIA,
+    ("Código Civil brasileiro", None),
+])
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
     ("Catecismo de São Pio X", None),
@@ -3031,8 +3035,8 @@ SECOES_FIXAS = {
     "5-ano": [KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LEITURAS_PAIS_4_5_ANO],
     "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
     "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
-    "8-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_8_ANO, ("Livros didáticos e paradidáticos", [LIVROS_NA_SECRETARIA])],
-    "9-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_9_ANO, ("Livros didáticos e paradidáticos", [LIVROS_NA_SECRETARIA])],
+    "8-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_8_ANO, LIVROS_8_9_ANO],
+    "9-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_9_ANO, LIVROS_8_9_ANO],
 }
 
 
