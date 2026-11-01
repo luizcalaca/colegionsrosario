@@ -2325,9 +2325,10 @@ def lista_infantil_ii():
             ("Uma troca de roupa de acordo com as normas da escola", "1 unidade"),
         ]),
         ("Livros literários", [
-            ("A arca de Noé (capa dura) — Vinicius de Moraes", "1º trimestre"),
-            ("Mundo de Nárnia: O leão, a feiticeira e o guarda-roupa", "2º trimestre"),
-            ("Minhas fábulas de Esopo (capa dura) — Michael Morpurgo", "3º trimestre"),
+            ("Fábulas de Esopo para os Pitiquinhos — João & Maria Editora", "1º bimestre"),
+            ("Ursinhos Sonhadores", "2º bimestre"),
+            ("Os Brinquedos da Vó Genoveva", "3º bimestre"),
+            ("Trem de Ferro", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
@@ -2400,10 +2401,10 @@ def lista_infantil_iii():
             ("Uma troca de roupa de acordo com a norma da escola (deixar na mochila)", "1 unidade"),
         ]),
         ("Livros literários", [
-            ("Alice no país das maravilhas — Ciranda Cultural", "1º bimestre"),
-            ("A Ilíada (em quadrinhos) — Cortez Editora", "2º bimestre"),
-            ("Fábulas de La Fontaine — Martin Claret", "3º bimestre"),
-            ("Será que Deus está acordado? — Thomas Nelson Brasil", "4º bimestre"),
+            ("Fábulas de Esopo para os Pitiquinhos — João & Maria Editora", "1º bimestre"),
+            ("A Viagem do Balão Azul — João & Maria Editora", "2º bimestre"),
+            ("A Árvore na Montanha — João & Maria Editora", "3º bimestre"),
+            ("O Gatinho Fujão e outras poesias — João & Maria Editora", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
@@ -2469,12 +2470,14 @@ def lista_infantil_v():
             ("Necessaire pequena para o kit de escovação", "2 unidades"),
             ("Toalha para o lanche (manter na lancheira)", "4 unidades"),
         ]),
-        ("Livros literários (trabalharemos todos os títulos)", [
-            ("Fábulas de La Fontaine — Martin Claret", "1º bimestre"),
-            ("Poesias infantis — Livros Vivos", "2º bimestre"),
-            ("Ou isto ou aquilo — Global Editora", "3º bimestre"),
-            ("Fábulas de Esopo — Editora Principis", "4º bimestre"),
-        ], "Período"),
+        ("Livros literários — Combo Heróis do Brasil (Caravelas Kids)", [
+            ("Osório, o General Cavaleiro — Daniel Jorge", None),
+            ("Dom Vital, Herói da Fé — Antonio Manuel", None),
+            ("Nossa Senhora Aparecida, Rainha e Padroeira do Brasil — Expedito Arantes", None),
+            ("Duque de Caxias — Gabriel de Paula e Marcelo Andrade", None),
+            ("Princesa Isabel — Raphael Tonon", None),
+            ("Heróis do Brasil para colorir", None),
+        ]),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
             ("Flauta doce barroca", None),
@@ -2532,10 +2535,10 @@ def lista_infantil_iv():
             ("Lenço de papel (100 folhas)", "1 caixa"),
         ]),
         ("Livros literários", [
-            ("Clássicos Todolivro: Três Porquinhos", "1º bimestre"),
-            ("Grandes Clássicos: João e o pé de feijão", "2º bimestre"),
-            ("A vida de São Nicolau contada em versos para as crianças — João e Maria", "3º bimestre"),
-            ("Fábulas de La Fontaine — Martin Claret", "4º bimestre"),
+            ("Trem de Ferro, Trem de Sonho", "1º bimestre"),
+            ("Meus Primeiros Poemas Ilustrados", "2º bimestre"),
+            ("A Casa Velha de Pedro", "3º bimestre"),
+            ("Estações Brasileiras", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
