@@ -3023,7 +3023,7 @@ ESCRITA_6_7_ANO = ("Escrita e uso diário", [
     ("Marca-texto", "2 unidades"),
     ("Tesoura escolar sem ponta", "1 unidade"),
     ("Cola branca", "2 tubos"),
-    ("Lápis de cor", "1 caixa"),
+    ("Caixa de lápis de cor de 24 cores", "1 caixa"),
     ("Canetinhas hidrográficas", "1 conjunto"),
     ("Caderno de 96 folhas", "10 unidades"),
 ])
