@@ -2688,8 +2688,6 @@ def lista_3_ano():
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
-            ("Sugestão de leitura para a família (os pais podem ler em casa; o livro não será trabalhado em "
-             "aula): “Estimulando a Inteligência”, de Pierluigi Piazzi. Editora Aleph.", None),
         ]),
     ]
 
@@ -2764,8 +2762,6 @@ def lista_2_ano():
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
-            ("Sugestão de leitura para a família (os pais podem ler em casa; o livro não será trabalhado em "
-             "aula): “Estimulando a Inteligência”, de Pierluigi Piazzi. Editora Aleph.", None),
         ]),
     ]
 
@@ -2830,8 +2826,6 @@ def lista_1_ano():
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
             ("Catecismo de São Pio X", None),
-            ("Sugestão de leitura para a família (os pais podem ler em casa; o livro não será trabalhado em "
-             "aula): “Estimulando a Inteligência”, de Pierluigi Piazzi. Editora Aleph.", None),
         ]),
     ]
 
@@ -2903,8 +2897,6 @@ def lista_4_ano():
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
-            ("Sugestão de leitura para a família (os pais podem ler em casa; o livro não será trabalhado em "
-             "aula): “Estimulando a Inteligência”, de Pierluigi Piazzi. Editora Aleph.", None),
         ]),
     ]
 
@@ -3013,6 +3005,7 @@ LITERARIOS_1_EM = ("Livros literários (autores)", [
     ("Padre Antônio Vieira: sermões", None),
     ("Autores goianos: Hugo de Carvalho Ramos (a obra <em>Tropas e Boiadas</em>), Bernardo Élis, "
      "José J. Veiga e outros", None),
+    ("Machado de Assis, Olavo Bilac, Mário Ferreira dos Santos", None),
 ])
 LIVROS_8_9_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
@@ -3043,11 +3036,16 @@ LEITURAS_PAIS_6_7_ANO = ("Sugestões de leituras para a formação dos pais", [
     ("Psicologia da Fé — Leonel Franca", None),
     ("A Educação dos Filhos — Álvaro Negromonte", None),
 ])
+LEITURA_PIAZZI = ("Estimulando a Inteligência — Pierluigi Piazzi, Editora Aleph (os pais podem ler em casa; "
+                  "o livro não será trabalhado em aula)", None)
+LEITURAS_PAIS_1_3_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [LEITURA_PIAZZI])
 LEITURAS_PAIS_4_5_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [
     ("A Educação da Sexualidade — Álvaro Negromonte", None),
+    LEITURA_PIAZZI,
 ])
 SECOES_FIXAS = {
     **{s: [KIT_COMPASSO, AGENDA] for s in TURMAS_COM_KIT},
+    **{t: [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_1_3_ANO] for t in ("1-ano", "2-ano", "3-ano")},
     **{t: [LEITURA_PAIS_INFANTIL] for t in ("infantil-ii", "infantil-iii", "infantil-iv", "infantil-v")},
     "4-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
     "5-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
