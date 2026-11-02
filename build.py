@@ -1453,7 +1453,7 @@ _oficinas_pilares = cards([
 PAGES["curriculo-steam.html"] = dict(
     title=f"STEAM — Currículo — {SCHOOL}",
     description="STEAM no currículo: Ciência, Tecnologia, Artes e Matemática, com eletrônica básica, "
-    "programação de computadores e Arduino a partir do 5º ano.",
+    "programação de computadores, inteligência artificial e Arduino a partir do 6º ano.",
     body=page_hero(
         "STEAM",
         "Science, Technology, Arts and Mathematics — o saber que se aprende pensando e fazendo.",
@@ -1470,8 +1470,8 @@ PAGES["curriculo-steam.html"] = dict(
                 "básica, montam circuitos e programam pequenos dispositivos, aplicando na prática o "
                 "que estudam em Matemática e em Ciências. A tecnologia entra como instrumento a "
                 "serviço da inteligência, e não como substituta dela.",
-                "As aulas de STEAM acontecem no 5º, 6º e 7º ano. Cada aluno traz o seu notebook e o "
-                "kit de robótica, conforme a <a href=\"lista-de-materiais.html#5-ano\">lista de "
+                "As aulas de STEAM acontecem no 6º e no 7º ano. Cada aluno traz o seu notebook e o "
+                "kit de robótica, conforme a <a href=\"lista-de-materiais.html#6-ano\">lista de "
                 "materiais</a> da turma.",
             ],
             "Currículo",
@@ -3050,7 +3050,7 @@ SECOES_FIXAS = {
     **{s: [KIT_COMPASSO, AGENDA] for s in TURMAS_COM_KIT},
     **{t: [LEITURA_PAIS_INFANTIL] for t in ("infantil-ii", "infantil-iii", "infantil-iv", "infantil-v")},
     "4-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
-    "5-ano": [KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LEITURAS_PAIS_4_5_ANO],
+    "5-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
     "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
     "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
     "8-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_8_ANO, LIVROS_8_9_ANO],
