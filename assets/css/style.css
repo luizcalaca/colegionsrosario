@@ -738,3 +738,14 @@ a.link-contato:focus-visible,
   .abas, .site-header, .site-footer, .cta-band { display: none !important; }
   .js .aba-painel:not(.is-ativo) { display: none; }
 }
+
+/* Artigos: lista de referências */
+.artigos { list-style: none; margin: 2rem 0 0; padding: 0; counter-reset: artigo; }
+.artigo { position: relative; padding: 0 0 1.8rem 3rem; margin-bottom: 1.8rem; border-bottom: 1px solid rgba(11,27,63,.12); counter-increment: artigo; }
+.artigo:last-child { border-bottom: 0; margin-bottom: 0; padding-bottom: 0; }
+.artigo::before {
+  content: counter(artigo, lower-alpha) ")"; position: absolute; left: 0; top: 0;
+  font-family: var(--serif); font-size: 1.25rem; color: var(--gold-500);
+}
+.artigo-titulo { font-family: var(--serif); font-size: 1.25rem; line-height: 1.35; color: var(--navy-800); margin: 0 0 .5rem; }
+.artigo-ref { margin: 0; font-size: .95rem; color: var(--ink-soft); }

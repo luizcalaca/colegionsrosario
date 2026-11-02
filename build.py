@@ -71,6 +71,7 @@ NAV = [
         ("Equipe Docente", "equipe-docente.html"),
         ("Regimento Escolar", "regimento-escolar.html"),
         ("Lista de Materiais", "lista-de-materiais.html"),
+        ("Artigos", "artigos.html"),
     ]),
     ("Ensino", None, [
         ("Educação Infantil", "ensino-infantil.html"),
@@ -587,6 +588,42 @@ PAGES["equipe-docente.html"] = dict(
             ]
         )
         + "</tbody></table></div>"
+    )
+    + CTA,
+)
+
+# ---- Artigos -------------------------------------------------------------
+ARTIGOS = [
+    ("O modelo de educação básica da Coreia do Sul: lições para o Brasil no século XXI",
+     "Revista de Geopolítica", " 16.5 (2025): e1143-e1143."),
+    ("Modelagem estocástica e aprendizado de máquina: integração entre estatística, matemática e "
+     "computação na previsão de cenários complexos",
+     "Anais Eventos", " (2025)."),
+    ("Tecnologia, individualismo e vínculos sociais: uma análise filosófica e ética sobre os impactos "
+     "da era digital na humanidade",
+     "Anais Eventos", " (2025)."),
+    ("Crises de segurança no ENEM: consequências pedagógicas, sociais e institucionais dos vazamentos",
+     "Aracê", ", v. 7, n. 12, p. e10899, 10 dez. 2025."),
+]
+_artigos_itens = "".join(
+    f'<li class="artigo"><p class="artigo-titulo">{t}</p>'
+    f'<p class="artigo-ref">Silva, Luiz Fernando Calaça, et al. <em>{rev}</em>{dados}</p></li>'
+    for t, rev, dados in ARTIGOS
+)
+
+PAGES["artigos.html"] = dict(
+    title=f"Artigos — O Colégio — {SCHOOL}",
+    description="Artigos acadêmicos de Luiz Fernando Calaça Silva e coautores sobre educação, "
+    "tecnologia, filosofia e matemática.",
+    body=page_hero(
+        "Artigos",
+        "Produção acadêmica de Luiz Fernando Calaça Silva e coautores.",
+        '<a href="historia.html">O Colégio</a> &nbsp;/&nbsp; Artigos',
+    )
+    + section(
+        '<div class="reveal" style="max-width:74ch;margin-inline:auto">'
+        '<p class="eyebrow">Publicações</p><h2>Artigos publicados</h2><hr class="rule">'
+        f'<ol class="artigos">{_artigos_itens}</ol></div>'
     )
     + CTA,
 )
@@ -3036,8 +3073,7 @@ LEITURAS_PAIS_6_7_ANO = ("Sugestões de leituras para a formação dos pais", [
     ("Psicologia da Fé — Leonel Franca", None),
     ("A Educação dos Filhos — Álvaro Negromonte", None),
 ])
-LEITURA_PIAZZI = ("Estimulando a Inteligência — Pierluigi Piazzi, Editora Aleph (os pais podem ler em casa; "
-                  "o livro não será trabalhado em aula)", None)
+LEITURA_PIAZZI = ("Estimulando a Inteligência — Pierluigi Piazzi, Editora Aleph", None)
 LEITURAS_PAIS_1_3_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [LEITURA_PIAZZI])
 LEITURAS_PAIS_4_5_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [
     ("A Educação da Sexualidade — Álvaro Negromonte", None),
