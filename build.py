@@ -2228,6 +2228,7 @@ TURMAS_LISTA = [
     ("7-ano", "7º ano"),
     ("8-ano", "8º ano"),
     ("9-ano", "9º ano"),
+    ("1-em", "1º ano do Ensino Médio"),
 ]
 
 
@@ -3002,9 +3003,16 @@ LITERARIOS_8_ANO = _literarios_6_7_ano({
 LITERARIOS_9_ANO = _literarios_6_7_ano({
     1: ["O Estado Servil (edição em português) — Hilaire Belloc"],
     2: ["A Oração de Santo Afonso"],
-    3: ["Caderno de Educação Financeira — Banco Central do Brasil"],
+    3: ["Caderno de Educação Financeira — Banco Central do Brasil e "
+        "Manual de Empresas Familiares — Harvard Business Review"],
     4: ["História da Literatura Ocidental — Otto Maria Carpeaux"],
-}, "Filosofia da Economia")
+}, "Filosofia da Economia, Educação Financeira prática, Religião e História da Literatura")
+LITERARIOS_1_EM = ("Livros literários (autores)", [
+    ("Luís de Camões: analisado de forma quase cirúrgica na métrica e na gramática", None),
+    ("Padre Antônio Vieira: sermões", None),
+    ("Autores goianos: Hugo de Carvalho Ramos (a obra <em>Tropas e Boiadas</em>), Bernardo Élis, "
+     "José J. Veiga e outros", None),
+])
 LIVROS_8_9_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
     ("Constituição da República Federativa do Brasil (Filosofia do Direito)", None),
@@ -3046,6 +3054,7 @@ SECOES_FIXAS = {
     "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
     "8-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_8_ANO, LIVROS_8_9_ANO],
     "9-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_9_ANO, LIVROS_8_9_ANO],
+    "1-em": [LITERARIOS_1_EM],
 }
 
 
@@ -3088,7 +3097,7 @@ def _pagina_lista_materiais():
     return (
         page_hero(
             "Lista de Materiais",
-            "Material escolar 2027, turma por turma — do Berçário ao 9º ano.",
+            "Material escolar 2027, turma por turma — do Berçário ao 1º ano do Ensino Médio.",
             '<a href="historia.html">O Colégio</a> &nbsp;/&nbsp; Lista de Materiais',
         )
         + section(
@@ -3102,7 +3111,7 @@ def _pagina_lista_materiais():
 
 PAGES["lista-de-materiais.html"] = dict(
     title=f"Lista de Materiais 2027 — O Colégio — {SCHOOL}",
-    description="Lista de material escolar 2027 por turma, do Berçário ao 9º ano do Ensino Fundamental.",
+    description="Lista de material escolar 2027 por turma, do Berçário ao 1º ano do Ensino Médio.",
     body=_pagina_lista_materiais(),
 )
 
