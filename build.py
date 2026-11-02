@@ -3002,6 +3002,8 @@ LITERARIOS_8_ANO = _literarios_6_7_ano({
 LITERARIOS_9_ANO = _literarios_6_7_ano({
     1: ["O Estado Servil (edição em português) — Hilaire Belloc"],
     2: ["A Oração de Santo Afonso"],
+    3: ["Caderno de Educação Financeira — Banco Central do Brasil"],
+    4: ["História da Literatura Ocidental — Otto Maria Carpeaux"],
 }, "Filosofia da Economia")
 LIVROS_8_9_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
