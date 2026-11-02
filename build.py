@@ -2999,14 +2999,15 @@ LITERARIOS_8_ANO = _literarios_6_7_ano({
     3: ["A Formação das Almas: o imaginário da República no Brasil (edição em português) — José Murilo de Carvalho"],
     4: ["Discursos clássicos selecionados: Oração Fúnebre de Péricles (431 a.C.), A Apologia de Sócrates "
         "(399 a.C.), O Discurso de Carataco perante o Imperador Cláudio (51 d.C.), dentre outros"],
-}, "Retórica, Política e História")
+}, "Retórica, Política, História e Oratória Poética")
 LITERARIOS_9_ANO = _literarios_6_7_ano({
     1: ["O Estado Servil (edição em português) — Hilaire Belloc"],
     2: ["A Oração de Santo Afonso"],
     3: ["Caderno de Educação Financeira — Banco Central do Brasil e "
         "Manual de Empresas Familiares — Harvard Business Review"],
     4: ["História da Literatura Ocidental — Otto Maria Carpeaux"],
-}, "Filosofia da Economia, Educação Financeira prática, Religião e História da Literatura")
+}, "Filosofia da Economia, Educação Financeira prática, Religião, História da Literatura, "
+   "Economia Política, Administração Pública e Comércio")
 LITERARIOS_1_EM = ("Livros literários (autores)", [
     ("Luís de Camões: analisado de forma quase cirúrgica na métrica e na gramática", None),
     ("Padre Antônio Vieira: sermões", None),
