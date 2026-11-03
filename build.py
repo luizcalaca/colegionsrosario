@@ -2789,8 +2789,8 @@ def lista_2_ano():
         ("Livros literários", [
             ("O Livro das Virtudes para crianças — Michael Bennett", "1º bimestre"),
             ("Uma casa na floresta — Laura Ingalls Wilder", "2º bimestre"),
-            ("As Crianças do Vagão — Gertrude Chandler Warner", "3º bimestre"),
-            ("A teia de Charlotte — E. B. White", "4º bimestre"),
+            ("Contos morais — Arnaldo Barreto", "3º bimestre"),
+            ("O pequeno peregrino ilustrado (edição de luxo, capa dura) — Helen L. Taylor", "4º bimestre"),
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
@@ -2925,7 +2925,7 @@ def lista_4_ano():
             ("Os Lusíadas para crianças — Martins Fontes", "1º bimestre"),
             ("As aventuras de Odisseu — Hugh Lupton", "2º bimestre"),
             ("A Amizade — Cícero / Lafonte", "3º bimestre"),
-            ("Os três mosqueteiros — Alexandre Dumas / Companhia das Letrinhas", "4º bimestre"),
+            ("No Coração da Floresta — Emily Winfield Martin e Viviane Diniz", "4º bimestre"),
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
