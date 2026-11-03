@@ -2642,7 +2642,7 @@ def lista_5_ano():
         ("Livros literários", [
             ("Dom Quixote em quadrinhos — L&PM", "1º bimestre"),
             ("História de uma alma — Editora Vozes", "2º bimestre"),
-            ("Categorias — Aristóteles. Edipro", "3º bimestre"),
+            ("O Mágico de Oz (edição bolso de luxo, capa dura, mais de 50 ilustrações) — L. Frank Baum", "3º bimestre"),
             ("O mito da caverna — Edipro", "4º bimestre"),
             ("The Secret Garden — Inglês", None),
         ], "Período"),
