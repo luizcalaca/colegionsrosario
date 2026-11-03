@@ -2498,14 +2498,13 @@ def lista_infantil_v():
             ("Papel crepom — azul escuro, verde, vermelho e amarelo (um de cada)", "4 unidades"),
             ("Tinta guache 6 cores", "2 caixas"),
             ("Papel colorido Creative Paper A4, 75 g/m²", "4 unidades"),
-            ("Jogo de letras em madeira, mínimo de 80 peças", "1 caixa"),
         ]),
         ("Para manter na mochila de uso diário", [
             ("Troca de roupa de acordo com as normas do colégio", "1 unidade"),
             ("Garrafinha para beber água (sem personagens)", "1 unidade"),
             ("Escova de dentes e creme dental", "1 unidade"),
             ("Lancheira sem personagens de TV, cinema ou times de futebol", "1 unidade"),
-            ("Lenço de papel — 100 unidades", "1 pacote"),
+            ("Lenço umedecido", "1 pacote"),
             ("Sacos plásticos 5 kg (para enviar roupas sujas)", "1 unidade"),
             ("Necessaire pequena para o kit de escovação", "2 unidades"),
             ("Toalha para o lanche (manter na lancheira)", "4 unidades"),
@@ -3066,7 +3065,7 @@ ESCRITA_6_7_ANO = ("Escrita e uso diário", [
     ("Cola branca", "2 tubos"),
     ("Caixa de lápis de cor de 24 cores", "1 caixa"),
     ("Canetinhas hidrográficas", "1 conjunto"),
-    ("Caderno de 96 folhas", "10 unidades"),
+    ("Caderno de 96 folhas — se o aluno ou a família preferir, em vez dos 10 cadernos pode ser adotado o fichário", "10 unidades"),
 ])
 LEITURAS_PAIS_6_7_ANO = ("Sugestões de leituras para a formação dos pais", [
     ("A Formação Religiosa da Juventude — Mons. Tihamer Toth", None),
