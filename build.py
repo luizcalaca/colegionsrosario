@@ -2923,7 +2923,7 @@ def lista_4_ano():
         ]),
         ("Livros literários", [
             ("Os Lusíadas para crianças — Martins Fontes", "1º bimestre"),
-            ("As aventuras de Odisseu — Hugh Lupton", "2º bimestre"),
+            ("Os mais belos contos de Grimm (capa dura) — Wilhelm Carl Grimm / Faro Editorial", "2º bimestre"),
             ("A Amizade — Cícero / Lafonte", "3º bimestre"),
             ("No Coração da Floresta — Emily Winfield Martin e Viviane Diniz", "4º bimestre"),
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
