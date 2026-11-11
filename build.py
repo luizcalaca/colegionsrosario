@@ -2647,7 +2647,7 @@ def lista_5_ano():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
-            ("Catecismo de São Pio X", None),
+            ("Catecismo de São Pio X — Editora América", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2720,7 +2720,7 @@ def lista_3_ano():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
-            ("Catecismo de São Pio X", None),
+            ("Catecismo de São Pio X — Editora América", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2794,7 +2794,7 @@ def lista_2_ano():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
-            ("Catecismo de São Pio X", None),
+            ("Catecismo de São Pio X — Editora América", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2861,7 +2861,7 @@ def lista_1_ano():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
-            ("Catecismo de São Pio X", None),
+            ("Catecismo de São Pio X — Editora América", None),
         ]),
     ]
 
@@ -2929,7 +2929,7 @@ def lista_4_ano():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
-            ("Catecismo de São Pio X", None),
+            ("Catecismo de São Pio X — Editora América", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -3050,7 +3050,7 @@ LIVROS_8_9_ANO = ("Livros didáticos e paradidáticos", [
 ])
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
-    ("Catecismo de São Pio X", None),
+    ("Catecismo de São Pio X — Editora América", None),
     ("Constituição da República Federativa do Brasil (Filosofia do Direito)", None),
 ])
 ESCRITA_6_7_ANO = ("Escrita e uso diário", [
@@ -3090,6 +3090,13 @@ SECOES_FIXAS = {
     "9-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_9_ANO, LIVROS_8_9_ANO],
     "1-em": [LITERARIOS_1_EM],
 }
+# Item para a Missa: Infantil III (3 anos) em diante, até o 1º ano do Ensino Médio.
+PARA_A_MISSA = ("Para a Missa", [
+    ("Véu branco (não obrigatório) para a Missa, exclusivamente para as meninas", None),
+])
+for _slug in ("infantil-iii", "infantil-iv", "infantil-v", "1-em",
+              *(s for s, _ in TURMAS_LISTA if s.endswith("-ano"))):
+    SECOES_FIXAS[_slug] = SECOES_FIXAS.get(_slug, []) + [PARA_A_MISSA]
 
 
 def _painel_lista(slug, nome):
