@@ -2714,7 +2714,7 @@ def lista_3_ano():
         ("Livros literários", [
             ("O Pequeno Príncipe — Antoine de Saint-Exupéry (no original, em francês)", "1º bimestre"),
             ("O Rei Artur (nova edição) e os cavaleiros da Távola Redonda", "2º bimestre"),
-            ("Um conto de Natal — Charles Dickens", "3º bimestre"),
+            ("Um conto de Natal — Charles Dickens (edição integral com ilustrações originais) / Edipro", "3º bimestre"),
             ("O pequeno fazendeiro — Laura Ingalls Wilder", "4º bimestre"),
             ("Devotionarium: orações cotidianas — Editora Ecclesiae", None),
         ], "Período"),
