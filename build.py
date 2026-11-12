@@ -3116,6 +3116,10 @@ for _slug in ("infantil-iii", "infantil-iv", "infantil-v", "1-em",
     SECOES_FIXAS[_slug] = SECOES_FIXAS.get(_slug, []) + [PARA_A_MISSA]
 
 
+# Turmas cujas seções fixas já formam a lista: dispensam o aviso "Lista em preparação".
+SEM_AVISO_EM_PREPARACAO = {"6-ano", "7-ano"}
+
+
 def _painel_lista(slug, nome):
     secoes = list(LISTAS_MATERIAL.get(slug, []))
     kit = SECOES_FIXAS.get(slug, [])
@@ -3126,7 +3130,7 @@ def _painel_lista(slug, nome):
         "<li>Ao longo do ano letivo, os professores poderão solicitar outros materiais "
         "e/ou livros literários.</li></ul>"
     )
-    if secoes:
+    if secoes or slug in SEM_AVISO_EM_PREPARACAO:
         conteudo = nota + "".join(_tabela_lista(*sec) for sec in secoes + kit)
     else:
         conteudo = (
