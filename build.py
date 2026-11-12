@@ -2659,6 +2659,7 @@ def lista_5_ano():
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
             ("Catecismo de São Pio X — Editora América", None),
+            ("Bíblia do Peregrino (Antigo e Novo Testamento)", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -2939,6 +2940,7 @@ def lista_4_ano():
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
             ("Catecismo de São Pio X — Editora América", None),
+            ("Bíblia do Peregrino (Antigo e Novo Testamento)", None),
             ("Pequeno dicionário Houaiss da língua portuguesa", None),
             ("Dicionário Oxford escolar para estudantes brasileiros de inglês", None),
             ("Michaelis dicionário escolar francês", None),
@@ -3026,7 +3028,7 @@ LITERARIOS_6_ANO = _literarios_6_7_ano({
 LITERARIOS_7_ANO = _literarios_6_7_ano({
     1: ["A Moça de Caráter (3ª edição) — Monsenhor Tihamer Toth (para as meninas)",
         "O Moço de Caráter — Monsenhor Tihamer Toth (para os meninos)"],
-    2: ["Órganon — Aristóteles, tradução e edição de Edson Bini, Editora Edipro"],
+    2: ["Sherlock Holmes ilustrado: Os três estudantes — Arthur Conan Doyle"],
     3: ["As boas maneiras: regras de convívio e elegância para jovens de hoje — Juan Narbona"],
     4: ["A História da Música — Otto Maria Carpeaux"],
 }, "Cortesia, Civilidade, Psicologia, Música, Religião e Lógica")
@@ -3056,10 +3058,12 @@ LIVROS_8_9_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
     ("Constituição da República Federativa do Brasil (Filosofia do Direito)", None),
     ("Código Civil brasileiro", None),
+    ("Bíblia do Peregrino (Antigo e Novo Testamento)", None),
 ])
 LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     LIVROS_NA_SECRETARIA,
     ("Catecismo de São Pio X — Editora América", None),
+    ("Bíblia do Peregrino (Antigo e Novo Testamento)", None),
     ("Constituição da República Federativa do Brasil (Filosofia do Direito)", None),
 ])
 ESCRITA_6_7_ANO = ("Escrita e uso diário", [
