@@ -3022,7 +3022,7 @@ LITERARIOS_7_ANO = _literarios_6_7_ano({
     4: ["A História da Música — Otto Maria Carpeaux"],
 }, "Psicologia, Música, Religião e Lógica")
 LITERARIOS_8_ANO = _literarios_6_7_ano({
-    1: ["Retórica — Aristóteles, Editora Edipro"],
+    1: ["Como ler livros — Charles Van Doren e Mortimer J. Adler"],
     2: ["Retórica Clássica para o Estudante Moderno — Edward P. J. Corbett"],
     3: ["A Formação das Almas: o imaginário da República no Brasil (edição em português) — José Murilo de Carvalho"],
     4: ["Discursos clássicos selecionados: Oração Fúnebre de Péricles (431 a.C.), A Apologia de Sócrates "
