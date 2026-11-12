@@ -2369,9 +2369,9 @@ def lista_infantil_ii():
         ]),
         ("Livros literários", [
             ("Fábulas de Esopo para os Pitiquinhos — João & Maria Editora", "1º bimestre"),
-            ("Ursinhos Sonhadores", "2º bimestre"),
-            ("Os Brinquedos da Vó Genoveva", "3º bimestre"),
-            ("Trem de Ferro", "4º bimestre"),
+            ("Ursinhos Sonhadores — João & Maria Editora", "2º bimestre"),
+            ("Os Brinquedos da Vó Genoveva — João & Maria Editora", "3º bimestre"),
+            ("Trem de Ferro — João & Maria Editora", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
@@ -2585,10 +2585,10 @@ def lista_infantil_iv():
             ("Lenço de papel (100 folhas)", "1 caixa"),
         ]),
         ("Livros literários", [
-            ("Trem de Ferro, Trem de Sonho", "1º bimestre"),
-            ("Meus Primeiros Poemas Ilustrados", "2º bimestre"),
-            ("A Casa Velha de Pedro", "3º bimestre"),
-            ("Estações Brasileiras", "4º bimestre"),
+            ("Fábulas de Esopo para os Pitiquinhos — João & Maria Editora", "1º bimestre"),
+            ("Meus Primeiros Poemas Ilustrados — João & Maria Editora", "2º bimestre"),
+            ("A Casa Velha de Pedro — João & Maria Editora", "3º bimestre"),
+            ("Estações Brasileiras — João & Maria Editora", "4º bimestre"),
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
@@ -2612,6 +2612,9 @@ def lista_5_ano():
             ("Caderno 50 folhas para História — capa amarela ou encapado com plástico amarelo", "1 unidade"),
             ("Caderno 50 folhas para Geografia — capa amarela ou encapado com plástico amarelo", "1 unidade"),
             ("Caderno 50 folhas para Matemática, quadriculado — capa amarela ou encapado com plástico amarelo", "1 unidade"),
+            ("Caderno 48 folhas para Artes", "1 unidade"),
+            ("Caderno 48 folhas para Ciências", "1 unidade"),
+            ("Caderno 98 folhas para Inglês", "1 unidade"),
             ("Pasta plástica fina com elástico, tamanho A4, na cor amarela", "1 unidade"),
             ("Caixa organizadora de plástico duro e transparente, 10 L. Para veteranos, reutilizar a do ano "
              "anterior", "1 unidade"),
