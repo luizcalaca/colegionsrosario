@@ -3078,7 +3078,9 @@ ESCRITA_6_7_ANO = ("Escrita e uso diário", [
     ("Cola branca", "2 tubos"),
     ("Caixa de lápis de cor de 24 cores", "1 caixa"),
     ("Canetinhas hidrográficas", "1 conjunto"),
-    ("Caderno de 96 folhas — se o aluno ou a família preferir, em vez dos 10 cadernos pode ser adotado o fichário", "10 unidades"),
+    ("Caderno de 96 folhas — se o aluno ou a família preferir, em vez dos 10 cadernos pode ser adotado o "
+     "fichário. Cadernos e fichário devem ser neutros, sem temáticas de personagens ou estampas do gênero",
+     "10 unidades"),
 ])
 LEITURAS_PAIS_6_7_ANO = ("Sugestões de leituras para a formação dos pais", [
     ("A Formação Religiosa da Juventude — Mons. Tihamer Toth", None),
