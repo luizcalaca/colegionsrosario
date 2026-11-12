@@ -3018,7 +3018,7 @@ LITERARIOS_7_ANO = _literarios_6_7_ano({
     1: ["A Moça de Caráter (3ª edição) — Monsenhor Tihamer Toth (para as meninas)",
         "O Moço de Caráter — Monsenhor Tihamer Toth (para os meninos)"],
     2: ["Órganon — Aristóteles, tradução e edição de Edson Bini, Editora Edipro"],
-    3: ["Os Temperamentos: conhece-te a ti mesmo — Conrad Hock"],
+    3: ["As boas maneiras: regras de convívio e elegância para jovens de hoje — Juan Narbona"],
     4: ["A História da Música — Otto Maria Carpeaux"],
 }, "Psicologia, Música, Religião e Lógica")
 LITERARIOS_8_ANO = _literarios_6_7_ano({
