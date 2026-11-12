@@ -2328,8 +2328,10 @@ def lista_infantil_ii():
             ("Avental plástico para aulas de pintura (sem personagens estampados no avental)", "1 unidade"),
             ("Brinquedo pedagógico adequado à idade (alinhavo, encaixe, blocos, quebra-cabeça)", "2 unidades"),
             ("Caderno de desenho grande, de 100 folhas, com capa na cor amarela, ou encapado com plástico amarelo", "1 unidade"),
-            ("Caderno 50 folhas com pauta — capa amarela", "1 unidade"),
             ("Caixa organizadora, de plástico duro, transparente, tamanho médio (20 L), com tampa", "1 caixa"),
+            ("2 chocalhos ovinho percussão"
+             '<img class="item-foto" src="assets/img/chocalho-ovinho-percussao.png" width="360" height="245" '
+             'alt="Dois chocalhos ovinho de percussão, na cor lilás" loading="lazy">', None),
             ("Cola branca lavável, 1 kg", "1 unidade"),
             ("Fita crepe", "2 rolos"),
             ("Fósforo (pequeno)", "1 unidade"),
@@ -2338,6 +2340,7 @@ def lista_infantil_ii():
              "da mochila diariamente uma troca completa de roupas (roupas de acordo com as normas do colégio)",
              "1 unidade"),
             ("Massinha de modelar atóxica — kit com 10 potes", "2 kits"),
+            ("Massa de modelar", "2 potes de 500 g"),
             ("Palito de sorvete colorido", "1 pacote"),
             ("Papel colorido (“creative paper”), tamanho A4, 75 g/m²", "50 folhas"),
             ("Papel crepom colorido — verde e amarelo", "2 rolos"),
@@ -2385,7 +2388,7 @@ def lista_infantil_iii():
             ("Apontadores plásticos para lápis tamanho Jumbo — com depósito", "2 unidades"),
             ("Avental plástico para as aulas de pintura, sem personagens de televisão, cinema ou times de "
              "futebol estampados", "1 unidade"),
-            ("Bexigas coloridas", "3 pacotes"),
+            ("Bexigas coloridas", "2 pacotes"),
             ("Brinquedo pedagógico: bloco de montagem, alinhavo, quebra-cabeça, sem personagens de televisão, "
              "cinema ou times de futebol estampados", "2 unidades"),
             ("Caderno de desenho grande (Meu primeiro Canson A4 de 140 g/m²), com 40 folhas, com capa inteira "
@@ -2399,8 +2402,8 @@ def lista_infantil_iii():
             ("Cola colorida (com 6 cores)", "1 caixa"),
             ("Estojo com duas divisórias, sem personagens de televisão, cinema ou times de futebol estampados",
              "1 unidade"),
-            ("Fita durex larga", "2 unidades"),
-            ("Fita crepe larga", "2 unidades"),
+            ("Fita durex larga", "1 unidade"),
+            ("Fita crepe larga", "1 unidade"),
             ("Fósforo (pequeno)", "1 caixinha"),
             ("Lápis de cor, tamanho Jumbo — com 12 cores cada caixa (como o da marca Tris)", "4 caixas"),
             ("Lápis preto, tamanho Jumbo, corpo triangular", "4 unidades"),
@@ -2408,6 +2411,9 @@ def lista_infantil_iii():
              "suficientes para comportarem apostilas e pasta tamanho A4", "1 unidade"),
             ("Massa para modelar (preferencialmente modelo soft, como a da marca Uti Guti) — com 6 cores cada",
              "6 caixas"),
+            ("1 pandeiro pandeirola meia lua com platinelas em aço preta"
+             '<img class="item-foto" src="assets/img/pandeirola-meia-lua.png" width="370" height="440" '
+             'alt="Pandeirola meia-lua preta com platinelas em aço" loading="lazy">', None),
             ("Palito de sorvete coloridos", "1 pacote"),
             ("Papel colorido (“creative paper”), tamanho A4, 75 g/m²", "50 folhas"),
             ("Papel crepom (amarelo, marrom, verde, azul e vermelho)", "2 unidades"),
@@ -2458,15 +2464,14 @@ def lista_infantil_v():
     return [
         ("Material", [
             ("Avental plástico, sem personagem de TV, cinema ou times de futebol estampados", "1 unidade"),
-            ("Bexigas coloridas", "2 pacotes"),
+            ("Bexigas coloridas", "1 unidade"),
             ("Borrachas grandes, brancas e macias", "4 unidades"),
             ("Apontador de plástico para lápis, com depósito", "4 unidades"),
-            ("Brinquedo pedagógico — pote de letras e números, plástico", "1 unidade"),
             ("Pasta plástica grossa com elástico, na cor vermelha, A4", "1 unidade"),
             ("Caderno brochura grande, 100 folhas — capa dura vermelha ou quadriculado vermelho", "1 unidade"),
             ("Caderno brochura pequeno (ficar na mochila), 48 folhas — capa dura vermelha", "1 unidade"),
             ("Pasta plástica fina com elástico, tamanho A4, na cor vermelha (ficar na mochila)", "1 unidade"),
-            ("Cola branca líquida", "3 unidades"),
+            ("Cola branca líquida", "1 unidade grande"),
             ("Cola bastão", "5 unidades"),
             ("Caixa organizadora de plástico duro e transparente, 20 L. Para alunos veteranos, reutilizar as "
              "caixas já adquiridas.", "1 unidade"),
@@ -2491,13 +2496,16 @@ def lista_infantil_v():
             ("Material Dourado, mínimo de 111 peças", "1 caixa"),
             ("Paleta ou godê (plástico)", "1 unidade"),
             ("Flauta doce barroca", "1 unidade"),
-            ("Ábaco", "1 unidade"),
+            ("Metalofone de madeira e teclas de aço"
+             '<img class="item-foto" src="assets/img/metalofone-madeira-aco.png" width="401" height="407" '
+             'alt="Metalofone de madeira com teclas de aço coloridas e duas baquetas" loading="lazy">',
+             "1 unidade"),
             ("Canetinhas 12 cores", "1 pacote"),
             ("E.V.A — azul escuro, verde, amarelo, preto e branco (um de cada)", "4 unidades"),
             ("E.V.A com glitter — laranja e vermelho (um de cada)", "2 unidades"),
             ("Papel crepom — azul escuro, verde, vermelho e amarelo (um de cada)", "4 unidades"),
             ("Tinta guache 6 cores", "2 caixas"),
-            ("Papel colorido Creative Paper A4, 75 g/m²", "4 unidades"),
+            ("Papel colorido Creative Paper A4, 75 g/m²", "1 pacote com 24 folhas"),
         ]),
         ("Para manter na mochila de uso diário", [
             ("Troca de roupa de acordo com as normas do colégio", "1 unidade"),
@@ -2559,6 +2567,9 @@ def lista_infantil_iv():
             ("Papel crepom (azul, verde, vermelho, amarelo e roxo)", "2 unidades"),
             ("Tesoura pequena e sem ponta (preferencialmente Tramontina ou Mundial)", "2 unidades"),
             ("Xilofone musical de madeira, 8 tons — Musicalização", "1 unidade"),
+            ("1 par de castanhola de madeira percussão"
+             '<img class="item-foto" src="assets/img/castanhola-madeira.png" width="401" height="315" '
+             'alt="Par de castanholas de madeira para percussão" loading="lazy">', None),
             ("Tinta guache (6 cores)", "1 caixa"),
             ("Papel 180 g para desenho (Canson)", "20 folhas"),
             ("Tela de pintura 10x15", "1 unidade"),
@@ -2664,16 +2675,14 @@ def lista_3_ano():
              "1 unidade"),
             ("Borrachas grandes, brancas e macias", "4 unidades"),
             ("Apontador de plástico para lápis, com depósito", "2 unidades"),
-            ("Caderno brochura grande, capa dura, 50 folhas, pauta normal, com capa na cor azul ou encapado "
-             "com plástico quadriculado azul — fazer margem (Inglês, Ciências etc.)", "5 unidades"),
             ("Caderno brochura grande, capa dura, 100 folhas, pauta normal, capa azul ou encapado com plástico "
-             "quadriculado azul — fazer margem (Português, História e Geografia)", "2 unidades"),
+             "quadriculado azul — fazer margem (Português, Inglês e Francês)", "3 unidades"),
+            ("Caderno brochura grande, capa dura, 50 folhas, pauta normal, com capa na cor azul ou encapado "
+             "com plástico quadriculado azul — fazer margem (Artes, Ensino Religioso, Ciências, História e "
+             "Geografia)", "5 unidades"),
             ("Pasta plástica fina com elástico, tamanho A4, na cor azul (ficar na mochila)", "1 unidade"),
             ("Caderno brochura grande, capa dura, quadriculado, 100 folhas — Matemática", "1 unidade"),
-            ("Caderno 48 folhas para Francês", "1 unidade"),
-            ("Caderno 48 folhas para Artes", "1 unidade"),
-            ("Caderno 48 folhas para Ensino Religioso", "1 unidade"),
-            ("Caderno 48 folhas para Música, com pauta", "1 unidade"),
+            ("Caderno de música (pentagrama)", "1 unidade"),
             ("Caixa organizadora de plástico duro e transparente, 10 L. Para veteranos, reutilizar a do ano "
              "anterior", "1 unidade"),
             ("Cola branca líquida lavável, pequena (que caiba no estojo)", "5 unidades"),
@@ -2702,7 +2711,7 @@ def lista_3_ano():
             ("Bastão de cola quente fino", "5 unidades"),
             ("Papel vegetal", "5 folhas"),
             ("Pasta preta com ferragem, com plástico grosso, tamanho ofício — Música", "1 unidade"),
-            ("Barbante", "1 unidade"),
+            ("Barbante", "1 rolo"),
         ]),
         ("Para higiene", [
             ("Copo com tampa ou garrafa de plástico para beber água (sem personagens)", "1 unidade"),
@@ -3020,7 +3029,7 @@ LITERARIOS_7_ANO = _literarios_6_7_ano({
     2: ["Órganon — Aristóteles, tradução e edição de Edson Bini, Editora Edipro"],
     3: ["As boas maneiras: regras de convívio e elegância para jovens de hoje — Juan Narbona"],
     4: ["A História da Música — Otto Maria Carpeaux"],
-}, "Psicologia, Música, Religião e Lógica")
+}, "Cortesia, Civilidade, Psicologia, Música, Religião e Lógica")
 LITERARIOS_8_ANO = _literarios_6_7_ano({
     1: ["Como ler livros — Charles Van Doren e Mortimer J. Adler"],
     2: ["Retórica Clássica para o Estudante Moderno — Edward P. J. Corbett"],
@@ -3078,14 +3087,18 @@ LEITURAS_PAIS_4_5_ANO = (LEITURAS_PAIS_6_7_ANO[0], LEITURAS_PAIS_6_7_ANO[1] + [
     ("A Educação da Sexualidade — Álvaro Negromonte", None),
     LEITURA_PIAZZI,
 ])
+# Instrumento de Música de cada fase do Fundamental.
+MUSICA_1_3_ANO = ("Música", [("Flauta soprano germânica", "1 unidade")])
+MUSICA_4_5_ANO = ("Música", [("Metalofone 12 notas, marca Concert", "1 unidade")])
+MUSICA_6_7_ANO = ("Música", [("Escaleta 32 teclas", "1 unidade")])
 SECOES_FIXAS = {
     **{s: [KIT_COMPASSO, AGENDA] for s in TURMAS_COM_KIT},
-    **{t: [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_1_3_ANO] for t in ("1-ano", "2-ano", "3-ano")},
+    **{t: [KIT_COMPASSO, AGENDA, MUSICA_1_3_ANO, LEITURAS_PAIS_1_3_ANO] for t in ("1-ano", "2-ano", "3-ano")},
     **{t: [LEITURA_PAIS_INFANTIL] for t in ("infantil-ii", "infantil-iii", "infantil-iv", "infantil-v")},
-    "4-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
-    "5-ano": [KIT_COMPASSO, AGENDA, LEITURAS_PAIS_4_5_ANO],
-    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
-    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
+    "4-ano": [KIT_COMPASSO, AGENDA, MUSICA_4_5_ANO, LEITURAS_PAIS_4_5_ANO],
+    "5-ano": [KIT_COMPASSO, AGENDA, MUSICA_4_5_ANO, LEITURAS_PAIS_4_5_ANO],
+    "6-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, MUSICA_6_7_ANO, LITERARIOS_6_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
+    "7-ano": [ESCRITA_6_7_ANO, KIT_COMPASSO, ROBOTICA_STEAM, AGENDA, MUSICA_6_7_ANO, LITERARIOS_7_ANO, LIVROS_6_7_ANO, LEITURAS_PAIS_6_7_ANO],
     "8-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_8_ANO, LIVROS_8_9_ANO],
     "9-ano": [KIT_COMPASSO, AGENDA, LITERARIOS_9_ANO, LIVROS_8_9_ANO],
     "1-em": [LITERARIOS_1_EM],
