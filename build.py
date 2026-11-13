@@ -2376,7 +2376,6 @@ def lista_infantil_ii():
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
             ("Material próprio do colégio — pagar à parte na secretaria", None),
-            ("Sineta (sino de mão) — Musicalização", None),
         ]),
     ]
 
@@ -2455,7 +2454,6 @@ def lista_infantil_iii():
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
             ("Apostila de Coordenação Motora — adquirir no colégio", None),
-            ("Clave Pinus em madeira infantil (Liverpool) — Musicalização", None),
         ]),
     ]
 
@@ -2527,7 +2525,6 @@ def lista_infantil_v():
         ]),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
-            ("Flauta doce barroca", None),
         ]),
     ]
 
@@ -2593,7 +2590,6 @@ def lista_infantil_iv():
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
             ("Alfabetização Fônica: construindo competências de leitura e escrita — Pearson", None),
-            ("Xilofone Vanguarda 8 notas", None),
             ("Santa Missa Ilustrada", None),
         ]),
     ]
