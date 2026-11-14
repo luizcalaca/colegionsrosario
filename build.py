@@ -8,9 +8,17 @@ Uso: python3 build.py  (regrava os arquivos .html na raiz do projeto)
 
 import os
 import re
+import sys
 from urllib.parse import quote_plus, quote
 import hashlib
 import unicodedata
+
+# Gerador de PDF (tools/minipdf.py e tools/lista_pdf.py). Sem isso o Python
+# deixaria tools/__pycache__ no repositório, e o CI confere que o build não
+# sujou a árvore.
+sys.dont_write_bytecode = True
+sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "tools"))
+import lista_pdf
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SITE_URL = "https://colegionsrosario.com.br"
@@ -3121,18 +3129,52 @@ for _slug in ("infantil-iii", "infantil-iv", "infantil-v", "1-em",
 SEM_AVISO_EM_PREPARACAO = {"6-ano", "7-ano"}
 
 
+# Avisos do alto de cada lista — compartilhados pela página e pelo PDF.
+NOTAS_LISTA = [
+    "<strong>Coloque o nome do aluno em todos os materiais</strong>, principalmente "
+    "os de uso pessoal (borracha, lápis, garrafa d’água etc.).",
+    "Ao longo do ano letivo, os professores poderão solicitar outros materiais "
+    "e/ou livros literários.",
+]
+
+# Linhas do rodapé de cada página do PDF.
+RODAPE_PDF = [
+    f"{ENDERECO_RUA} · {ENDERECO_BAIRRO} · {ENDERECO_CIDADE} · {ENDERECO_CEP}",
+    f"WhatsApp {WHATSAPP_FMT} · {EMAIL} · {SITE_URL.replace('https://', '')}",
+]
+
+# PDF da lista de cada turma: assets/listas/lista-de-materiais-2027-<turma>.pdf.
+# Só existe para turma com a lista publicada — o PDF de uma lista “em preparação”
+# seria salvo incompleto pelas famílias. O build grava os bytes guardados aqui.
+LISTAS_PDF_DIR = "assets/listas"
+PDFS_LISTA = {}
+
+
+def _caminho_pdf_lista(slug):
+    return f"{LISTAS_PDF_DIR}/lista-de-materiais-2027-{slug}.pdf"
+
+
 def _painel_lista(slug, nome):
     secoes = list(LISTAS_MATERIAL.get(slug, []))
     kit = SECOES_FIXAS.get(slug, [])
     nota = (
         '<ul class="list-gold">'
-        "<li><strong>Coloque o nome do aluno em todos os materiais</strong>, principalmente "
-        "os de uso pessoal (borracha, lápis, garrafa d’água etc.).</li>"
-        "<li>Ao longo do ano letivo, os professores poderão solicitar outros materiais "
-        "e/ou livros literários.</li></ul>"
+        + "".join(f"<li>{n}</li>" for n in NOTAS_LISTA)
+        + "</ul>"
     )
+    botao_pdf = ""
     if secoes or slug in SEM_AVISO_EM_PREPARACAO:
         conteudo = nota + "".join(_tabela_lista(*sec) for sec in secoes + kit)
+        pdf = lista_pdf.gerar_pdf_lista(ROOT, SCHOOL, RODAPE_PDF, nome, secoes + kit, NOTAS_LISTA)
+        PDFS_LISTA[slug] = pdf
+        caminho = _caminho_pdf_lista(slug)
+        versao = hashlib.sha1(pdf).hexdigest()[:8]  # o PDF muda quando a lista muda: evita cópia velha em cache
+        botao_pdf = (
+            '<p class="lista-pdf"><a class="btn btn--navy" '
+            f'href="{caminho}?v={versao}" download="{os.path.basename(caminho)}" '
+            f'aria-label="Baixar a lista de materiais — {nome} — em PDF">Baixar lista em PDF</a></p>'
+        )
+        conteudo = botao_pdf + conteudo
     else:
         conteudo = (
             '<div class="aviso-vazio"><h3>Lista em preparação</h3>'
@@ -3211,6 +3253,13 @@ def build():
         with open(os.path.join(ROOT, slug), "w", encoding="utf-8") as fh:
             fh.write(html)
         print(f"  ✓ {slug}")
+
+    # PDFs da Lista de Materiais (gerados junto com as páginas)
+    os.makedirs(os.path.join(ROOT, LISTAS_PDF_DIR), exist_ok=True)
+    for slug, pdf in PDFS_LISTA.items():
+        with open(os.path.join(ROOT, _caminho_pdf_lista(slug)), "wb") as fh:
+            fh.write(pdf)
+        print(f"  ✓ {_caminho_pdf_lista(slug)}")
 
     # sitemap.xml
     urls = "".join(

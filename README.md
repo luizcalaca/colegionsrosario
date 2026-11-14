@@ -19,6 +19,9 @@ assets/img/
   brasao.png        versão web usada no site, 272x340
   brasao-icon.png   192x192 quadrado, favicon e apple-touch-icon
 tools/remove-bg.py  script que gerou os PNGs transparentes a partir de image.png
+tools/minipdf.py, tools/lista_pdf.py, tools/minipdf_fontes.py
+                    gerador (só biblioteca padrão) dos PDFs da Lista de Materiais
+assets/listas/      PDFs gerados, um por turma com lista publicada
 ```
 
 ## Como editar
@@ -32,6 +35,15 @@ python3 build.py
 Isso reescreve todas as páginas, o `sitemap.xml` e o `robots.txt`.
 O menu fica na constante `NAV`, no topo do arquivo; o texto de cada página,
 no dicionário `PAGES`.
+
+## PDF da Lista de Materiais
+
+O `build.py` gera, junto com as páginas, um PDF por turma que já tem a lista
+publicada (`assets/listas/lista-de-materiais-2027-<turma>.pdf`) e coloca o botão
+“Baixar lista em PDF” na aba da turma. Cabeçalho com o nome do Colégio, “Lista de
+Materiais 2027” e a turma; as cores vêm do `:root` do `style.css`. Turma “em
+preparação” não tem PDF — ele aparece sozinho quando a lista entra em
+`LISTAS_MATERIAL`. O PDF é determinístico, então o CI continua conferindo o build.
 
 ## Rodar localmente
 

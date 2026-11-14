@@ -735,8 +735,9 @@ a.link-contato:focus-visible,
 .lista-tabela { margin-bottom: 2rem; box-shadow: var(--shadow-sm); }
 .lista-tabela td:last-child:not(:first-child) { white-space: nowrap; width: 1%; font-variant-numeric: lining-nums; }
 .item-foto { display: block; width: 100%; max-width: 180px; height: auto; margin-top: .6rem; border-radius: var(--radius-sm, 8px); }
+.lista-pdf { margin: 0 0 1.8rem; }
 @media print {
-  .abas, .site-header, .site-footer, .cta-band { display: none !important; }
+  .abas, .site-header, .site-footer, .cta-band, .lista-pdf { display: none !important; }
   .js .aba-painel:not(.is-ativo) { display: none; }
 }
 
