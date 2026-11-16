@@ -56,9 +56,12 @@ def _imagem(raiz, caminho, fator, fundo=None):
 
 
 class _Construtor:
-    def __init__(self, raiz, escola, contato, titulo_doc, turma, cor):
-        self.raiz, self.escola, self.contato, self.turma, self.c = raiz, escola, contato, turma, cor
-        self.doc = mp.Documento(titulo_doc, escola, f"Lista de material escolar — {turma}")
+    def __init__(self, raiz, escola, contato, titulo_doc, assunto, rotulo, destaque, cor):
+        # rotulo e destaque são os dois textos à direita do cabeçalho
+        # (ex.: "LISTA DE MATERIAIS 2027" / "Infantil II").
+        self.raiz, self.escola, self.contato, self.c = raiz, escola, contato, cor
+        self.rotulo, self.destaque = rotulo, destaque
+        self.doc = mp.Documento(titulo_doc, escola, assunto)
         self.pag = None
         self.y = 0.0
         self.n_img = 0
@@ -78,7 +81,7 @@ class _Construtor:
         return p
 
     def _cabecalho(self, p):
-        """Faixa azul-marinho com o nome da escola, 'Lista de Materiais' e a turma."""
+        """Faixa azul-marinho com o nome da escola, o rótulo do documento e o destaque (turma)."""
         c = self.c
         # degradê 160° do .page-hero (navy-800 -> navy-900), na geometria do CSS
         import math
@@ -102,12 +105,12 @@ class _Construtor:
                                mp.largura(tag, "sans", 6.2, 1.3))
 
         direita = W - M
-        rotulo = "LISTA DE MATERIAIS 2027"
+        rotulo = self.rotulo
         p.texto(direita - mp.largura(rotulo, "sans-b", 7, 1.8) + 1.8, 29, rotulo, "sans-b", 7, c["gold-300"], 1.8)
         # a turma ocupa o que sobrar ao lado do nome da escola, até 20 pt
         disponivel = direita - esquerda_fim - 18
-        tam = min(20.0, disponivel / mp.largura(self.turma, "serif-b", 1))
-        p.texto(direita - mp.largura(self.turma, "serif-b", tam), 29 + 7 + tam * 0.72, self.turma,
+        tam = min(20.0, disponivel / mp.largura(self.destaque, "serif-b", 1))
+        p.texto(direita - mp.largura(self.destaque, "serif-b", tam), 29 + 7 + tam * 0.72, self.destaque,
                 "serif-b", tam, c["white"])
 
     def _rodape(self, p, n, total):
@@ -178,16 +181,20 @@ class _Construtor:
 
     def _foto(self, src):
         """Foto do item: composta sobre o branco da célula, tamanho máximo ~180 px do site."""
+        nome, w, h = self._registrar_foto(src)
+        escala = min(96 / w, 104 / h)
+        return nome, w * escala, h * escala
+
+    def _registrar_foto(self, src, px_alvo=190):
+        """Reduz a foto (composta sobre branco) e a registra no PDF; devolve (nome, w_px, h_px)."""
         if src not in self.nomes_img:
-            fator = max(1, round(_png(self.raiz, src)[0] / 190))
+            fator = max(1, round(_png(self.raiz, src)[0] / px_alvo))
             w, h, rgb, _ = _imagem(self.raiz, src, fator, "#FFFFFF")
             self.n_img += 1
             nome = f"Im{self.n_img}"
             self.doc.registrar_imagem(nome, w, h, rgb)
             self.nomes_img[src] = (nome, w, h)
-        nome, w, h = self.nomes_img[src]
-        escala = min(96 / w, 104 / h)
-        return nome, w * escala, h * escala
+        return self.nomes_img[src]
 
     def tabela(self, titulo, linhas, coluna="Quantidade"):
         c = self.c
@@ -257,6 +264,78 @@ class _Construtor:
             self.y += altura
         self.y += 22
 
+    # ---------- blocos do guia de calçados ----------
+    def subtitulo(self, texto):
+        """Título de seção (h3 do site: serifada, azul-marinho)."""
+        self.garantir(40)
+        self.pag.texto(M, self.y + 15, texto, "serif-b", 16, self.c["navy-900"])
+        self.y += 16 + 14
+
+    def etapa(self, rotulo, colunas, linhas, fotos):
+        """Rótulo (.eyebrow), tabela de colunas e fileira de fotos com legenda — tudo junto na página.
+
+        colunas: ["", "Feminino", "Masculino"]; linhas: [(ocasião, feminino, masculino), ...];
+        fotos: [(caminho do PNG, legenda), ...].
+        """
+        c = self.c
+        w0 = CW * 0.26
+        wc = (CW - w0) / (len(colunas) - 1)
+        larguras = [w0] + [wc] * (len(colunas) - 1)
+
+        # células já quebradas em linhas
+        celulas = []
+        for lin in linhas:
+            row = []
+            for i, txt in enumerate(lin):
+                fam_neg = i == 0
+                row.append(mp.quebrar_linhas([(txt, fam_neg, False, None)], "sans", TAM,
+                                             larguras[i] - 2 * PAD_X, c["ink"], c["navy-700"]))
+            celulas.append(row)
+        alturas = [max(len(cel) for cel in row) * ENTRELINHA + 2 * PAD_Y for row in celulas]
+        cab_h = 24.0
+
+        # fotos: altura comum de 76 pt, largura pela proporção; legenda embaixo
+        ALT_FOTO, GAP, LEG_H = 76.0, 12.0, 18.0
+        tiles = []
+        for src, legenda in fotos:
+            nome, w, h = self._registrar_foto(src)
+            tiles.append((nome, ALT_FOTO * w / h, legenda))
+        total = 14 + cab_h + sum(alturas) + 14 + ALT_FOTO + LEG_H + 22
+        self.garantir(total)
+
+        p = self.pag
+        p.texto(M, self.y + 8, rotulo.upper(), "sans-b", 7.8, c["gold-500"], 1.6)
+        self.y += 14
+
+        # tabela
+        p.retangulo(M, self.y, CW, cab_h, c["navy-800"])
+        x = M
+        for i, nome_col in enumerate(colunas):
+            if nome_col:
+                p.texto(x + PAD_X, self.y + cab_h / 2 + TAM_TH * 0.36, nome_col.upper(),
+                        "sans-b", TAM_TH, c["gold-200"], ESP_TH)
+            x += larguras[i]
+        self.y += cab_h
+        borda = mp.misturar(c["navy-900"], "#FFFFFF", .10)
+        for row, altura in zip(celulas, alturas):
+            p.retangulo(M, self.y, CW, altura, "#FFFFFF")
+            p.linha(M, self.y + altura, M + CW, self.y + altura, borda, 0.6)
+            x = M
+            for i, cel in enumerate(row):
+                self._linhas(cel, x + PAD_X, self.y + PAD_Y, TAM)
+                x += larguras[i]
+            self.y += altura
+        self.y += 14
+
+        # fotos
+        x = M
+        for nome, w, legenda in tiles:
+            p.imagem(nome, x, self.y, w, ALT_FOTO)
+            lw = mp.largura(legenda, "sans", 8.2)
+            p.texto(x + (w - lw) / 2, self.y + ALT_FOTO + 12, legenda, "sans", 8.2, c["ink-soft"])
+            x += w + GAP
+        self.y += ALT_FOTO + LEG_H + 22
+
     def finalizar(self):
         total = len(self.doc.paginas)
         for i, p in enumerate(self.doc.paginas, 1):
@@ -273,11 +352,35 @@ def gerar_pdf_lista(raiz, escola, contato, nome_turma, secoes, notas, css="asset
     cor = cores_do_css(os.path.join(raiz, css))
     b = _Construtor(
         raiz, escola, contato,
-        f"Lista de Materiais 2027 — {nome_turma} — {escola}", nome_turma, cor,
+        f"Lista de Materiais 2027 — {nome_turma} — {escola}",
+        f"Lista de material escolar — {nome_turma}",
+        "LISTA DE MATERIAIS 2027", nome_turma, cor,
     )
     b.nova_pagina()
     b.titulo(f"Lista de Material Escolar 2027 — {nome_turma}")
     b.notas(notas)
     for sec in secoes:
         b.tabela(*sec)
+    return b.finalizar()
+
+
+def gerar_pdf_calcados(raiz, escola, contato, diretrizes, etapas, css="assets/css/style.css"):
+    """Devolve os bytes do guia de calçados do uniforme (o mesmo para todas as turmas).
+
+    diretrizes: lista de textos (HTML mínimo) dos avisos do início.
+    etapas: [(rótulo, colunas, linhas, fotos), ...] — argumentos de _Construtor.etapa().
+    """
+    cor = cores_do_css(os.path.join(raiz, css))
+    b = _Construtor(
+        raiz, escola, contato,
+        f"Uniforme — Calçados — {escola}", "Diretrizes de calçados do uniforme escolar",
+        "UNIFORME ESCOLAR", "Calçados", cor,
+    )
+    b.nova_pagina()
+    b.titulo("Uniforme — Calçados")
+    b.subtitulo("Descrição das diretrizes do uniforme")
+    b.notas(diretrizes)
+    b.subtitulo("Sapatos")
+    for etapa in etapas:
+        b.etapa(*etapa)
     return b.finalizar()

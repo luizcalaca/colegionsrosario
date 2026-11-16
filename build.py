@@ -3155,6 +3155,44 @@ RODAPE_PDF = [
 LISTAS_PDF_DIR = "assets/listas"
 PDFS_LISTA = {}
 
+# Guia de calçados do uniforme: um único PDF, oferecido ao lado do da lista nas turmas
+# a que se aplica (Infantil de 2 a 5 anos e Fundamental I e II — não o Berçário nem o
+# Ensino Médio). Vale mesmo para turma com lista “em preparação”.
+CALCADOS_PDF = f"{LISTAS_PDF_DIR}/uniforme-calcados.pdf"
+CALCADOS_TURMAS = {"infantil-ii", "infantil-iii", "infantil-iv", "infantil-v",
+                   *(f"{n}-ano" for n in range(1, 10))}
+DIRETRIZES_CALCADOS = [
+    "Sem adereços de forma geral, a não ser os previstos.",
+    "Não uso de sapatos inadequados, para além da previsão da Escola. Ratificamos evitar as botas, "
+    "saltos e outros que possam promover a instabilidade no correr ou andar durante as atividades "
+    "na Escola.",
+    "Seguindo o regimento interno, é passível, por segurança, a não participação nas atividades "
+    "com o uso inadequado dos calçados.",
+]
+_FOTOS_CALCADOS = "assets/img/calcados"
+_COLUNAS_CALCADOS = ["", "Feminino", "Masculino"]
+_FUNDAMENTAL_CALCADOS = (
+    _COLUNAS_CALCADOS,
+    [("Dia a dia", "Sapatilha preta (meias brancas)", "Sapato marrom social (meias marrons) e cinto marrom"),
+     ("Educação Física", "Tênis esportivo preto com solado preto (meias pretas)",
+      "Tênis esportivo preto com solado preto (meias pretas)")],
+    [(f"{_FOTOS_CALCADOS}/sapatilha-preta.png", "Sapatilha"),
+     (f"{_FOTOS_CALCADOS}/tenis-esportivo-preto.png", "Tênis preto esportivo"),
+     (f"{_FOTOS_CALCADOS}/sapato-social-marrom.png", "Sapato social marrom")],
+)
+ETAPAS_CALCADOS = [
+    ("Infantil — 2 a 5 anos", _COLUNAS_CALCADOS,
+     [("Dia a dia", "Sapatilha preta com solado preto (meias brancas)",
+       "Tênis infantil preto com solado preto (meias brancas)"),
+      ("Educação Física", "Tênis infantil preto com solado preto (meias pretas)",
+       "Tênis infantil preto com solado preto (meias pretas)")],
+     [(f"{_FOTOS_CALCADOS}/sapatilha-preta.png", "Sapatilha"),
+      (f"{_FOTOS_CALCADOS}/tenis-infantil-sem-cadarco.png", "Tênis infantil sem cadarço")]),
+    ("Fundamental I — 1º ao 5º ano", *_FUNDAMENTAL_CALCADOS),
+    ("Fundamental II — 6º ao 9º ano", *_FUNDAMENTAL_CALCADOS),
+]
+PDF_CALCADOS = lista_pdf.gerar_pdf_calcados(ROOT, SCHOOL, RODAPE_PDF, DIRETRIZES_CALCADOS, ETAPAS_CALCADOS)
+
 
 def _caminho_pdf_lista(slug):
     return f"{LISTAS_PDF_DIR}/lista-de-materiais-2027-{slug}.pdf"
@@ -3168,19 +3206,18 @@ def _painel_lista(slug, nome):
         + "".join(f"<li>{n}</li>" for n in NOTAS_LISTA)
         + "</ul>"
     )
-    botao_pdf = ""
+    botoes = []
     if secoes or slug in SEM_AVISO_EM_PREPARACAO:
         conteudo = nota + "".join(_tabela_lista(*sec) for sec in secoes + kit)
         pdf = lista_pdf.gerar_pdf_lista(ROOT, SCHOOL, RODAPE_PDF, nome, secoes + kit, NOTAS_LISTA)
         PDFS_LISTA[slug] = pdf
         caminho = _caminho_pdf_lista(slug)
         versao = hashlib.sha1(pdf).hexdigest()[:8]  # o PDF muda quando a lista muda: evita cópia velha em cache
-        botao_pdf = (
-            '<p class="lista-pdf"><a class="btn btn--navy" '
+        botoes.append(
+            '<a class="btn btn--navy" '
             f'href="{caminho}?v={versao}" download="{os.path.basename(caminho)}" '
-            f'aria-label="Baixar a lista de materiais — {nome} — em PDF">Baixar lista em PDF</a></p>'
+            f'aria-label="Baixar a lista de materiais — {nome} — em PDF">Baixar lista em PDF</a>'
         )
-        conteudo = botao_pdf + conteudo
     else:
         conteudo = (
             '<div class="aviso-vazio"><h3>Lista em preparação</h3>'
@@ -3192,6 +3229,15 @@ def _painel_lista(slug, nome):
                 '<p style="margin:2rem 0 1rem">Enquanto isso, já pode providenciar o que consta abaixo:</p>'
                 + "".join(_tabela_lista(*sec) for sec in kit)
             )
+    if slug in CALCADOS_TURMAS:
+        versao = hashlib.sha1(PDF_CALCADOS).hexdigest()[:8]
+        botoes.append(
+            '<a class="btn btn--navy" '
+            f'href="{CALCADOS_PDF}?v={versao}" download="{os.path.basename(CALCADOS_PDF)}" '
+            'aria-label="Baixar as diretrizes de calçados do uniforme em PDF">Baixar calçados em PDF</a>'
+        )
+    if botoes:
+        conteudo = '<div class="lista-pdf">' + "".join(botoes) + "</div>" + conteudo
     return (
         f'<div class="aba-painel" id="painel-{slug}" role="tabpanel" aria-labelledby="aba-{slug}" tabindex="0">'
         f"<h2>Lista de Material Escolar 2027 — {nome}</h2><hr class=\"rule\">{conteudo}</div>"
@@ -3266,6 +3312,10 @@ def build():
         with open(os.path.join(ROOT, _caminho_pdf_lista(slug)), "wb") as fh:
             fh.write(pdf)
         print(f"  ✓ {_caminho_pdf_lista(slug)}")
+
+    with open(os.path.join(ROOT, CALCADOS_PDF), "wb") as fh:
+        fh.write(PDF_CALCADOS)
+    print(f"  ✓ {CALCADOS_PDF}")
 
     # sitemap.xml
     urls = "".join(
