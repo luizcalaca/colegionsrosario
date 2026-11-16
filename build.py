@@ -2616,6 +2616,7 @@ def lista_5_ano():
             ("Caderno 50 folhas para História — capa amarela ou encapado com plástico amarelo", "1 unidade"),
             ("Caderno 50 folhas para Geografia — capa amarela ou encapado com plástico amarelo", "1 unidade"),
             ("Caderno 50 folhas para Matemática, quadriculado — capa amarela ou encapado com plástico amarelo", "1 unidade"),
+            ("Caderno 96 folhas para Português", "1 unidade"),
             ("Caderno 48 folhas para Artes", "1 unidade"),
             ("Caderno 48 folhas para Ciências", "1 unidade"),
             ("Caderno 98 folhas para Inglês", "1 unidade"),
@@ -2760,6 +2761,7 @@ def lista_2_ano():
             ("Caderno brochura grande, capa dura, quadriculado, 100 folhas — Matemática", "1 unidade"),
             ("Caderno brochura grande, capa dura, 100 folhas, pauta normal, capa verde ou encapado com plástico "
              "quadriculado verde — fazer margem (Português)", "2 unidades"),
+            ("Caderno pentagrama grande, 50 folhas — Música", "1 unidade"),
             ("Pasta plástica fina com elástico, tamanho A4, na cor verde (ficar na mochila)", "1 unidade"),
             ("Caixa organizadora de plástico duro e transparente, 10 L. Para veteranos, reutilizar a do ano "
              "anterior", "1 unidade"),
@@ -2893,11 +2895,13 @@ def lista_4_ano():
              "1 unidade"),
             ("Borrachas grandes, brancas e macias", "4 unidades"),
             ("Apontador de plástico para lápis, com depósito", "2 unidades"),
-            ("Caderno brochura grande, capa dura, 50 folhas, pauta normal, com capa na cor vermelha ou encapado "
-             "com plástico quadriculado vermelho — fazer margem (Inglês, Ciências, Catecismo, Francês etc.)",
-             "5 unidades"),
-            ("Caderno brochura grande, capa dura, 100 folhas, pauta normal, capa vermelha ou encapado com "
-             "plástico quadriculado vermelho — fazer margem (Português, História, Geografia etc.)", "3 unidades"),
+            *[(f"Caderno brochura grande, capa dura, 50 folhas, pauta normal, com capa na cor vermelha ou "
+               f"encapado com plástico quadriculado vermelho — fazer margem ({materia})", "1 unidade")
+              for materia in ("Inglês", "Ciências", "Catecismo", "Francês",
+                              "outra matéria, conforme orientação dos professores")],
+            *[(f"Caderno brochura grande, capa dura, 100 folhas, pauta normal, capa vermelha ou encapado com "
+               f"plástico quadriculado vermelho — fazer margem ({materia})", "1 unidade")
+              for materia in ("Português", "História", "Geografia")],
             ("Pasta plástica fina com elástico, tamanho A4, na cor vermelha (ficar na mochila)", "1 unidade"),
             ("Caderno brochura grande, capa dura, quadriculado, 100 folhas — Matemática", "1 unidade"),
             ("Caderno de Música, 50 folhas", "1 unidade"),
