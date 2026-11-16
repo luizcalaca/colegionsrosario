@@ -298,7 +298,7 @@ class _Construtor:
         ALT_FOTO, GAP, LEG_H = 76.0, 12.0, 18.0
         tiles = []
         for src, legenda in fotos:
-            nome, w, h = self._registrar_foto(src)
+            nome, w, h = self._registrar_foto(src, 240)
             tiles.append((nome, ALT_FOTO * w / h, legenda))
         total = 14 + cab_h + sum(alturas) + 14 + ALT_FOTO + LEG_H + 22
         self.garantir(total)

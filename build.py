@@ -3177,12 +3177,12 @@ _FOTOS_CALCADOS = "assets/img/calcados"
 _COLUNAS_CALCADOS = ["", "Feminino", "Masculino"]
 _FUNDAMENTAL_CALCADOS = (
     _COLUNAS_CALCADOS,
-    [("Dia a dia", "Sapatilha preta (meias brancas)", "Sapato marrom social (meias marrons) e cinto marrom"),
+    [("Dia a dia", "Sapatilha preta (meias brancas)", "Sapato social marrom escuro com cadarço (meias azul escuro) e cinto marrom"),
      ("Educação Física", "Tênis esportivo preto com solado preto (meias pretas)",
       "Tênis esportivo preto com solado preto (meias pretas)")],
     [(f"{_FOTOS_CALCADOS}/sapatilha-preta.png", "Sapatilha"),
      (f"{_FOTOS_CALCADOS}/tenis-esportivo-preto.png", "Tênis preto esportivo"),
-     (f"{_FOTOS_CALCADOS}/sapato-social-marrom.png", "Sapato social marrom")],
+     (f"{_FOTOS_CALCADOS}/sapato-social-cadarco-marrom.png", "Sapato social marrom escuro")],
 )
 ETAPAS_CALCADOS = [
     ("Infantil — 2 a 5 anos", _COLUNAS_CALCADOS,
