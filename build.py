@@ -3078,6 +3078,10 @@ LIVROS_6_7_ANO = ("Livros didáticos e paradidáticos", [
     ("Catecismo de São Pio X — Editora América", None),
     ("Bíblia do Peregrino (Antigo e Novo Testamento)", None),
     ("Constituição da República Federativa do Brasil (Filosofia do Direito)", None),
+    ("Pequeno dicionário Houaiss da língua portuguesa", None),
+    ("Michaelis dicionário escolar francês", None),
+    ("Dicionário Latim-Português: Termos e Expressões — Edição Português, por Jair Lot Vieira (Editor), "
+     "Alexandre Hasegawa", None),
 ])
 ESCRITA_6_7_ANO = ("Escrita e uso diário", [
     ("Lápis grafite ou lapiseiras", "4 lápis ou 2 lapiseiras"),
