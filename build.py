@@ -2597,8 +2597,6 @@ def lista_infantil_iv():
         ], "Período"),
         ("Livros didáticos e paradidáticos", [
             LIVROS_NA_SECRETARIA,
-            ("Alfabetização Fônica: construindo competências de leitura e escrita — Pearson", None),
-            ("Santa Missa Ilustrada", None),
         ]),
     ]
 
